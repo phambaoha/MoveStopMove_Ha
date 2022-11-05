@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : Weapons
+public class Knife : Weapons
 {
-
-
     public override void OnInit()
     {
-        base.OnInit();
-        WeaponRender.Rotate(Vector3.up * -360 * Time.deltaTime, Space.World);
-    }
 
-   
+        base.OnInit();
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+
+    }
 }

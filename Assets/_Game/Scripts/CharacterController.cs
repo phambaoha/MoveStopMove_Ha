@@ -2,18 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour, IHit
 {
     // Start is called before the first frame update
 
 
     [SerializeField]
-    List<Weapons> ListWeapons = new List<Weapons>();
-
-    [SerializeField]
-    protected JoystickMove joystick;
-
-   
+    protected List<Weapons> ListWeapons = new List<Weapons>();
 
     private string curentAnim;
 
@@ -33,84 +28,63 @@ public class CharacterController : MonoBehaviour
 
     public Transform throwPoint;
 
-    float nextFire;
+    private float nextFire = 0.5f;
 
-    readonly float fireRate = 3f;
-
-
-    
+    public float fireRate = 3f;
 
 
-    protected virtual void Move()
+
+    public virtual bool IsTargetInRange(Vector3 center, float radius, string tag)
     {
-        isTargetInRange = IsTargetInRange(transform.position, radiusRangeAttack);
+        bool temp = false;
 
-        if (IsMoving)
+        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+        foreach (var hitCollider in hitColliders)
         {
-            isAttack = true;
+          
+                if (hitCollider != null && (hitCollider.CompareTag(tag)))
+                {
+                    transform.LookAt(hitCollider.transform.position);
 
-            ChangeAnim(Constants.TAG_ANIM_RUN);
+                    temp = true;
+
+                }
+            
         }
-        else
-        {
-            if (isTargetInRange && isAttack)
-            {
-
-                ThrowAttack();
-                return;
-            }
-
-            ChangeAnim(Constants.TAG_ANIM_IDLE);
-        }
-
+        return temp;
     }
 
-
-    protected virtual bool IsTargetInRange(Vector3 center, float radius)
+    public virtual bool IsTargetInRange(Vector3 center, float radius, string tag_Player,string tag_Bot )
     {
         bool temp = false;
 
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
 
-        foreach (var hitCollider in hitColliders)
+
+        for (int i = 2; i < hitColliders.Length; i++)
         {
-            if (hitCollider.CompareTag(Constants.TAG_BOT))
+            if (hitColliders[i].CompareTag(tag_Player) || hitColliders[i].CompareTag(tag_Bot))
             {
-                transform.LookAt(hitCollider.transform.position);
-               
+                transform.LookAt(hitColliders[i].transform.position);
+
                 temp = true;
 
             }
-
         }
 
+ 
         return temp;
-
-
     }
-
-    protected virtual void ThrowAttack()
+    public virtual void ThrowAttack()
     {
 
-        ChangeAnim(Constants.TAG_ANIM_ATTACK);
-        StartCoroutine(IDelayAttack());
         if (Time.time > nextFire)
         {
-            SimplePool.Spawn(ListWeapons[ListWeapons.Count - 1], throwPoint.position, Quaternion.Euler(-90, 0, 0)).OnInit();
-           // Instantiate(ListWeapons[ListWeapons.Count - 1], throwPoint.position, Quaternion.Euler(-90,0,0));
+            ChangeAnim(Constants.TAG_ANIM_ATTACK);
+            SimplePool.Spawn(ListWeapons[ListWeapons.Count - 1], throwPoint.position, throwPoint.rotation).OnInit();
             nextFire = Time.time + fireRate;
         }
-
-
-
     }
-
-    IEnumerator IDelayAttack()
-    {
-        yield return new WaitForSeconds(0.8f);
-        isAttack = false;
-    }
-
 
 
     protected virtual void ChangeAnim(string animName)
@@ -125,4 +99,9 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    // nhan damge
+    public void OnHit()
+    {
+        Destroy(this.gameObject);
+    }
 }

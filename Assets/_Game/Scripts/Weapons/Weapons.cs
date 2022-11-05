@@ -10,20 +10,38 @@ public class Weapons : GameUnit
     public float speed;
     public Transform WeaponRender;
 
-    public override void OnDespawn()
+    private void Start()
     {
-       
+        Invoke(nameof(OnDespawn), 3f);
     }
 
-    
+    private void Update()
+    {
+        OnInit();
+    }
+    public override void OnDespawn()
+    {
+        SimplePool.Despawn(this);
+    }
+
+
 
     public override void OnInit()
     {
-       
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        IHit ihit = Cache.GetHit(other);
        
+        if (ihit != null)
+        {
+            ihit.OnHit();
+            OnDespawn();
+        }
+    }
 
-    
+
+
 }

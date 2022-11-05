@@ -10,7 +10,8 @@ public class CameraController : MonoBehaviour
     Vector3 offset;
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        player = FindObjectOfType<PlayerController>().transform;
     }
 
 

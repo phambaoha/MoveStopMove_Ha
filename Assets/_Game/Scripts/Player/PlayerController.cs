@@ -4,28 +4,60 @@ using UnityEngine;
 
 public class PlayerController : CharacterController
 {
+    [SerializeField]
+    JoystickMove joystick;
 
-
-    // Start is called before the first frame update
-   
+   public Transform TF;
 
     // Update is called once per frame
     void Update()
     {
-
-       
         Move();
-
-        print("is attack " + isAttack);
-        print(" is move " + IsMoving);
-
-       
-
     }
 
-   
- 
+    void Move()
+    {
 
-   
+        isTargetInRange = IsTargetInRange(transform.position, radiusRangeAttack, Constants.TAG_BOT);
+
+        if (IsMoving)
+        {
+            isAttack = true;
+
+            ChangeAnim(Constants.TAG_ANIM_RUN);
+        }
+        else
+        {
+            if (isTargetInRange && isAttack)
+            {
+
+                ThrowAttack();
+                return;
+            }
+
+            ChangeAnim(Constants.TAG_ANIM_IDLE);
+        }
+    }
+
+
+
+    public override void ThrowAttack()
+    {
+        base.ThrowAttack();
+
+        StartCoroutine(IDelayAttack());
+      
+    }
+
+    IEnumerator IDelayAttack()
+    {
+        yield return new WaitForSeconds(0.8f);
+        isAttack = false;
+    }
+
+
+
+
+
 
 }
