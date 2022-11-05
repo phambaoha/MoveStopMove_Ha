@@ -12,12 +12,14 @@ public class CharacterController : MonoBehaviour, IHit
 
     private string curentAnim;
 
-    protected bool isAttack;
+  
+    protected bool isAttack = true;
 
-    protected bool isTargetInRange;
+   
 
-    private bool isMoving;
-    protected bool IsMoving { get => rb.velocity != Vector3.zero; set => isMoving = value; }
+    
+   // private bool isMoving; 
+  //  protected bool IsMoving { get => rb.velocity != Vector3.zero; set => isMoving = value; }
 
     public Animator playerAnim;
 
@@ -28,11 +30,13 @@ public class CharacterController : MonoBehaviour, IHit
 
     public Transform throwPoint;
 
-    private float nextFire = 0.5f;
+    private float nextFire=0f;
 
     public float fireRate = 3f;
 
 
+  
+  
 
     public virtual bool IsTargetInRange(Vector3 center, float radius, string tag)
     {
@@ -77,15 +81,24 @@ public class CharacterController : MonoBehaviour, IHit
     }
     public virtual void ThrowAttack()
     {
+        ChangeAnim(Constants.TAG_ANIM_ATTACK);
 
-        if (Time.time > nextFire)
+        if (Time.time >= nextFire)
         {
-            ChangeAnim(Constants.TAG_ANIM_ATTACK);
-            SimplePool.Spawn(ListWeapons[ListWeapons.Count - 1], throwPoint.position, throwPoint.rotation).OnInit();
+            StartCoroutine(IDelayThrowWeapon());
             nextFire = Time.time + fireRate;
         }
     }
 
+    IEnumerator IDelayThrowWeapon()
+    {
+        yield return new WaitForSeconds(0.3f);
+     
+        SimplePool.Spawn(ListWeapons[ListWeapons.Count - 1], throwPoint.position, throwPoint.rotation).OnInit();
+
+      
+       
+    }
 
     protected virtual void ChangeAnim(string animName)
     {

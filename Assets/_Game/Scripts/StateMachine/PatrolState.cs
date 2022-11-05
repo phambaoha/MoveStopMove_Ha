@@ -18,13 +18,12 @@ public class PatrolState : IState<BotController>
 
         if (t.IsTargetInRange(t.transform.position, t.radiusRangeAttack, Constants.TAG_PLAYER,Constants.TAG_BOT))
         {
-            t.StopMoving();
+           
             t.ChangeState(new AttackState());
         }
         else
         {
-            t.Moving();
-
+           
             timer += Time.deltaTime;
             if (timer < randomTime)
             {

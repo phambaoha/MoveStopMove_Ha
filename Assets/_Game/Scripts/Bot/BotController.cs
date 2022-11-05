@@ -22,11 +22,11 @@ public class BotController : CharacterController
         player = FindObjectOfType<PlayerController>();
 
         listCharacter.Add(player.gameObject);
-        
+
 
 
     }
-    
+
     void Start()
     {
         foreach (GameObject go in GameObject.FindGameObjectsWithTag(Constants.TAG_BOT))
@@ -47,14 +47,10 @@ public class BotController : CharacterController
             currentState.OnExecute(this);
         }
 
-        if(listCharacter.Count >0 )
+        if (listCharacter.Count > 0)
         {
             targerNearest = GetClosestEnemy(listCharacter).transform;
         }
-    
-
-       
-
 
     }
     public void StopMoving()
@@ -73,7 +69,12 @@ public class BotController : CharacterController
 
     public override void ThrowAttack()
     {
+      
         base.ThrowAttack();
+        
+        navMeshAgent.SetDestination(TF.position);
+
+       
     }
 
     private IState<BotController> currentState;
@@ -101,7 +102,7 @@ public class BotController : CharacterController
         Vector3 currentPosition = transform.position;
         foreach (GameObject potentialTarget in enemies)
         {
-            if(potentialTarget!= null)
+            if (potentialTarget != null)
             {
                 Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
                 float dSqrToTarget = directionToTarget.sqrMagnitude;
@@ -111,7 +112,7 @@ public class BotController : CharacterController
                     bestTarget = potentialTarget;
                 }
             }
-            
+
         }
 
         return bestTarget;
