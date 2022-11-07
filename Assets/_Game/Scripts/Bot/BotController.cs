@@ -5,54 +5,51 @@ using UnityEngine.AI;
 
 public class BotController : CharacterController
 {
-
+    [SerializeField]
     NavMeshAgent navMeshAgent;
-    public Transform TF;
+
+    public new Transform TF;
 
     PlayerController player;
 
     [SerializeField]
-    List<GameObject> listCharacter = new List<GameObject>();
+    List<GameObject> listTarget = new List<GameObject>();
 
     Transform targerNearest;
 
     private void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
         player = FindObjectOfType<PlayerController>();
-
-        listCharacter.Add(player.gameObject);
-
-
-
-    }
-
-    void Start()
-    {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag(Constants.TAG_BOT))
-        {
-            if (go.Equals(this.gameObject))
-                continue;
-
-            listCharacter.Add(go);
-        }
+        AddAllTarget();
 
         ChangeState(new IdleState());
     }
 
+
     private void Update()
     {
+        if (isDead)
+        {
+            ChangeAnim(Constants.TAG_ANIM_DEAD);
+            StartCoroutine(IDelayDestroy());
+            return;
+        }
+
         if (currentState != null)
         {
             currentState.OnExecute(this);
         }
 
-        if (listCharacter.Count > 0)
+        if (listTarget.Count > 0)
         {
-            targerNearest = GetClosestEnemy(listCharacter).transform;
+            targerNearest = GetClosestEnemy(listTarget).transform;
         }
 
+
+
     }
+
+
     public void StopMoving()
     {
         ChangeAnim(Constants.TAG_ANIM_IDLE);
@@ -63,18 +60,26 @@ public class BotController : CharacterController
     public void Moving()
     {
         ChangeAnim(Constants.TAG_ANIM_RUN);
-        navMeshAgent.SetDestination(targerNearest.position);
+        if (targerNearest != null)
+            navMeshAgent.SetDestination(targerNearest.position);
+
+    }
+
+    IEnumerator IDelayDestroy()
+    {
+        yield return new WaitForSeconds(2f);
+
+        OnDespawn();
 
     }
 
     public override void ThrowAttack()
     {
-      
+
         base.ThrowAttack();
-        
+
         navMeshAgent.SetDestination(TF.position);
 
-       
     }
 
     private IState<BotController> currentState;
@@ -87,7 +92,7 @@ public class BotController : CharacterController
 
         currentState = state;
 
-        Debug.Log(state);
+       
 
         if (currentState != null)
         {
@@ -95,11 +100,27 @@ public class BotController : CharacterController
         }
     }
 
+
+    void AddAllTarget()
+    {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag(Constants.TAG_BOT))
+        {
+            if (go.Equals(this.gameObject))
+                continue;
+
+            listTarget.Add(go);
+        }
+
+        listTarget.Add(player.gameObject);
+    }
+
+    // tim tartget gan nhat
     GameObject GetClosestEnemy(List<GameObject> enemies)
     {
         GameObject bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
+
         foreach (GameObject potentialTarget in enemies)
         {
             if (potentialTarget != null)
@@ -117,5 +138,19 @@ public class BotController : CharacterController
 
         return bestTarget;
     }
+
+
+    public override void OnInit()
+    {
+        base.OnInit();
+       
+    }
+
+    public override void OnDespawn()
+    {
+        base.OnDespawn();
+
+    }
+
 
 }

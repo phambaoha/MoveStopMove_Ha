@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class JoystickMove : MonoBehaviour
 {
-
-    
     public float speed;
     public DynamicJoystick dynamicJoystick;
 
     [SerializeField]
-     PlayerController playerController;
+    PlayerController playerController;
 
     private void Awake()
     {
-        
+
     }
 
     private void Update()
     {
-        JoystickMoving();
+        MoveByJoystick();
     }
 
-    public void JoystickMoving()
+    public void MoveByJoystick()
     {
+
+        if (playerController.isDead)
+            return;
 
         playerController.rb.velocity = new Vector3(dynamicJoystick.Horizontal * speed, playerController.rb.velocity.y, dynamicJoystick.Vertical * speed);
 
@@ -31,9 +32,9 @@ public class JoystickMove : MonoBehaviour
         float angleA = Mathf.Atan2(dynamicJoystick.Horizontal, dynamicJoystick.Vertical) * Mathf.Rad2Deg;
 
         if (angleA != 0)
-           transform.rotation = Quaternion.Euler(0f, angleA, 0f);
+            transform.rotation = Quaternion.Euler(0f, angleA, 0f);
 
     }
 
-    
+
 }

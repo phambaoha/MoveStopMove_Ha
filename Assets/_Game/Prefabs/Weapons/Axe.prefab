@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 0
-  speed: 3
+  speed: 8
   WeaponRender: {fileID: 7515741418614688683}
 --- !u!65 &793101219
 BoxCollider:
@@ -60,7 +60,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.1, z: 0.3}
-  m_Center: {x: -0.1, y: 0, z: 0.36}
+  m_Center: {x: -0.1, y: 0, z: 0.01}
 --- !u!1001 &7515741418615083307
 PrefabInstance:
   m_ObjectHideFlags: 0

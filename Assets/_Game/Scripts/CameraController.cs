@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    Transform player;
+    
     public float speed;
     [SerializeField]
     Vector3 offset;
+    [SerializeField]
+    Transform TF;
+
+    Transform playerTF;
     private void Awake()
     {
 
-        player = FindObjectOfType<PlayerController>().transform;
-    }
+         playerTF = FindObjectOfType<PlayerController>().transform;
 
+    }
 
     // Update is called once per frame
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(TF.position, playerTF.position + offset, speed * Time.deltaTime);
     }
+   
 }

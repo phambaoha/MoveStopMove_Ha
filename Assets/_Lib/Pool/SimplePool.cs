@@ -29,7 +29,7 @@ public static class SimplePool
         {
             if (root == null)
             {
-                root = GameObject.FindObjectOfType<PoolControler>().transform;
+                root = GameObject.FindObjectOfType<PoolController>().transform;
 
                 if (root == null)
                 {

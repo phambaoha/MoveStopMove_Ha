@@ -14,5 +14,7 @@ public class Constants : MonoBehaviour
 
     public const string TAG_ANIM_ATTACK = "Attack";
 
+    public const string TAG_ANIM_DEAD = "Dead";
+
 
 }

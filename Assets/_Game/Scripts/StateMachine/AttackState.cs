@@ -7,20 +7,17 @@ public class AttackState : IState<BotController>
     float timer;
     public void OnEnter(BotController t)
     {
-
-        timer = 0;
         t.ThrowAttack();
+        timer = 0;
+       
     }
 
     public void OnExecute(BotController t)
     {
-
         timer += Time.deltaTime;
-        if (timer >= 0.5f)
+        if (timer >= 1.5f)
         {
-           
-            t.ChangeState(new PatrolState());
-            
+            t.ChangeState(new IdleState());
         }
     }
 

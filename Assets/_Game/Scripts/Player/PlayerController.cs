@@ -7,7 +7,7 @@ public class PlayerController : CharacterController
     [SerializeField]
     JoystickMove joystick;
 
-    public Transform TF;
+    public new  Transform TF;
 
     bool isTargetInRange;
 
@@ -29,6 +29,15 @@ public class PlayerController : CharacterController
     void Move()
     {
 
+        if (isDead)
+        {
+
+            ChangeAnim(Constants.TAG_ANIM_DEAD);
+            StartCoroutine(IDelayDestroy());
+            return;
+        }
+
+
         isTargetInRange = IsTargetInRange(transform.position, radiusRangeAttack, Constants.TAG_BOT);
 
 
@@ -44,30 +53,36 @@ public class PlayerController : CharacterController
             {
 
                 ThrowAttack();
-                return;
+                
             }
             else
             {
                 ChangeAnim(Constants.TAG_ANIM_IDLE);
+
+                return;
 
             }
 
 
         }
     }
-
     public override void ThrowAttack()
     {
         base.ThrowAttack();
-      //  StartCoroutine(IDelayAttack());
+       
 
     }
 
-    IEnumerator IDelayAttack()
+     IEnumerator IDelayDestroy()
     {
-        yield return new WaitForSeconds(0.5f);
-        isAttack = false;
+
+        yield return Cache.GetWaitForSeconds(1.5f);
+
+        this.gameObject.SetActive(false);
+
     }
+
+
 
 
 
