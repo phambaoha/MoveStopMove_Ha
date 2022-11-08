@@ -9,7 +9,7 @@ public abstract class GameUnit : MonoBehaviour
     {
         get
         {
-            tf = tf ?? gameObject.transform;
+            tf = tf != null ? tf : gameObject.transform;
             return tf;
         }
     }

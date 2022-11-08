@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Axe : Weapons
 {
-    private void Start()
-    {
-        Invoke(nameof(OnDespawn), 3f);
-    }
+    //private void Start()
+    //{
+    //    Invoke(nameof(OnDespawn), 3f);
+    //}
 
     public override void OnInit()
     {
@@ -15,10 +15,10 @@ public class Axe : Weapons
         WeaponRender.Rotate(Vector3.up * -360 * Time.deltaTime, Space.World);
     }
 
-    public override void OnDespawn()
-    {
-        base.OnDespawn();
-        SimplePool.Despawn(this);
-    }
+    //public override void OnDespawn()
+    //{
+    //    base.OnDespawn();
+    //    SimplePool.Despawn(this);
+    //}
 
 }

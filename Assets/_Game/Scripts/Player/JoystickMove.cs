@@ -8,7 +8,7 @@ public class JoystickMove : MonoBehaviour
     public DynamicJoystick dynamicJoystick;
 
     [SerializeField]
-    PlayerController playerController;
+    CharacterController playerController;
 
     private void Awake()
     {

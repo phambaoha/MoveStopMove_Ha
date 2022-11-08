@@ -8,23 +8,21 @@ public class BotController : CharacterController
     [SerializeField]
     NavMeshAgent navMeshAgent;
 
-    public new Transform TF;
+    //public new Transform TF;
 
     PlayerController player;
 
     [SerializeField]
     List<GameObject> listTarget = new List<GameObject>();
 
-    Transform targerNearest;
+    GameObject targerNearest;
 
     private void Awake()
     {
         player = FindObjectOfType<PlayerController>();
-        AddAllTarget();
 
-        ChangeState(new IdleState());
+      
     }
-
 
     private void Update()
     {
@@ -32,6 +30,7 @@ public class BotController : CharacterController
         {
             ChangeAnim(Constants.TAG_ANIM_DEAD);
             StartCoroutine(IDelayDestroy());
+            
             return;
         }
 
@@ -42,7 +41,7 @@ public class BotController : CharacterController
 
         if (listTarget.Count > 0)
         {
-            targerNearest = GetClosestEnemy(listTarget).transform;
+            targerNearest = GetClosestEnemy(listTarget);
         }
 
 
@@ -60,14 +59,15 @@ public class BotController : CharacterController
     public void Moving()
     {
         ChangeAnim(Constants.TAG_ANIM_RUN);
-        if (targerNearest != null)
-            navMeshAgent.SetDestination(targerNearest.position);
+
+      //  if (targerNearest.activeSelf )
+            navMeshAgent.SetDestination(targerNearest.transform.position);
 
     }
 
     IEnumerator IDelayDestroy()
     {
-        yield return new WaitForSeconds(2f);
+        yield return Cache.GetWaitForSeconds(2f);
 
         OnDespawn();
 
@@ -100,9 +100,11 @@ public class BotController : CharacterController
         }
     }
 
-
+    // them cac doi tuong co tren scene hien tai
     void AddAllTarget()
     {
+      
+
         foreach (GameObject go in GameObject.FindGameObjectsWithTag(Constants.TAG_BOT))
         {
             if (go.Equals(this.gameObject))
@@ -111,27 +113,33 @@ public class BotController : CharacterController
             listTarget.Add(go);
         }
 
-        listTarget.Add(player.gameObject);
+
+     listTarget.Add(player.gameObject);
+      
     }
 
-    // tim tartget gan nhat
-    GameObject GetClosestEnemy(List<GameObject> enemies)
-    {
-        GameObject bestTarget = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
 
-        foreach (GameObject potentialTarget in enemies)
+
+    // tim tartget gan nhat
+    GameObject GetClosestEnemy(List<GameObject> target)
+    {
+        GameObject bestTarget = player.gameObject;
+       // float closestDistanceSqr = Mathf.Infinity;
+      //  Vector3 currentPosition = TF.position;
+
+        foreach (GameObject potentialTarget in target)
         {
-            if (potentialTarget != null)
+            if (potentialTarget != null && potentialTarget.activeSelf)
             {
-                Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-                float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr)
-                {
-                    closestDistanceSqr = dSqrToTarget;
+              //  Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+              //  float dSqrToTarget = directionToTarget.sqrMagnitude;
+               // if (dSqrToTarget < closestDistanceSqr)
+              //  {
+                  //  closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
-                }
+
+                break;
+              //  }
             }
 
         }
@@ -143,7 +151,13 @@ public class BotController : CharacterController
     public override void OnInit()
     {
         base.OnInit();
-       
+
+        isDead = false;
+
+        AddAllTarget();
+
+        ChangeState(new IdleState());
+
     }
 
     public override void OnDespawn()

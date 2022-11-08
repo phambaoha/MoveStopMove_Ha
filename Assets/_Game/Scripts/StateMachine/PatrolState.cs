@@ -10,13 +10,13 @@ public class PatrolState : IState<BotController>
     public void OnEnter(BotController t)
     {
         timer = 0;
-        randomTime = Random.Range(2f, 5f);
+        randomTime = Random.Range(1f, 3f);
     }
 
     public void OnExecute(BotController t)
     {
 
-        if (t.IsTargetInRange(t.transform.position, t.radiusRangeAttack, Constants.TAG_PLAYER,Constants.TAG_BOT))
+        if (t.IsTargetInRange(t.TF.position, t.radiusRangeAttack, Constants.TAG_PLAYER,Constants.TAG_BOT))
         {
         
             t.ChangeState(new AttackState());
@@ -26,13 +26,15 @@ public class PatrolState : IState<BotController>
         {
            
             timer += Time.deltaTime;
-            if (timer < randomTime)
+            if (timer > randomTime)
             {
-                t.Moving();
+                t.ChangeState(new IdleState());
+               
 
             }
             else
-                t.ChangeState(new IdleState());
+                t.Moving();
+
         }
 
 

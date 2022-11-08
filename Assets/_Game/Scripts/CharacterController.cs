@@ -16,7 +16,7 @@ public class CharacterController : GameUnit, IHit
 
     public Rigidbody rb;
 
-
+   
     public bool isDead = false;
 
     public float radiusRangeAttack;
@@ -77,6 +77,7 @@ public class CharacterController : GameUnit, IHit
     }
     public virtual void ThrowAttack()
     {
+
         ChangeAnim(Constants.TAG_ANIM_ATTACK);
 
         if (Time.time > nextFire)
@@ -108,11 +109,6 @@ public class CharacterController : GameUnit, IHit
         }
     }
 
-
-
-
-  
-   
 
     // nhan damge
     public void OnHit()

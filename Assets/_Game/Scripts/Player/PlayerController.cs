@@ -7,7 +7,7 @@ public class PlayerController : CharacterController
     [SerializeField]
     JoystickMove joystick;
 
-    public new  Transform TF;
+    //public new  Transform TF;
 
     bool isTargetInRange;
 

@@ -9,8 +9,12 @@ public class Weapons : GameUnit
 
     public float speed;
     public Transform WeaponRender;
+    public void Start()
+    {
+        Invoke(nameof(OnDespawn), 3f);
+    }
 
-    private void Update()
+    public void Update()
     {
         OnInit();
     }
@@ -22,7 +26,7 @@ public class Weapons : GameUnit
 
     public override void OnInit()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        transform.Translate(speed * Time.deltaTime * Vector3.forward);
     }
 
 

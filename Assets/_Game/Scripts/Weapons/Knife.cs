@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Knife : Weapons
 {
-    private void Start()
-    {
-        Invoke(nameof(OnDespawn), 3f);
-    }
+    //private void Start()
+    //{
+    //    Invoke(nameof(OnDespawn), 3f);
+    //}
 
     public override void OnInit()
     {
@@ -17,12 +17,12 @@ public class Knife : Weapons
     }
 
 
-    public override void OnDespawn()
-    {
-        base.OnDespawn();
-        SimplePool.Despawn(this);
+    //public override void OnDespawn()
+    //{
+    //    base.OnDespawn();
+    //    SimplePool.Despawn(this);
 
 
-    }
+    //}
 
 }

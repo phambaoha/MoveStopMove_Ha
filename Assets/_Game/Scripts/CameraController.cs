@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(TF.position, playerTF.position + offset, speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(TF.position, playerTF.position + offset, speed * Time.fixedDeltaTime);
     }
    
 }

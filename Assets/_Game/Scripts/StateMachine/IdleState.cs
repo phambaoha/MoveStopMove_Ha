@@ -10,7 +10,7 @@ public class IdleState : IState<BotController>
     {
         t.StopMoving();
         timer = 0;
-        ramdomTime = Random.Range(0f, 1f);
+        ramdomTime = 0;
     }
 
     public void OnExecute(BotController t)
