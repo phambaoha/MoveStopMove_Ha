@@ -20,6 +20,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
-        ChangeState(GameState.GamePlay);
+        ChangeState(GameState.MainMenu);
     }
 }

@@ -24,6 +24,16 @@ public static class Cache
         return CacheWaitforSenconds[t];
     }
 
-    
+    static readonly Dictionary<GameObject, PlayerController> CachePlayerController = new Dictionary<GameObject, PlayerController>();
+
+    public static PlayerController GetPlayerController(GameObject Obj)
+    {
+        if (!CachePlayerController.ContainsKey(Obj))
+            CachePlayerController.Add(Obj, Obj.GetComponent<PlayerController>());
+        return CachePlayerController[Obj];
+    }
+
+  
+
 
 }

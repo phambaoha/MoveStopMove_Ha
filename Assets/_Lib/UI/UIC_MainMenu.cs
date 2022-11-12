@@ -10,12 +10,12 @@ public class UIC_MainMenu : UICanvas
     public override void Setup()
     {
         base.Setup();
-        level.text = "Level " +  PlayerPrefs.GetInt("level", 1).ToString();
+       // level.text = "Level " +  PlayerPrefs.GetInt("level", 1).ToString();
     }
 
     public void StartGameButton()
     {
-      //  LevelManager.Instance.OnStartGame();
+        LevelManagers.Instance.OnStart();
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
     }

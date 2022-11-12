@@ -6,9 +6,10 @@ public class UIC_Fail : UICanvas
 {
     public void RetryButton()
     {
-     //   LevelManager.Instance.RetryLevel();
-        Close();
+        
+        LevelManagers.Instance.RetryLevel();
+         Close();
 
-        UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
+        UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
     }
 }

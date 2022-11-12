@@ -331,10 +331,12 @@ public enum IngameType
 
 public enum PoolType
 {
-    Minion_1,
-    Minion_2,
-    Minion_3,
-    Minion_4,
-    None,
-    Nurse,
+        Axe,
+        Knife,
+        Bot,
+    //Minion_2,
+    //Minion_3,
+    //Minion_4,
+    //None,
+    //Nurse,
 }

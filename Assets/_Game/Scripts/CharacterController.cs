@@ -6,17 +6,34 @@ public class CharacterController : GameUnit, IHit
 {
     // Start is called before the first frame update
 
-
     [SerializeField]
     protected List<Weapons> ListWeapons = new List<Weapons>();
 
+    [SerializeField]
+   protected Transform tranSizeUp;
+
+    [SerializeField]
+    SkinnedMeshRenderer skinMeshRen;
+
+    [SerializeField]
+    SkinnedMeshRenderer PantMeshRen;
+
+
+    [Header("Scripable Object")]
+    [SerializeField]
+    Skins SObj_Skins;
+    [SerializeField]
+    Pants SObj_Pants;
+
+
+    [Header("    ")]
     private string curentAnim;
 
     public Animator playerAnim;
 
     public Rigidbody rb;
 
-   
+
     public bool isDead = false;
 
     public float radiusRangeAttack;
@@ -26,6 +43,33 @@ public class CharacterController : GameUnit, IHit
     private float nextFire = 0f;
 
     public float fireRate = 3f;
+
+    public ColorType colorType;
+
+    public PantType pantType;
+
+
+    [SerializeField]
+    int targetKilled = 0;
+
+    public int quantityTargetKilled { get => targetKilled; set => targetKilled = value; }
+
+    private void Start()
+    {
+        OnInit();
+    }
+    public override void OnInit()
+    {
+        targetKilled = 0;
+
+        isDead = false;
+        ResetSize();
+
+        ChangeBodySkinMat((ColorType)Random.Range(0, SObj_Skins.Amount));
+
+        ChangePantsMat((PantType)Random.Range(0, SObj_Pants.Amount));
+       
+    }
 
 
     // tim target trong tam tan cong
@@ -82,9 +126,9 @@ public class CharacterController : GameUnit, IHit
 
         if (Time.time > nextFire)
         {
-           
+
             StartCoroutine(IDelayThrowWeapon());
-            
+
             nextFire = Time.time + fireRate;
         }
     }
@@ -92,7 +136,12 @@ public class CharacterController : GameUnit, IHit
     IEnumerator IDelayThrowWeapon()
     {
         yield return Cache.GetWaitForSeconds(0.3f);
-        SimplePool.Spawn(ListWeapons[ListWeapons.Count - 1], throwPoint.position, throwPoint.rotation).OnInit();
+        Weapons weapons = SimplePool.Spawn<Weapons>(ListWeapons[ListWeapons.Count - 1], throwPoint.position, throwPoint.rotation);
+        weapons.OnInit();
+        weapons.SetCharacter(this);
+
+      
+     
     }
 
 
@@ -110,20 +159,47 @@ public class CharacterController : GameUnit, IHit
     }
 
 
-    // nhan damge
-    public void OnHit()
-    {
-        isDead = true;
 
-    }
+  
 
-    public override void OnInit()
-    {
-       
-    }
+    
+
 
     public override void OnDespawn()
     {
         SimplePool.Despawn(this);
+    }
+
+    public void ChangeBodySkinMat(ColorType colorType)
+    {
+        this.colorType = colorType;
+        skinMeshRen.material = SObj_Skins.GetSkinColor(colorType);
+
+    }
+
+    public void ChangePantsMat(PantType pantType)
+    {
+        this.pantType = pantType;
+
+        PantMeshRen.material = SObj_Pants.GetSkinPants(pantType);
+        
+
+    }
+
+    public virtual void OnHit()
+    {
+        isDead = true;
+        LevelManagers.Instance.SetTotalBotAmount();
+    }
+    public void SizeUp()
+    {
+        if (tranSizeUp != null)
+            tranSizeUp.localScale += new Vector3(0.05f, 0.05f, 0.05f);
+    }
+
+
+    public void ResetSize()
+    {
+        tranSizeUp.localScale = Vector3.one;
     }
 }

@@ -8,6 +8,10 @@ public class BotController : CharacterController
     [SerializeField]
     NavMeshAgent navMeshAgent;
 
+    [SerializeField]
+    Transform circleTarget;
+
+
     //public new Transform TF;
 
     PlayerController player;
@@ -19,18 +23,21 @@ public class BotController : CharacterController
 
     private void Awake()
     {
+        circleTarget.gameObject.SetActive(false);
         player = FindObjectOfType<PlayerController>();
+        listTarget.Add(player.gameObject);
 
-      
     }
 
     private void Update()
     {
+       
+
         if (isDead)
         {
             ChangeAnim(Constants.TAG_ANIM_DEAD);
             StartCoroutine(IDelayDestroy());
-            
+
             return;
         }
 
@@ -60,15 +67,14 @@ public class BotController : CharacterController
     {
         ChangeAnim(Constants.TAG_ANIM_RUN);
 
-      //  if (targerNearest.activeSelf )
+        if (targerNearest.activeSelf)
             navMeshAgent.SetDestination(targerNearest.transform.position);
 
     }
 
     IEnumerator IDelayDestroy()
     {
-        yield return Cache.GetWaitForSeconds(2f);
-
+        yield return Cache.GetWaitForSeconds(1.5f);
         OnDespawn();
 
     }
@@ -92,7 +98,7 @@ public class BotController : CharacterController
 
         currentState = state;
 
-       
+
 
         if (currentState != null)
         {
@@ -103,8 +109,6 @@ public class BotController : CharacterController
     // them cac doi tuong co tren scene hien tai
     void AddAllTarget()
     {
-      
-
         foreach (GameObject go in GameObject.FindGameObjectsWithTag(Constants.TAG_BOT))
         {
             if (go.Equals(this.gameObject))
@@ -113,9 +117,9 @@ public class BotController : CharacterController
             listTarget.Add(go);
         }
 
+        listTarget.Reverse();
 
-     listTarget.Add(player.gameObject);
-      
+
     }
 
 
@@ -124,22 +128,34 @@ public class BotController : CharacterController
     GameObject GetClosestEnemy(List<GameObject> target)
     {
         GameObject bestTarget = player.gameObject;
-       // float closestDistanceSqr = Mathf.Infinity;
-      //  Vector3 currentPosition = TF.position;
+
+
+        // float closestDistanceSqr = Mathf.Infinity;
+        //  Vector3 currentPosition = TF.position;
+
+        if(Vector3.Distance(TF.position,bestTarget.transform.position) <= radiusRangeAttack)
+        {
+            circleTarget.gameObject.SetActive(true);
+        }
+        else
+        {
+            circleTarget.gameObject.SetActive(false);
+        }
 
         foreach (GameObject potentialTarget in target)
         {
             if (potentialTarget != null && potentialTarget.activeSelf)
             {
-              //  Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-              //  float dSqrToTarget = directionToTarget.sqrMagnitude;
-               // if (dSqrToTarget < closestDistanceSqr)
-              //  {
-                  //  closestDistanceSqr = dSqrToTarget;
-                    bestTarget = potentialTarget;
+
+                //  Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+                //  float dSqrToTarget = directionToTarget.sqrMagnitude;
+                // if (dSqrToTarget < closestDistanceSqr)
+                //  {
+                //  closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
 
                 break;
-              //  }
+                //  }
             }
 
         }
@@ -151,8 +167,6 @@ public class BotController : CharacterController
     public override void OnInit()
     {
         base.OnInit();
-
-        isDead = false;
 
         AddAllTarget();
 

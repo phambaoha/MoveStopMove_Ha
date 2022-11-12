@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1245723323145272741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7515741418614688683}
   m_Father: {fileID: 0}
@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff1ec2c66fceb214f9cbed1aeeab51ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
+  poolType: 2
   speed: 8
   WeaponRender: {fileID: 7515741418614688683}
+  WeaponOfPlayer: 1
+  weaponSize: {fileID: 2776763209620054494}
 --- !u!65 &793101219
 BoxCollider:
   m_ObjectHideFlags: 0

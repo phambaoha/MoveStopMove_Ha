@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : CharacterController
+public class PlayerController : CharacterController,IHit
 {
     [SerializeField]
     JoystickMove joystick;
 
-    //public new  Transform TF;
-
     bool isTargetInRange;
-
-
-
-    // Update is called once per frame
+ 
     void Update()
     {
 
         Move();
 
     }
+
+   
 
     public bool IsMove()
     {
@@ -52,7 +49,9 @@ public class PlayerController : CharacterController
             if (isTargetInRange)
             {
 
+
                 ThrowAttack();
+                
                 
             }
             else
@@ -81,6 +80,20 @@ public class PlayerController : CharacterController
         this.gameObject.SetActive(false);
 
     }
+
+
+    public override void OnInit()
+    {
+        base.OnInit();
+      //  BotKilledPlayer = 0;
+    }
+
+
+  
+
+
+
+
 
 
 
