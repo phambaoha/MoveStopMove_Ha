@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 1
-  speed: 8
+  SObj_weaponSpecs: {fileID: 11400000, guid: 0d98817209112a24da90744f8a7e084a, type: 2}
   WeaponRender: {fileID: 2650509212723559394}
-  WeaponOfPlayer: 0
   weaponSize: {fileID: 6001959077392990785}
+  timeDespawn: 1.5
 --- !u!65 &2439559752429546764
 BoxCollider:
   m_ObjectHideFlags: 0

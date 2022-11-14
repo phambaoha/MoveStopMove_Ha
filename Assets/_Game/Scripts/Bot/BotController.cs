@@ -12,12 +12,10 @@ public class BotController : CharacterController
     Transform circleTarget;
 
 
-    //public new Transform TF;
-
     PlayerController player;
 
-    [SerializeField]
     List<GameObject> listTarget = new List<GameObject>();
+
 
     GameObject targerNearest;
 
@@ -81,9 +79,8 @@ public class BotController : CharacterController
 
     public override void ThrowAttack()
     {
-
         base.ThrowAttack();
-
+        TF.LookAt(targerNearest.transform);
         navMeshAgent.SetDestination(TF.position);
 
     }
@@ -171,6 +168,7 @@ public class BotController : CharacterController
         AddAllTarget();
 
         ChangeState(new IdleState());
+
 
     }
 

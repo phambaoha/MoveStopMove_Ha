@@ -85,7 +85,7 @@ public class PlayerController : CharacterController,IHit
     public override void OnInit()
     {
         base.OnInit();
-      //  BotKilledPlayer = 0;
+     
     }
 
 

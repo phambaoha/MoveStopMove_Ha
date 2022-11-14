@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterController : GameUnit, IHit
@@ -10,7 +11,7 @@ public class CharacterController : GameUnit, IHit
     protected List<Weapons> ListWeapons = new List<Weapons>();
 
     [SerializeField]
-   protected Transform tranSizeUp;
+    protected Transform tranSizeUp;
 
     [SerializeField]
     SkinnedMeshRenderer skinMeshRen;
@@ -25,6 +26,14 @@ public class CharacterController : GameUnit, IHit
     [SerializeField]
     Pants SObj_Pants;
 
+    [SerializeField]
+    int targetKilledAmount = 0;
+
+
+    [Header("canvas")]
+    [SerializeField]
+    TextMeshProUGUI textLevel;
+
 
     [Header("    ")]
     private string curentAnim;
@@ -33,26 +42,32 @@ public class CharacterController : GameUnit, IHit
 
     public Rigidbody rb;
 
-
+    [HideInInspector]
     public bool isDead = false;
 
     public float radiusRangeAttack;
 
     public Transform throwPoint;
 
+
     private float nextFire = 0f;
 
     public float fireRate = 3f;
+
 
     public ColorType colorType;
 
     public PantType pantType;
 
 
-    [SerializeField]
-    int targetKilled = 0;
 
-    public int quantityTargetKilled { get => targetKilled; set => targetKilled = value; }
+
+
+
+
+    public int QuantityTargetKilled { get => targetKilledAmount; set => targetKilledAmount = value; }
+
+
 
     private void Start()
     {
@@ -60,15 +75,25 @@ public class CharacterController : GameUnit, IHit
     }
     public override void OnInit()
     {
-        targetKilled = 0;
+        
+        targetKilledAmount = 0;
+
+        SetTextLevel(targetKilledAmount);
 
         isDead = false;
+
         ResetSize();
 
+        ChangeAllSkin();
+       
+    }
+
+    void ChangeAllSkin()
+    {
         ChangeBodySkinMat((ColorType)Random.Range(0, SObj_Skins.Amount));
 
         ChangePantsMat((PantType)Random.Range(0, SObj_Pants.Amount));
-       
+
     }
 
 
@@ -81,7 +106,7 @@ public class CharacterController : GameUnit, IHit
         foreach (var hitCollider in hitColliders)
         {
 
-            if (hitCollider != null && (hitCollider.CompareTag(tag)))
+            if (hitCollider.CompareTag(tag) && !Cache.GetCharacterController(hitCollider.transform).isDead)
             {
                 transform.LookAt(hitCollider.transform.position);
 
@@ -99,10 +124,9 @@ public class CharacterController : GameUnit, IHit
 
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
 
-
         for (int i = 2; i < hitColliders.Length; i++)
         {
-            if (hitColliders[i] != this.gameObject)
+            if (hitColliders[i] != this.gameObject )
             {
                 if (hitColliders[i].CompareTag(tag_Player) || hitColliders[i].CompareTag(tag_Bot))
                 {
@@ -112,8 +136,8 @@ public class CharacterController : GameUnit, IHit
 
                 }
             }
-
-
+            else
+                temp = false;
         }
 
 
@@ -121,27 +145,31 @@ public class CharacterController : GameUnit, IHit
     }
     public virtual void ThrowAttack()
     {
+        if (isDead)
+            return;
+
+
 
         ChangeAnim(Constants.TAG_ANIM_ATTACK);
 
         if (Time.time > nextFire)
         {
-
+            nextFire = Time.time + fireRate;
             StartCoroutine(IDelayThrowWeapon());
 
-            nextFire = Time.time + fireRate;
+          
         }
     }
 
     IEnumerator IDelayThrowWeapon()
     {
         yield return Cache.GetWaitForSeconds(0.3f);
-        Weapons weapons = SimplePool.Spawn<Weapons>(ListWeapons[ListWeapons.Count - 1], throwPoint.position, throwPoint.rotation);
+        Weapons weapons = SimplePool.Spawn<Weapons>(PoolType.Knife, throwPoint.position, throwPoint.rotation);
         weapons.OnInit();
         weapons.SetCharacter(this);
 
-      
-     
+
+
     }
 
 
@@ -160,9 +188,9 @@ public class CharacterController : GameUnit, IHit
 
 
 
-  
 
-    
+
+
 
 
     public override void OnDespawn()
@@ -182,14 +210,21 @@ public class CharacterController : GameUnit, IHit
         this.pantType = pantType;
 
         PantMeshRen.material = SObj_Pants.GetSkinPants(pantType);
-        
+
 
     }
 
     public virtual void OnHit()
     {
         isDead = true;
-        LevelManagers.Instance.SetTotalBotAmount();
+        int num =  LevelManagers.Instance.TotalBotAmount--;
+        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).setNumBot(num);
+        
+    }
+
+   public void SetTextLevel(int num)
+    {
+        textLevel.text = num.ToString();
     }
     public void SizeUp()
     {

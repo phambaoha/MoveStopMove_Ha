@@ -11,20 +11,23 @@ public class LevelManagers : Singleton<LevelManagers>
 
 
     [SerializeField]
-    int TotalBotAmount;
+    int totalBotAmount;
 
     [SerializeField]
     BotController bot;
 
-    [SerializeField]
-    Transform poolOfBot;
+
 
     PlayerController player;
-    Vector3 pos;
+
+
+
+
 
     Level curentLevel;
 
 
+    public int TotalBotAmount { get => totalBotAmount; set => totalBotAmount = value; }
 
     private void Awake()
     {
@@ -38,56 +41,50 @@ public class LevelManagers : Singleton<LevelManagers>
         OnInit();
 
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
-
         Time.timeScale = 0;
 
-        InvokeRepeating(nameof(SpawnBotOnNavMesh), 1, 1f);
+        InvokeRepeating(nameof(SpawnBotOnNavMesh), 0, 1f);
+
+       
     }
 
     private void Update()
     {
-       
         if (player.isDead)
         {
             UIManager.Instance.OpenUI(UIID.UIC_Fail);
 
+
         }
-
-        if (TotalBotAmount <= 0)
+        else
+        if (totalBotAmount <= 0)
         {
-
             UIManager.Instance.OpenUI(UIID.UIC_Victory);
         }
 
     }
 
-    public int GetBotAmount()
-    {
-        return TotalBotAmount;
-    }
 
-    // tong so bot trong mot level
-    public void SetTotalBotAmount()
-    {
-        this.TotalBotAmount--;
-    }
-
-
-
-    
-
-
+    Vector3 randomPos;
 
     // spawn bot
     void SpawnBotOnNavMesh()
     {
-        pos = RandomNavmeshLocation();
+        if (totalBotAmount <= 0)
+            return;
 
-        if (Vector3.Distance(pos, player.TF.position) >= 20f)
-        {
 
-            SimplePool.Spawn<BotController>(bot, pos, transform.rotation).OnInit();
-        }
+       // int xCam = camera.ViewportToWorldPoint().x;
+        randomPos = RandomNavmeshLocation();
+      //  if (randomPos.x )
+
+            if (Vector3.Distance(randomPos, player.TF.position) >= 20f)
+            {
+
+                SimplePool.Spawn<BotController>(bot, randomPos, transform.rotation).OnInit();
+            }
+
+
 
     }
 
@@ -131,19 +128,16 @@ public class LevelManagers : Singleton<LevelManagers>
 
     public void OnInit()
     {
-        player.TF.position = Vector3.one;
         player.gameObject.SetActive(true);
+        player.TF.position = Vector3.one;        
         player.isDead = false;
-        poolOfBot.gameObject.SetActive(true);
 
-       
     }
 
     public void OnDespawn()
     {
-     
 
-         
+        SimplePool.CollectAll();
     }
 
     public void OnStart()

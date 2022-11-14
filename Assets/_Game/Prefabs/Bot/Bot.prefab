@@ -319,7 +319,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c7ce037e15937d7429061dc4cfec2621, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 8346754021811397546}
   - component: {fileID: 8298222765349312703}
   - component: {fileID: 289014376}
+  - component: {fileID: 6595103519152772961}
   m_Layer: 6
   m_Name: Bot
   m_TagString: Bot
@@ -507,6 +508,7 @@ MonoBehaviour:
   colorType: 3
   pantType: 4
   targetKilled: 0
+  textLevel: {fileID: 6070212464988192826}
   navMeshAgent: {fileID: 289014376}
   circleTarget: {fileID: 2486718737013364200}
   listTarget: []
@@ -532,6 +534,23 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6595103519152772961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296107945744340966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 0.101326115, g: 0.16228302, b: 0.9339623, a: 1}
+  needBoxIndicator: 1
+  needArrowIndicator: 1
+  needDistanceText: 0
+  indicator: {fileID: 0}
 --- !u!1001 &22169345834886217
 PrefabInstance:
   m_ObjectHideFlags: 0

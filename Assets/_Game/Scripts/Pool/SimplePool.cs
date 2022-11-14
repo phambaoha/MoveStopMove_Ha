@@ -271,6 +271,8 @@ public static class SimplePool
             poolInstanceID[obj.GetInstanceID()].Collect();
     }
 
+
+    // despawn all pool
     static public void CollectAll()
     {
         foreach (var item in poolInstanceID)

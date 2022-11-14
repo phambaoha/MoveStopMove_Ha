@@ -5,15 +5,13 @@ using UnityEngine;
 public class JoystickMove : MonoBehaviour
 {
     public float speed;
-    public DynamicJoystick dynamicJoystick;
+
+   public  DynamicJoystick dynamicJoystick;
+
 
     [SerializeField]
     CharacterController playerController;
 
-    private void Awake()
-    {
-
-    }
 
     private void Update()
     {

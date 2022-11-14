@@ -7,20 +7,24 @@ public class Weapons : GameUnit
 {
     //  bat buoc ke thua game unit
 
+    [SerializeField]
 
+   protected WeaponSpecs SObj_weaponSpecs;
 
-    public float speed;
+   // public float speed;
     public Transform WeaponRender;
 
-    private CharacterController character;
-    public bool WeaponOfPlayer;
 
+
+    private CharacterController character;
     public Transform weaponSize;
+
+    public float timeDespawn;
 
     public void Start()
     {
         TF.localScale = Vector3.one;
-        Invoke(nameof(OnDespawn), 3f);
+        Invoke(nameof(OnDespawn), timeDespawn);
     }
 
     public void Update()
@@ -36,8 +40,6 @@ public class Weapons : GameUnit
     public override void OnInit()
     {
         WeaponSizeUp();
-        TF.Translate(speed * Time.deltaTime * Vector3.forward);
-      
 
     }
 
@@ -46,9 +48,9 @@ public class Weapons : GameUnit
   
     void WeaponSizeUp()
     {
-        if (character != null && character.quantityTargetKilled > 0)
+        if (character != null && character.QuantityTargetKilled > 0)
         {
-            TF.localScale = Vector3.one + new Vector3(0.05f, 0.05f, 0.05f) * character.quantityTargetKilled;
+            TF.localScale = Vector3.one + new Vector3(0.05f, 0.05f, 0.05f) * character.QuantityTargetKilled;
 
         }
             
@@ -63,7 +65,9 @@ public class Weapons : GameUnit
 
 
             character.SizeUp();
-            character.quantityTargetKilled++;
+            character.QuantityTargetKilled++;
+
+            character.SetTextLevel(character.QuantityTargetKilled);
 
             ihit.OnHit();
 

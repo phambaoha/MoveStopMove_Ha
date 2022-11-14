@@ -9,7 +9,7 @@ public class Knife : Weapons
     {
 
         base.OnInit();
-
+        TF.Translate(SObj_weaponSpecs.speedKnife * Time.deltaTime * Vector3.forward);
     }
 
 

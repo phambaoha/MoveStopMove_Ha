@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Numerics;
+using TMPro;
 
 public enum UIID
 {
@@ -132,5 +133,6 @@ public class UIManager : Singleton<UIManager>
             GetUI(ID).Close();
         }
     }
+
 
 }

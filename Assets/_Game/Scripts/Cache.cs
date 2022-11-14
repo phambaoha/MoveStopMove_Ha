@@ -24,14 +24,16 @@ public static class Cache
         return CacheWaitforSenconds[t];
     }
 
-    static readonly Dictionary<GameObject, PlayerController> CachePlayerController = new Dictionary<GameObject, PlayerController>();
+    static readonly Dictionary<Transform, CharacterController> CacheCharacterController = new Dictionary<Transform, CharacterController>();
 
-    public static PlayerController GetPlayerController(GameObject Obj)
+    public static CharacterController GetCharacterController(Transform trans)
     {
-        if (!CachePlayerController.ContainsKey(Obj))
-            CachePlayerController.Add(Obj, Obj.GetComponent<PlayerController>());
-        return CachePlayerController[Obj];
+        if (!CacheCharacterController.ContainsKey(trans))
+            CacheCharacterController.Add(trans, trans.GetComponent<CharacterController>());
+        return CacheCharacterController[trans];
     }
+
+
 
   
 
