@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff1ec2c66fceb214f9cbed1aeeab51ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 2
+  poolType: 1
   SObj_weaponSpecs: {fileID: 11400000, guid: 0d98817209112a24da90744f8a7e084a, type: 2}
   WeaponRender: {fileID: 7515741418614688683}
   weaponSize: {fileID: 2776763209620054494}

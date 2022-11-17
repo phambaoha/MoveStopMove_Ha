@@ -29,8 +29,6 @@ public class BotController : CharacterController
 
     private void Update()
     {
-       
-
         if (isDead)
         {
             ChangeAnim(Constants.TAG_ANIM_DEAD);
@@ -70,6 +68,8 @@ public class BotController : CharacterController
 
     }
 
+
+    // anim die va despawn pool
     IEnumerator IDelayDestroy()
     {
         yield return Cache.GetWaitForSeconds(1.5f);
@@ -80,7 +80,9 @@ public class BotController : CharacterController
     public override void ThrowAttack()
     {
         base.ThrowAttack();
+
         TF.LookAt(targerNearest.transform);
+
         navMeshAgent.SetDestination(TF.position);
 
     }
@@ -176,6 +178,14 @@ public class BotController : CharacterController
     {
         base.OnDespawn();
 
+    }
+
+    public override void OnHit()
+    {
+        base.OnHit();
+
+        // cap nhat so bot khi bot bi giet
+        LevelManagers.Instance.TotalBotAmount--;
     }
 
 

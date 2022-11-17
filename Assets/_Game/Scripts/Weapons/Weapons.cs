@@ -17,13 +17,14 @@ public class Weapons : GameUnit
 
 
     private CharacterController character;
-    public Transform weaponSize;
+  //  public Transform weaponSize;
 
     public float timeDespawn;
 
     public void Start()
     {
-        TF.localScale = Vector3.one;
+
+       
         Invoke(nameof(OnDespawn), timeDespawn);
     }
 
@@ -43,34 +44,36 @@ public class Weapons : GameUnit
 
     }
 
-
-
-  
     void WeaponSizeUp()
     {
-        if (character != null && character.QuantityTargetKilled > 0)
-        {
-            TF.localScale = Vector3.one + new Vector3(0.05f, 0.05f, 0.05f) * character.QuantityTargetKilled;
+        TF.localScale = Vector3.one;
 
+        if (character != null && character.TargetKilledQty >= 0)
+        {
+            
+            TF.localScale = Vector3.one + new Vector3(0.05f, 0.05f, 0.05f) * character.TargetKilledQty;
         }
             
     }
+   
 
     private void OnTriggerEnter(Collider other)
     {
         IHit ihit = Cache.GetHit(other);
 
-        if (ihit != null)
+        if (ihit != null && other.transform != character.transform )
         {
-
-
             character.SizeUp();
-            character.QuantityTargetKilled++;
+            character.TargetKilledQty++;
+            character.SetTextLevel(character.TargetKilledQty);
 
-            character.SetTextLevel(character.QuantityTargetKilled);
-
+            if(character as PlayerController)
+            {
+                PlayerController player = (PlayerController)character;
+                player.PosUpCamera();
+            }
+          
             ihit.OnHit();
-
             OnDespawn();
         }
     }

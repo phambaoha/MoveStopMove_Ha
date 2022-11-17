@@ -71,15 +71,16 @@ public static class SimplePool
             if (m_collect) active = new List<GameUnit>();
             if (m_clamp) m_Amount = initialQty;
         }
-        public int Count {
-            get { return inactive.Count;}
+        public int Count
+        {
+            get { return inactive.Count; }
         }
         // Spawn an object from our pool
         public GameUnit Spawn(Vector3 pos, Quaternion rot)
         {
             GameUnit obj = Spawn();
 
-            obj.TF.SetPositionAndRotation( pos, rot);
+            obj.TF.SetPositionAndRotation(pos, rot);
 
             return obj;
         }
@@ -125,14 +126,18 @@ public static class SimplePool
             if (m_collect) active.Remove(obj);
         }
 
-        public void Clamp(int amount) {
-            while(inactive.Count> amount) {
+        public void Clamp(int amount)
+        {
+            while (inactive.Count > amount)
+            {
                 GameUnit go = inactive.Dequeue();
                 GameObject.DestroyImmediate(go);
             }
         }
-        public void Release() {
-            while(inactive.Count>0) {
+        public void Release()
+        {
+            while (inactive.Count > 0)
+            {
                 GameUnit go = inactive.Dequeue();
                 GameObject.DestroyImmediate(go);
             }
@@ -187,7 +192,7 @@ public static class SimplePool
         GameUnit[] obs = new GameUnit[qty];
         for (int i = 0; i < qty; i++)
         {
-            obs[i] = Spawn(prefab);        
+            obs[i] = Spawn(prefab);
         }
 
         // Now despawn them all.
@@ -201,7 +206,7 @@ public static class SimplePool
     {
         return Spawn(GetGameUnitByType(poolType), pos, rot) as T;
     }
-    
+
     static public T Spawn<T>(PoolType poolType) where T : GameUnit
     {
         return Spawn<T>(GetGameUnitByType(poolType));
@@ -248,7 +253,7 @@ public static class SimplePool
             if (pools.ContainsKey(obj.GetInstanceID()))
                 pools[obj.GetInstanceID()].Despawn(obj);
             else
-                GameObject.Destroy(obj.gameObject);    
+                GameObject.Destroy(obj.gameObject);
         }
     }
 
@@ -309,6 +314,9 @@ public static class SimplePool
 
         return poolTypes[poolType];
     }
+
+
+  
 }
 
 [System.Serializable]
@@ -322,9 +330,10 @@ public class PoolAmount
     public bool clamp;
 }
 
-public enum IngameType 
-{ 
-    PLAYER, 
+
+public enum IngameType
+{
+    PLAYER,
     ENEMY,
     None,
     HpBar,
@@ -333,12 +342,14 @@ public enum IngameType
 
 public enum PoolType
 {
-        Axe,
-        Knife,
-        Bot,
-    //Minion_2,
-    //Minion_3,
-    //Minion_4,
-    //None,
-    //Nurse,
+    None,
+    Axe,
+    Knife,
+    Bommerang,
+    Bot,
+    Axe_WeaponsHand,
+    Knife_WeaponsHand, 
+    Boomerang_WeaponsHand,
 }
+
+

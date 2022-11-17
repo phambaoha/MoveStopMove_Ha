@@ -6,14 +6,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Skins", menuName = "ScriptableObjects/Skins", order = 1)]
 public class Skins : ScriptableObject
 {
-    [SerializeField] Material[] SkinBodyColor;
-
-    private int amount;
-
-    public int Amount { get => SkinBodyColor.Length; }
+    [SerializeField] Material[] colorBodyColor;
+    [SerializeField] Material[] pantsMat;
+    public int ColorBodyAmount { get => colorBodyColor.Length; }
+    public int PantAmount { get => pantsMat.Length; }
 
     public Material GetSkinColor(ColorType colorType)
     {
-        return SkinBodyColor[(int)colorType];
+        return colorBodyColor[(int)colorType];
+    }
+   
+
+    public Material GetSkinPants(PantType pantType)
+    {
+        return pantsMat[(int)pantType];
     }
 }

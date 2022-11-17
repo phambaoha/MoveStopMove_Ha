@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Attach this script to all the target game objects in the scene.
@@ -7,7 +8,7 @@
 public class Target : MonoBehaviour
 {
     [Tooltip("Change this color to change the indicators color for this target")]
-    [SerializeField] private Color targetColor = Color.red;
+    [SerializeField] private Color targetColor = Color.clear;
 
     [Tooltip("Select if box indicator is required for this target")]
     [SerializeField] private bool needBoxIndicator = true;
@@ -18,6 +19,10 @@ public class Target : MonoBehaviour
     [Tooltip("Select if distance text is required for this target")]
     [SerializeField] private bool needDistanceText = true;
 
+    [SerializeField]
+    BotController bot;
+
+    List<Color> colorArow = new List<Color>() { Color.red, Color.blue, Color.green };
     /// <summary>
     /// Please do not assign its value yourself without understanding its use.
     /// A reference to the target's indicator, 
@@ -28,17 +33,24 @@ public class Target : MonoBehaviour
     /// <summary>
     /// Gets the color for the target indicator.
     /// </summary>
-    public Color TargetColor
+    /// 
+
+ 
+    void SetColorArow(ColorType color)
     {
-        get
-        {
-            return targetColor;
-        }
+        targetColor = colorArow[(int)color];
+
     }
 
-    /// <summary>
-    /// Gets if box indicator is required for the target.
-    /// </summary>
+
+    private void Start()
+    {
+        SetColorArow(bot.colorType);
+
+    }
+
+    public Color Targetcolor { get => targetColor; set => targetColor = value; }
+
     public bool NeedBoxIndicator
     {
         get
@@ -68,6 +80,8 @@ public class Target : MonoBehaviour
             return needDistanceText;
         }
     }
+
+    
 
     /// <summary>
     /// On enable add this target object to the targets list.

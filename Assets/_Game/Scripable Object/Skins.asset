@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe0779ef4d089c4295842b733868244, type: 3}
   m_Name: Skins
   m_EditorClassIdentifier: 
-  SkinBodyColor:
+  colorBodyColor:
   - {fileID: 2100000, guid: 37d380e67d5d85d45a1de5738756381a, type: 2}
   - {fileID: 2100000, guid: 3309dc4e5978eff4e8027d65e6cb5c40, type: 2}
   - {fileID: 2100000, guid: 6532e5291439c37408e62b832f6eb26f, type: 2}
+  pantsMat:
+  - {fileID: 2100000, guid: 740cd7cce51c64846accf3905d8c4b2e, type: 2}
+  - {fileID: 2100000, guid: 5881e09042aa25244a935cff99efca7e, type: 2}
+  - {fileID: 2100000, guid: ebe3db1791845fd4f882c428791edaee, type: 2}
+  - {fileID: 2100000, guid: 6ba7263576faa3440884e8ad401ce19f, type: 2}

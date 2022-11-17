@@ -16,10 +16,12 @@ public class Constants : MonoBehaviour
 
     public const string TAG_ANIM_DEAD = "Dead";
 
+    public const string TAG_GROUND = "Ground";
+
 }
 
 public enum ColorType { Red,Blue,Green, None }
 
 public enum PantType { Orion, Pokemon, RainBow, Skrull, None }
 
-public enum WeaponOnHands { Axe, Knife, Boomerang, None}
+public enum WeaponOnHandType { Axe, Knife, Boomerang}
