@@ -8,18 +8,20 @@ using TMPro;
 
 public enum UIID
 {
-    UIC_BlockRaycast = 0,
-    UIC_GamePlay = 1,
-    UIC_MainMenu = 2,
-    UICSetting = 3,
-    UIC_Victory = 4,
-    UIC_Fail = 5,
+    UIC_BlockRaycast,
+    UIC_GamePlay,
+    UIC_MainMenu,
+    UIC_ChangeSkin,
+    UICSetting,
+    UIC_Victory,
+    UIC_Fail,
+
 }
 
 
 public class UIManager : Singleton<UIManager>
 {
-    
+
     private Dictionary<UIID, UICanvas> UICanvas = new Dictionary<UIID, UICanvas>();
 
     public Transform CanvasParentTF;
@@ -40,8 +42,8 @@ public class UIManager : Singleton<UIManager>
         }
 
         return UICanvas[ID];
-    } 
-    
+    }
+
     public T GetUI<T>(UIID ID) where T : UICanvas
     {
         return GetUI(ID) as T;
@@ -55,8 +57,8 @@ public class UIManager : Singleton<UIManager>
         canvas.Open();
 
         return canvas;
-    }  
-    
+    }
+
     public T OpenUI<T>(UIID ID) where T : UICanvas
     {
         return OpenUI(ID) as T;
@@ -73,7 +75,8 @@ public class UIManager : Singleton<UIManager>
 
     private Dictionary<UICanvas, UnityAction> BackActionEvents = new Dictionary<UICanvas, UnityAction>();
     private List<UICanvas> backCanvas = new List<UICanvas>();
-    UICanvas BackTopUI {
+    UICanvas BackTopUI
+    {
         get
         {
             UICanvas canvas = null;

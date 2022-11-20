@@ -13,6 +13,9 @@ public class LevelManagers : Singleton<LevelManagers>
     PlayerController player;
     Level curentLevel;
     public int TotalBotAmount { get => totalBotAmount; set => totalBotAmount = value; }
+
+   
+
     private void Awake()
     {
 
@@ -22,22 +25,17 @@ public class LevelManagers : Singleton<LevelManagers>
     void Start()
     {
         LoadLevel(1);
+
         OnInit();
 
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
-        Time.timeScale = 0;
 
-        InvokeRepeating(nameof(SpawnBotOnNavMesh), 0, 2f);
-
+        InvokeRepeating(nameof(SpawnBotOnNavMesh), 0, 1f);
 
     }
     private void Update()
     {
-
-        if (!player.isDead && TotalBotAmount <= 0)
-        {
-            UIManager.Instance.OpenUI(UIID.UIC_Victory);
-        }
+        print(GameManager.Instance.getCurentState());
 
     }
     Vector3 randomPos;
@@ -49,15 +47,19 @@ public class LevelManagers : Singleton<LevelManagers>
             return;
 
 
-        // int xCam = camera.ViewportToWorldPoint().x;
-        randomPos = RandomNavmeshLocation();
-        //  if (randomPos.x )
-
-        if (Vector3.Distance(randomPos, player.TF.position) >= 20f)
+        if(GameManager.Instance.IsState(GameState.GamePlay))
         {
+            // int xCam = camera.ViewportToWorldPoint().x;
+            randomPos = RandomNavmeshLocation();
+            //  if (randomPos.x )
 
-            SimplePool.Spawn<BotController>(PoolType.Bot, randomPos, transform.rotation).OnInit();
+            if (Vector3.Distance(randomPos, player.TF.position) >= 20f)
+            {
+
+                SimplePool.Spawn<BotController>(PoolType.Bot, randomPos, transform.rotation).OnInit();
+            }
         }
+       
 
 
 
@@ -93,6 +95,8 @@ public class LevelManagers : Singleton<LevelManagers>
         curentLevel = Instantiate(levels[indexLevel - 1]);
     }
 
+    
+
     public void RetryLevel()
     {
         LoadLevel(1);
@@ -104,28 +108,19 @@ public class LevelManagers : Singleton<LevelManagers>
 
     public void OnInit()
     {
+        player.isDead = false;
         player.gameObject.SetActive(true);
         player.TF.position = Vector3.one;
-        player.isDead = false;
 
+       
     }
 
 
     public void OnDespawn()
     {
-
+        GameManager.Instance.ChangeState(GameState.Menu);
         SimplePool.CollectAll();
     }
 
-    public void OnStart()
-    {
-        GameManager.Instance.ChangeState(GameState.GamePlay);
-        Time.timeScale = 1;
-
-    }
-
-    public void OnFinish()
-    {
-        GameManager.Instance.ChangeState(GameState.Finish);
-    }
+    
 }

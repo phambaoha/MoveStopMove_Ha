@@ -10,35 +10,42 @@ public class PatrolState : IState<BotController>
     public void OnEnter(BotController t)
     {
         timer = 0;
-        randomTime = Random.Range(1f, 3f);
+        randomTime = Random.Range(1f, 4f);
     }
 
     public void OnExecute(BotController t)
     {
-       
-        if(t!= null)
+        if(GameManager.Instance.IsState(GameState.GamePlay))
         {
-            if (t.IsTargetInRange(t.TF.position, t.radiusRangeAttack, Constants.TAG_PLAYER, Constants.TAG_BOT))
+            if (t != null)
             {
-
-                t.ChangeState(new AttackState());
-
-            }
-            else
-            {
-
-                timer += Time.deltaTime;
-                if (timer > randomTime)
+                if (t.IsTargetInRange(t.TF.position, t.radiusRangeAttack, Constants.TAG_PLAYER, Constants.TAG_BOT))
                 {
-                    t.ChangeState(new IdleState());
 
+                    t.ChangeState(new AttackState());
 
                 }
                 else
-                    t.Moving();
+                {
 
+                    timer += Time.deltaTime;
+                    if (timer >= randomTime)
+                    {
+                        t.ChangeState(new IdleState());
+
+                    }
+                    else
+                        t.Moving();
+
+                }
             }
         }
+        else
+        {
+            t.StopMoving();
+        }
+       
+       
       
 
     }

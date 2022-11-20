@@ -11,7 +11,6 @@ public class BotController : CharacterController
     [SerializeField]
     Transform circleTarget;
 
-
     PlayerController player;
 
     List<GameObject> listTarget = new List<GameObject>();
@@ -22,7 +21,9 @@ public class BotController : CharacterController
     private void Awake()
     {
         circleTarget.gameObject.SetActive(false);
+
         player = FindObjectOfType<PlayerController>();
+
         listTarget.Add(player.gameObject);
 
     }
@@ -61,8 +62,12 @@ public class BotController : CharacterController
 
     public void Moving()
     {
+        if (isDead)
+            return;
+
         ChangeAnim(Constants.TAG_ANIM_RUN);
 
+        // kiem tra doi tuong trong pool co dang active khong
         if (targerNearest.activeSelf)
             navMeshAgent.SetDestination(targerNearest.transform.position);
 
@@ -167,16 +172,29 @@ public class BotController : CharacterController
     {
         base.OnInit();
 
+        this.radiusRangeAttack = Random.Range(4.5f, 7);
+
         AddAllTarget();
+
+        ChangeHat((HatType)Random.Range(0, SObj_Skins.GetHatAmount));
 
         ChangeState(new IdleState());
 
 
     }
+    //public override void ChangeHat(HatType hatType)
+    //{
+    //    base.ChangeHat(hatType);
+    //}
 
     public override void OnDespawn()
     {
-        base.OnDespawn();
+        if (weaponHand != null)
+            Destroy(weaponHand.gameObject);
+        if (hat != null)
+            Destroy(hat.gameObject);
+
+        SimplePool.Despawn(this);
 
     }
 
@@ -186,7 +204,14 @@ public class BotController : CharacterController
 
         // cap nhat so bot khi bot bi giet
         LevelManagers.Instance.TotalBotAmount--;
+
+        if (!player.isDead && LevelManagers.Instance.TotalBotAmount < 0)
+        {
+            GameManager.Instance.ChangeState(GameState.Menu);
+            UIManager.Instance.OpenUI(UIID.UIC_Victory);
+        }
     }
 
+  
 
 }

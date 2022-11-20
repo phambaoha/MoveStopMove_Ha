@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { MainMenu, GamePlay, Finish }
+public enum GameState { Menu, GamePlay, Finish }
 
 public class GameManager : Singleton<GameManager>
 {
@@ -17,9 +17,13 @@ public class GameManager : Singleton<GameManager>
     {
         return this.gameState == gameState;
     }
-
+    
+    public GameState getCurentState()
+    {
+        return gameState;
+    }
     private void Awake()
     {
-        ChangeState(GameState.MainMenu);
+        ChangeState(GameState.Menu);
     }
 }

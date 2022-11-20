@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Cache 
 {
@@ -33,9 +34,28 @@ public static class Cache
         return CacheCharacterController[trans];
     }
 
+    static readonly Dictionary<Transform, Hat> CacheHat = new Dictionary<Transform, Hat>();
+
+    public static Hat GetHat(Transform trans)
+    {
+        if (!CacheHat.ContainsKey(trans))
+            CacheHat.Add(trans, trans.GetComponent<Hat>());
+        return CacheHat[trans];
+    }
 
 
-  
+    static readonly Dictionary<Transform, WeaponHand> CacheWeaponHand = new Dictionary<Transform, WeaponHand>();
+
+    public static WeaponHand GetWeaponHand(Transform trans)
+    {
+        if (!CacheWeaponHand.ContainsKey(trans))
+            CacheWeaponHand.Add(trans, trans.GetComponent<WeaponHand>());
+        return CacheWeaponHand[trans];
+    }
+
+
+
+
 
 
 }

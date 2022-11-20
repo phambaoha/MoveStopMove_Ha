@@ -13,72 +13,75 @@ public class CharacterController : GameUnit, IHit
     protected Transform tranSizeUp;
 
     [SerializeField]
+    Transform posSpawnWeaponHand;
+
+    [SerializeField]
+    protected Transform PosSpawnHat;
+
+    [SerializeField]
     SkinnedMeshRenderer skinMeshRen;
 
     [SerializeField]
     SkinnedMeshRenderer PantMeshRen;
-
-
-    [Header("Scripable Object")]
-    [SerializeField]
-    Skins SObj_Skins;
-    [SerializeField]
-    WeaponSpecs SObj_WeaponSpecs;
-
-
 
     [SerializeField]
     int targetKilledQty = 0;
     public int TargetKilledQty { get => targetKilledQty; set => targetKilledQty = value; }
 
 
+
+    [Header("Scripable Object")]
+    [SerializeField]
+    protected Skins SObj_Skins;
+    [SerializeField]
+    protected WeaponSObj SObj_Weapon;
+
+
+
     [Header("canvas")]
     [SerializeField]
     TextMeshProUGUI textLevel;
 
-    [SerializeField]
-    WeaponOnHandType weaponHandType;
 
-    [Header("    ")]
+
+    [Header(" Skin Object")]
+    protected WeaponHand weaponHand;
+    protected Hat hat;
+
+
+
     private string curentAnim;
 
+    [HideInInspector]
+    public float nextFire = 0f;
+    [HideInInspector]
+    public Vector3 offSetScaleup = new Vector3(0.02f, 0.02f, 0.02f);
+    [HideInInspector]
+    public bool isDead = false;
+    [HideInInspector]
+    public Rigidbody rb;
+    [HideInInspector]
     public Animator playerAnim;
 
-    public Rigidbody rb;
-
-
-    public bool isDead = false;
-
-    public float radiusRangeAttack;
-
-    public Transform throwPoint;
-
-
-    public float nextFire = 0f;
 
     public float fireRate;
+    public float radiusRangeAttack;
+    public Transform throwPoint;
 
-
+    [Header("Type ")]
     public ColorType colorType;
 
     public PantType pantType;
 
+    // phan biet type cua weapon hand
+    public WeaponOnHandType weaponHandType;
 
+    public HatType hatType;
 
-
-
-    public Vector3 offSetScaleup;
-
-
-    [SerializeField]
-    Transform posSpawnWeaponHand;
-
-    WeaponHand weapon;
 
 
     public override void OnInit()
     {
-     
         targetKilledQty = 0;
 
         SetTextLevel(targetKilledQty);
@@ -89,66 +92,60 @@ public class CharacterController : GameUnit, IHit
 
         ChangeAllSkin();
 
+
+
     }
 
     void ChangeAllSkin()
     {
-        ChangeBodySkinMat((ColorType)Random.Range(0, SObj_Skins.ColorBodyAmount));
+        ChangeBodySkinMat((ColorType)Random.Range(0, SObj_Skins.GetColorBodyAmount));
 
-        ChangePantsMat((PantType)Random.Range(0, SObj_Skins.PantAmount));
-
-        // gan weaponhand
-        weaponHandType = SObj_WeaponSpecs.GetWeaponHand();
+        ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
 
         ChangeWeaponHand();
 
-
+        if (weaponHand != null)
+            weaponHand.gameObject.SetActive(true);
     }
 
-    void ChangeWeaponHand()
-    {
 
-         weapon = SimplePool.Spawn<WeaponHand>(SelectWeaponHand(weaponHandType), posSpawnWeaponHand.position, posSpawnWeaponHand.rotation);
-
-        weapon.transform.SetParent(posSpawnWeaponHand);
-
-        weapon.transform.localRotation = Quaternion.identity;
-    }    
-
-
-    Collider coll;
+    // [HideInInspector]
+    // public Transform targetofPlayer;
     // tim target trong tam tan cong
     public virtual bool IsTargetInRange(Vector3 center, float radius, string tag)
     {
-      
+        //   targetofPlayer = null;
+        Collider coll = null;
         bool temp = false;
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
 
         for (int i = 0; i < hitColliders.Length; i++)
         {
-             coll = hitColliders[i];
-            if (coll.CompareTag(tag) && !Cache.GetCharacterController(coll.transform).isDead)
+            coll = hitColliders[i];
+            if (coll.transform != this.TF && coll.CompareTag(tag) && !Cache.GetCharacterController(coll.transform).isDead)
             {
+                //  targetofPlayer = coll.transform;
+                this.TF.LookAt(coll.transform);
                 temp = true;
                 break;
             }
-
         }
 
-        transform.LookAt(coll.transform);
         return temp;
     }
 
     public virtual bool IsTargetInRange(Vector3 center, float radius, string tag_Player, string tag_Bot)
     {
+
+        Collider coll = null;
         bool temp = false;
 
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
 
         for (int i = 0; i < hitColliders.Length; i++)
         {
+            coll = hitColliders[i];
 
-            Collider coll = hitColliders[i];
             if (coll.transform != this.transform)
             {
                 if (hitColliders[i].CompareTag(tag_Player) || coll.CompareTag(tag_Bot))
@@ -162,33 +159,79 @@ public class CharacterController : GameUnit, IHit
 
 
         }
-
-
         return temp;
     }
 
 
-    public virtual void ThrowAttack()
+    protected virtual void ChangeAnim(string animName)
     {
-        if (!isDead)
+        if (curentAnim != animName)
         {
-            ChangeAnim(Constants.TAG_ANIM_ATTACK);
+            playerAnim.ResetTrigger(animName);
 
-            if (Time.time > nextFire)
-            {
-                nextFire = Time.time + fireRate;
-                StartCoroutine(IDelayThrowWeapon());
-            }
+            curentAnim = animName;
+
+            playerAnim.SetTrigger(curentAnim);
         }
+    }
+
+    // Despawn gameobjet
+    //public override void OnDespawn()
+    //{
+        
+
+    //}
+
+    public void ChangeBodySkinMat(ColorType colorType)
+    {
+        this.colorType = colorType;
+        skinMeshRen.material = SObj_Skins.GetSkinColor(colorType);
 
     }
 
-    IEnumerator IDelayThrowWeapon()
+    public void ChangePantsMat(PantType pantType)
     {
-        yield return Cache.GetWaitForSeconds(0.3f);
-        Weapons weapons = SimplePool.Spawn<Weapons>(SelectWeapon(weaponHandType), throwPoint.position, throwPoint.rotation);
-        weapons.OnInit();
-        weapons.SetCharacter(this);
+        this.pantType = pantType;
+
+        PantMeshRen.material = SObj_Skins.GetSkinPants(pantType);
+
+    }
+    void ChangeWeaponHand()
+    {
+
+        WeaponOnHandType temp  = (WeaponOnHandType)Random.Range(0, SObj_Weapon.WeaponHandAmount);
+
+        weaponHandType = SObj_Weapon.GetTypeWeaponHand(temp);
+
+
+        weaponHand = Instantiate<WeaponHand>(SObj_Weapon.GetWeaponHand(temp), posSpawnWeaponHand.position, posSpawnWeaponHand.rotation);
+
+        weaponHand.transform.SetParent(posSpawnWeaponHand);
+
+        weaponHand.transform.localRotation = Quaternion.identity;
+    }
+
+    public virtual void ChangeHat( HatType hatType)
+    {
+        if (hat != null)
+        {
+            Destroy(hat.gameObject);
+        }
+
+        this.hatType = SObj_Skins.GetHatType(hatType);
+
+        if (this.hatType == HatType.None)
+            return;
+
+        if(hat == null)
+        {
+            hat = Instantiate<Hat>(SObj_Skins.GetHat(hatType), PosSpawnHat.position, PosSpawnHat.rotation);
+
+            hat.transform.SetParent(PosSpawnHat);
+
+            hat.transform.localRotation = Quaternion.identity;
+        }
+       
     }
 
     PoolType SelectWeapon(WeaponOnHandType weaponOnHandType)
@@ -217,74 +260,48 @@ public class CharacterController : GameUnit, IHit
 
         return temp;
     }
-    PoolType SelectWeaponHand(WeaponOnHandType weaponOnHandType)
+
+
+    public virtual void ThrowAttack()
     {
-        PoolType temp = PoolType.None;
-
-        switch (weaponOnHandType)
+        if (!isDead)
         {
-            case WeaponOnHandType.Axe:
-                {
-                    temp = PoolType.Axe_WeaponsHand;break;
-                }
-                
-            case WeaponOnHandType.Knife:
-                {
-                    temp = PoolType.Knife_WeaponsHand; break;
-                }
-               
+            ChangeAnim(Constants.TAG_ANIM_ATTACK);
 
-            case WeaponOnHandType.Boomerang:
-                {
-                    temp = PoolType.Boomerang_WeaponsHand;break;
-                }
-                
+            if (Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                //  StartCoroutine(IDelaySetTrue());
+                StartCoroutine(IDelayThrowWeapon());
+            }
         }
 
-        return temp;
     }
 
-
-    protected virtual void ChangeAnim(string animName)
+    IEnumerator IDelaySetWeaponTrue()
     {
-        if (curentAnim != animName)
-        {
-            playerAnim.ResetTrigger(animName);
-
-            curentAnim = animName;
-
-            playerAnim.SetTrigger(curentAnim);
-        }
+        yield return new WaitForSeconds(0.3f);
+        weaponHand.gameObject.SetActive(true);
     }
 
-
-    public override void OnDespawn()
+    IEnumerator IDelayThrowWeapon()
     {
-        SimplePool.Despawn(this);
-        SimplePool.Despawn(weapon);
+        yield return Cache.GetWaitForSeconds(0.4f);
+        weaponHand.gameObject.SetActive(false);
+
+        Weapons weapons = SimplePool.Spawn<Weapons>(SelectWeapon(weaponHandType), throwPoint.position, throwPoint.rotation);
+        weapons.OnInit();
+        weapons.SetCharacter(this);
+
+        // hien lai vu khi sau khi nem
+        StartCoroutine(IDelaySetWeaponTrue());
     }
-
-    public void ChangeBodySkinMat(ColorType colorType)
-    {
-        this.colorType = colorType;
-        skinMeshRen.material = SObj_Skins.GetSkinColor(colorType);
-
-    }
-
-    public void ChangePantsMat(PantType pantType)
-    {
-        this.pantType = pantType;
-
-        PantMeshRen.material = SObj_Skins.GetSkinPants(pantType);
-
-    }
-
-
 
     // check dead
     public virtual void OnHit()
     {
         isDead = true;
+        ChangeAnim(Constants.TAG_ANIM_DEAD);
         UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).setNumBot(LevelManagers.Instance.TotalBotAmount);
 
     }
@@ -304,5 +321,8 @@ public class CharacterController : GameUnit, IHit
         tranSizeUp.localScale = Vector3.one;
     }
 
-
+    public override void OnDespawn()
+    {
+       
+    }
 }

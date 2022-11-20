@@ -9,25 +9,14 @@ public class Weapons : GameUnit
 
     [SerializeField]
 
-   protected WeaponSpecs SObj_weaponSpecs;
+   protected WeaponSObj SObj_weaponSpecs;
 
    // public float speed;
     public Transform WeaponRender;
-
-
-
     private CharacterController character;
   //  public Transform weaponSize;
 
     public float timeDespawn;
-
-    public void Start()
-    {
-
-       
-        Invoke(nameof(OnDespawn), timeDespawn);
-    }
-
     public void Update()
     {
         OnInit();
@@ -35,11 +24,15 @@ public class Weapons : GameUnit
     public override void OnDespawn()
     {
         SimplePool.Despawn(this);
+
+        CancelInvoke();
     }
 
 
     public override void OnInit()
     {
+
+        Invoke(nameof(OnDespawn), timeDespawn);
         WeaponSizeUp();
 
     }
@@ -74,6 +67,8 @@ public class Weapons : GameUnit
             }
           
             ihit.OnHit();
+
+
             OnDespawn();
         }
     }

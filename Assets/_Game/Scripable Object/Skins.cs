@@ -8,17 +8,38 @@ public class Skins : ScriptableObject
 {
     [SerializeField] Material[] colorBodyColor;
     [SerializeField] Material[] pantsMat;
-    public int ColorBodyAmount { get => colorBodyColor.Length; }
-    public int PantAmount { get => pantsMat.Length; }
+
+    [SerializeField] Transform[] Hat;
+
+    public int GetColorBodyAmount { get => colorBodyColor.Length; }
+   
 
     public Material GetSkinColor(ColorType colorType)
     {
         return colorBodyColor[(int)colorType];
     }
-   
 
+
+    public int GetPantAmount { get => pantsMat.Length; }
     public Material GetSkinPants(PantType pantType)
     {
         return pantsMat[(int)pantType];
     }
+
+
+    public int GetHatAmount { get => Hat.Length; }
+
+    public Hat GetHat(HatType hatType)
+    {
+    
+        return Cache.GetHat(Hat[(int)hatType]);
+    }
+
+    public HatType GetHatType(HatType hatType)
+    {
+        return hatType;
+
+    }
+
+
 }

@@ -333,7 +333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165556459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498813213}
@@ -425,7 +425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263270866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 2, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498813213}
@@ -594,7 +594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359348000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498813213}
@@ -757,36 +757,21 @@ MonoBehaviour:
     prefab: {fileID: 8298222765349312703, guid: a94ca4bf19f1f174ba097204b85a50b2, type: 3}
     amount: 10
     collect: 1
-    clamp: 1
+    clamp: 0
   - root: {fileID: 165556460}
     prefab: {fileID: 894134171016509122, guid: 31b07d06208b4ea4e896db0ee0e8707b, type: 3}
-    amount: 10
+    amount: 3
     collect: 1
     clamp: 0
   - root: {fileID: 263270867}
     prefab: {fileID: 5982108505361770930, guid: 0bd89357588446d49be71522b913b4d2, type: 3}
-    amount: 1
+    amount: 3
     collect: 1
     clamp: 0
   - root: {fileID: 1993882516}
     prefab: {fileID: 2998041017797768944, guid: fa870fd3d49dc154db3eae84eb0f91f8, type: 3}
-    amount: 5
+    amount: 3
     collect: 1
-    clamp: 0
-  - root: {fileID: 1406826832}
-    prefab: {fileID: -390474005833608828, guid: 3a006139869eb144c8d3128e19a07b5a, type: 3}
-    amount: 5
-    collect: 1
-    clamp: 0
-  - root: {fileID: 1406826832}
-    prefab: {fileID: -1331318166861583683, guid: 122f0cca5aeb47e4d91ec8e140bd0d64, type: 3}
-    amount: 5
-    collect: 1
-    clamp: 0
-  - root: {fileID: 1406826832}
-    prefab: {fileID: 6532025995544625028, guid: 4363f0a4b5ca894489f819f6224f770d, type: 3}
-    amount: 1
-    collect: 0
     clamp: 0
 --- !u!4 &498813213
 Transform:
@@ -803,7 +788,6 @@ Transform:
   - {fileID: 165556460}
   - {fileID: 263270867}
   - {fileID: 1993882516}
-  - {fileID: 1406826832}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -852,7 +836,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - {fileID: 524511788247628313, guid: 064e9262f84826847b334e7c8f640f51, type: 3}
-  totalBotAmount: 50
+  - {fileID: 6259315083382699574, guid: 099165a41bd625a4fbfbd50f837b17a6, type: 3}
+  totalBotAmount: 20
 --- !u!1 &516834388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,7 +1949,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2178,36 +2163,6 @@ Transform:
   m_Father: {fileID: 908099716}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.0000006156034, y: -0.0000004617026, z: 0.00000030780166}
---- !u!1 &1406826831
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1406826832}
-  m_Layer: 0
-  m_Name: WeaponHand
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1406826832
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406826831}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 498813213}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1423395419
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,7 +3104,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835385838}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 1, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3159,7 +3114,7 @@ Transform:
   - {fileID: 834033861}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1835385843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3174,24 +3129,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 0
   tranSizeUp: {fileID: 1156798757}
+  posSpawnWeaponHand: {fileID: 1751118433}
+  PosSpawnHat: {fileID: 47478759}
   skinMeshRen: {fileID: 1750672968}
   PantMeshRen: {fileID: 636032685}
-  SObj_Skins: {fileID: 11400000, guid: 9385417b735990a4e9518dd82fe3de0a, type: 2}
-  SObj_WeaponSpecs: {fileID: 11400000, guid: 0d98817209112a24da90744f8a7e084a, type: 2}
   targetKilledQty: 0
+  SObj_Skins: {fileID: 11400000, guid: 9385417b735990a4e9518dd82fe3de0a, type: 2}
+  SObj_Weapon: {fileID: 11400000, guid: 8e36b21bd1e3aba43b421c14c75dd673, type: 2}
   textLevel: {fileID: 1517372103}
-  weaponHandType: 3
-  playerAnim: {fileID: 1156798758}
-  rb: {fileID: 1835385845}
+  nextFire: 0
+  offSetScaleup: {x: 0.02, y: 0.02, z: 0.02}
   isDead: 0
+  rb: {fileID: 1835385845}
+  playerAnim: {fileID: 1156798758}
+  fireRate: 2
   radiusRangeAttack: 6
   throwPoint: {fileID: 413039003}
-  nextFire: 0
-  fireRate: 2
   colorType: 0
   pantType: 0
-  offSetScaleup: {x: 0.02, y: 0.02, z: 0.02}
-  posSpawnWeaponHand: {fileID: 1751118433}
+  weaponHandType: 0
+  hatType: 3
   joystick: {fileID: 1835385844}
   cam: {fileID: 963194228}
 --- !u!114 &1835385844
@@ -3530,7 +3487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993882515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 5, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498813213}

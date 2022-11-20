@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class UIC_MainMenu : UICanvas
 {
-    public TextMeshProUGUI level;
+    //public TextMeshProUGUI level;
+
+
 
     public override void Setup()
     {
@@ -15,8 +17,17 @@ public class UIC_MainMenu : UICanvas
 
     public void StartGameButton()
     {
-        LevelManagers.Instance.OnStart();
+        GameManager.Instance.ChangeState(GameState.GamePlay);
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
+       
     }
+
+    public void ChangeSkinButton()
+    {
+        Close();
+        UIManager.Instance.OpenUI(UIID.UIC_ChangeSkin);
+    }
+
+    
 }

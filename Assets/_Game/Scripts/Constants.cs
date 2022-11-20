@@ -22,6 +22,8 @@ public class Constants : MonoBehaviour
 
 public enum ColorType { Red,Blue,Green, None }
 
-public enum PantType { Orion, Pokemon, RainBow, Skrull, None }
+public enum PantType { Orion, Pokemon, RainBow, Skrull }
 
 public enum WeaponOnHandType { Axe, Knife, Boomerang}
+
+public enum HatType { BunnyEar, Hat, Horn, None }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -8,7 +9,14 @@ public class Indicator : MonoBehaviour
 {
     [SerializeField] private IndicatorType indicatorType;
     private Image indicatorImage;
+    public TextMeshProUGUI textLevelIndicator;
     private Text distanceText;
+
+    private void Update()
+    {
+        if(textLevelIndicator!= null)
+        textLevelIndicator.rectTransform.localRotation = Quaternion.Euler(0, 0, 90);
+    }
 
     /// <summary>
     /// Gets if the game object is active in hierarchy.
@@ -45,6 +53,13 @@ public class Indicator : MonoBehaviour
     public void SetImageColor(Color color)
     {
         indicatorImage.color = color;
+    }
+
+
+   public void SetTextLevelIndicator(int num)
+    {
+        if(textLevelIndicator!= null)
+        textLevelIndicator.text = num.ToString();
     }
 
     /// <summary>

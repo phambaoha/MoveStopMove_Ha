@@ -19,6 +19,7 @@ public class Target : MonoBehaviour
     [Tooltip("Select if distance text is required for this target")]
     [SerializeField] private bool needDistanceText = true;
 
+
     [SerializeField]
     BotController bot;
 
@@ -40,6 +41,16 @@ public class Target : MonoBehaviour
     {
         targetColor = colorArow[(int)color];
 
+    }
+
+    
+    // lay so luong target bi giet boi Bot
+   public int GetTargetKillQty()
+    {
+
+        BotController bot =  Cache.GetCharacterController(transform) as BotController;
+
+        return bot.TargetKilledQty;
     }
 
 

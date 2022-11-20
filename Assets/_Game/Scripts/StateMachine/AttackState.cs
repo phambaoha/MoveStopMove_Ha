@@ -9,16 +9,18 @@ public class AttackState : IState<BotController>
     {
         t.ThrowAttack();
         timer = 0;
-       
+
     }
 
     public void OnExecute(BotController t)
     {
         timer += Time.deltaTime;
-        if (timer >= 1.5f)
+        if (timer >= 2f)
         {
             t.ChangeState(new IdleState());
         }
+
+
     }
 
     public void OnExit(BotController t)

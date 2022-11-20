@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 3
-  SObj_weaponSpecs: {fileID: 11400000, guid: 0d98817209112a24da90744f8a7e084a, type: 2}
+  SObj_weaponSpecs: {fileID: 11400000, guid: 8e36b21bd1e3aba43b421c14c75dd673, type: 2}
   WeaponRender: {fileID: 121330879572356729}
   timeDespawn: 1.5
 --- !u!65 &759002251792134539

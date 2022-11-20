@@ -6,15 +6,19 @@ public class UIC_Victory : UICanvas
 {
     public void RetryButton()
     {
-      //  LevelManager.Instance.RetryLevel();
-        UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
+        LevelManagers.Instance.TotalBotAmount = 10;
+        LevelManagers.Instance.RetryLevel();  
         Close();
+        UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
+        GameManager.Instance.ChangeState(GameState.GamePlay);
     }
 
-    public void BackMainMenuButton()
+    public void Nextlevel()
     {
-     //   LevelManager.Instance.NextLevel();
-        UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
+        GameManager.Instance.ChangeState(GameState.GamePlay);
+        LevelManagers.Instance.LoadLevel(2);
+        LevelManagers.Instance.TotalBotAmount = 10;
         Close();
+        UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
     }
 }

@@ -350,6 +350,9 @@ public enum PoolType
     Axe_WeaponsHand,
     Knife_WeaponsHand, 
     Boomerang_WeaponsHand,
+    Bunny,
+    Hat,
+    Horn,
 }
 
 

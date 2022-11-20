@@ -353,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8266870446058526261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.42, y: -0.01, z: -0.57}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2507570918874972171}
@@ -493,24 +493,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 4
   tranSizeUp: {fileID: 6662515434921612670}
+  posSpawnWeaponHand: {fileID: 3027409700203495326}
+  PosSpawnHat: {fileID: 5930873078019767564}
   skinMeshRen: {fileID: 2182645537437706382}
   PantMeshRen: {fileID: 7037803518804520429}
-  SObj_Skins: {fileID: 11400000, guid: 9385417b735990a4e9518dd82fe3de0a, type: 2}
-  SObj_WeaponSpecs: {fileID: 11400000, guid: 0d98817209112a24da90744f8a7e084a, type: 2}
   targetKilledQty: 0
+  SObj_Skins: {fileID: 11400000, guid: 9385417b735990a4e9518dd82fe3de0a, type: 2}
+  SObj_Weapon: {fileID: 11400000, guid: 8e36b21bd1e3aba43b421c14c75dd673, type: 2}
   textLevel: {fileID: 6070212464988192826}
-  weaponHandType: 3
-  playerAnim: {fileID: 3673813306199242756}
-  rb: {fileID: 8346754021811397546}
+  nextFire: 0
+  offSetScaleup: {x: 0, y: 0, z: 0}
   isDead: 0
+  rb: {fileID: 8346754021811397546}
+  playerAnim: {fileID: 3673813306199242756}
+  fireRate: 2
   radiusRangeAttack: 6
   throwPoint: {fileID: 7247090554622965155}
-  nextFire: 0
-  fireRate: 2
-  colorType: 3
-  pantType: 4
-  offSetScaleup: {x: 0, y: 0, z: 0}
-  posSpawnWeaponHand: {fileID: 3027409700203495326}
+  colorType: 0
+  pantType: 0
+  weaponHandType: 0
+  hatType: 0
   navMeshAgent: {fileID: 289014376}
   circleTarget: {fileID: 2486718737013364200}
 --- !u!195 &289014376
@@ -1306,6 +1308,11 @@ Transform:
 --- !u!95 &3673813306199242756 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 1805018433009942116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5930873078019767564 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3800467336962686104, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 1805018433009942116}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3027409700203495326 stripped
