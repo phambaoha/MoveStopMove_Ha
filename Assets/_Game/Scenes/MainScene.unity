@@ -836,9 +836,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 524511788247628313, guid: 064e9262f84826847b334e7c8f640f51, type: 3}
   - {fileID: 6259315083382699574, guid: 099165a41bd625a4fbfbd50f837b17a6, type: 3}
-  totalBotAmount: 20
+  - {fileID: 1359463042108523391, guid: b1a067da6a5e48e44be79333c62b90b8, type: 3}
+  totalBotAmount: 3
+  navMeshData:
+  - {fileID: 23800000, guid: ecbaa071d03b70b48982836a8b7571eb, type: 2}
+  - {fileID: 23800000, guid: f62819da738f20043aa0814e477a8b22, type: 2}
 --- !u!1 &516834388
 GameObject:
   m_ObjectHideFlags: 0

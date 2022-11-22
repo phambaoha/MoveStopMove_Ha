@@ -16,12 +16,29 @@ public class LevelManagers : Singleton<LevelManagers>
     Level curentLevel;
     public int TotalBotAmount { get => totalBotAmount; set => totalBotAmount = value; }
 
-   
+
+      public NavMeshData[] navMeshData;
+
+
+
+    //   public NavMeshSurface[] surfaces;
+
+
+    //// Use this for initialization
+    //void BiuldNavmesh(int index)
+    //{
+
+    //    surfaces[index].BuildNavMesh();
+
+    //}
+
 
     private void Awake()
     {
-        
+       
         player = FindObjectOfType<PlayerController>();
+
+      
 
     }
     void Start()
@@ -32,15 +49,10 @@ public class LevelManagers : Singleton<LevelManagers>
 
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
 
-        InvokeRepeating(nameof(SpawnBotOnNavMesh), 0, 1f);
+        InvokeRepeating(nameof(SpawnBotOnNavMesh), 0, 0.5f);
 
     }
-    private void Update()
-    {
 
-      
-
-    }
     Vector3 randomPos;
 
     // spawn bot
@@ -62,8 +74,6 @@ public class LevelManagers : Singleton<LevelManagers>
                 SimplePool.Spawn<BotController>(PoolType.Bot, randomPos, transform.rotation).OnInit();
             }
         }
-       
-
 
 
     }
@@ -95,7 +105,19 @@ public class LevelManagers : Singleton<LevelManagers>
             Destroy(curentLevel.gameObject);
 
         }
+
+        NavMesh.RemoveAllNavMeshData();
+
         curentLevel = Instantiate(levels[indexLevel - 1]);
+
+        NavMesh.AddNavMeshData(navMeshData[indexLevel-1]);
+
+        
+
+       
+
+       
+
     }
 
     
