@@ -12,6 +12,11 @@ public class Knife : Weapons
         TF.Translate(SObj_weaponSpecs.speedKnife * Time.deltaTime * Vector3.forward);
     }
 
+    private void Update()
+    {
+        OnInit();
+    }
+
 
 
 }

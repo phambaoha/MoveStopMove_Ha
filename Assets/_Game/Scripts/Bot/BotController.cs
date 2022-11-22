@@ -178,6 +178,8 @@ public class BotController : CharacterController
 
         ChangeHat((HatType)Random.Range(0, SObj_Skins.GetHatAmount));
 
+        ChangeWeaponHand((WeaponOnHandType)(Random.Range(0, SObj_Weapon.WeaponHandAmount)));
+
         ChangeState(new IdleState());
 
 

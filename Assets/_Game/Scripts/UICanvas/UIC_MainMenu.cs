@@ -29,5 +29,11 @@ public class UIC_MainMenu : UICanvas
         UIManager.Instance.OpenUI(UIID.UIC_ChangeSkin);
     }
 
+    public void ChangeWeaponButton()
+    {
+        Close();
+        UIManager.Instance.OpenUI(UIID.UIC_ChangeWeapon);
+    }    
+
     
 }

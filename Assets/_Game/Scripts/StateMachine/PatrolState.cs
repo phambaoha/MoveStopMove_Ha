@@ -17,7 +17,7 @@ public class PatrolState : IState<BotController>
     {
         if(GameManager.Instance.IsState(GameState.GamePlay))
         {
-            if (t != null)
+            if (t != null && !t.isDead)
             {
                 if (t.IsTargetInRange(t.TF.position, t.radiusRangeAttack, Constants.TAG_PLAYER, Constants.TAG_BOT))
                 {

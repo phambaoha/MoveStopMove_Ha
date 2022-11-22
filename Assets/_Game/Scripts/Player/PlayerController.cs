@@ -11,21 +11,19 @@ public class PlayerController : CharacterController, IHit
     Transform cam;
 
 
-
    // bool isTargetInRange;
 
     private void Start()
     {
         OnInit();
+
+        ChangeWeaponHand(WeaponOnHandType.Axe);
     }
     void Update()
     {
-
         Move();
-
     }
 
-    
     public bool IsMove()
     {
         return rb.velocity != Vector3.zero;
@@ -67,11 +65,7 @@ public class PlayerController : CharacterController, IHit
   
 
    
-    public override void OnInit()
-    {
-        base.OnInit();
-
-    }
+ 
 
     public override void OnHit()
     {

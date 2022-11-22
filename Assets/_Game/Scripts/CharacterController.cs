@@ -91,9 +91,6 @@ public class CharacterController : GameUnit, IHit
         ResetSize();
 
         ChangeAllSkin();
-
-
-
     }
 
     void ChangeAllSkin()
@@ -101,8 +98,6 @@ public class CharacterController : GameUnit, IHit
         ChangeBodySkinMat((ColorType)Random.Range(0, SObj_Skins.GetColorBodyAmount));
 
         ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
-
-        ChangeWeaponHand();
 
         if (weaponHand != null)
             weaponHand.gameObject.SetActive(true);
@@ -175,13 +170,6 @@ public class CharacterController : GameUnit, IHit
         }
     }
 
-    // Despawn gameobjet
-    //public override void OnDespawn()
-    //{
-        
-
-    //}
-
     public void ChangeBodySkinMat(ColorType colorType)
     {
         this.colorType = colorType;
@@ -196,43 +184,64 @@ public class CharacterController : GameUnit, IHit
         PantMeshRen.material = SObj_Skins.GetSkinPants(pantType);
 
     }
-    void ChangeWeaponHand()
+
+    //void ChangeRandomWeaponHand()
+    //{
+
+    //    WeaponOnHandType temp  = (WeaponOnHandType)Random.Range(0, SObj_Weapon.WeaponHandAmount);
+
+    //    weaponHandType = SObj_Weapon.GetTypeWeaponHand(temp);
+
+    //    weaponHand = Instantiate<WeaponHand>(SObj_Weapon.GetWeaponHand(temp), posSpawnWeaponHand.position, posSpawnWeaponHand.rotation);
+
+    //    weaponHand.transform.SetParent(posSpawnWeaponHand);
+
+    //    weaponHand.transform.localRotation = Quaternion.identity;
+    //}
+
+   public void ChangeWeaponHand(WeaponOnHandType weaponHandType)
     {
 
-        WeaponOnHandType temp  = (WeaponOnHandType)Random.Range(0, SObj_Weapon.WeaponHandAmount);
+        if (weaponHand != null)
+        {
+            Destroy(weaponHand.gameObject);
+        }
 
-        weaponHandType = SObj_Weapon.GetTypeWeaponHand(temp);
+        this.weaponHandType = weaponHandType;
 
-
-        weaponHand = Instantiate<WeaponHand>(SObj_Weapon.GetWeaponHand(temp), posSpawnWeaponHand.position, posSpawnWeaponHand.rotation);
+        weaponHand = Instantiate<WeaponHand>(SObj_Weapon.GetWeaponHand(weaponHandType), posSpawnWeaponHand.position, posSpawnWeaponHand.rotation);
 
         weaponHand.transform.SetParent(posSpawnWeaponHand);
 
         weaponHand.transform.localRotation = Quaternion.identity;
     }
 
-    public virtual void ChangeHat( HatType hatType)
+
+
+   // Hat curentHat;
+    public virtual void ChangeHat(HatType hatType)
     {
-        if (hat != null)
+      
+        if(hat!= null)
         {
             Destroy(hat.gameObject);
         }
 
-        this.hatType = SObj_Skins.GetHatType(hatType);
+
+        this.hatType = hatType;
 
         if (this.hatType == HatType.None)
             return;
 
-        if(hat == null)
-        {
             hat = Instantiate<Hat>(SObj_Skins.GetHat(hatType), PosSpawnHat.position, PosSpawnHat.rotation);
 
             hat.transform.SetParent(PosSpawnHat);
 
             hat.transform.localRotation = Quaternion.identity;
-        }
+        
        
     }
+
 
     PoolType SelectWeapon(WeaponOnHandType weaponOnHandType)
     {

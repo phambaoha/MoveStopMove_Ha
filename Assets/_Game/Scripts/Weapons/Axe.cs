@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Axe : Weapons
 {
- 
   
     public override void OnInit()
     {
@@ -14,6 +13,10 @@ public class Axe : Weapons
         WeaponRender.Rotate( -360 * Time.deltaTime * Vector3.up, Space.World);
     }
 
-   
+    private void Update()
+    {
+        OnInit(); 
+    }
+
 
 }

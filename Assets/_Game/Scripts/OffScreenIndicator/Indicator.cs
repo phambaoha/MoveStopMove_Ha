@@ -12,11 +12,7 @@ public class Indicator : MonoBehaviour
     public TextMeshProUGUI textLevelIndicator;
     private Text distanceText;
 
-    private void Update()
-    {
-        if(textLevelIndicator!= null)
-        textLevelIndicator.rectTransform.localRotation = Quaternion.Euler(0, 0, 90);
-    }
+
 
     /// <summary>
     /// Gets if the game object is active in hierarchy.

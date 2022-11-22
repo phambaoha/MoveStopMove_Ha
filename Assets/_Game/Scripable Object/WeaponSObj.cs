@@ -9,22 +9,18 @@ public class WeaponSObj : ScriptableObject
     public int speedKnife;
 
     [SerializeField]
-    Transform[] WeaponHand;
+    public Transform[] WeaponHand;
   
     public int WeaponHandAmount { get => WeaponHand.Length; }
 
+    // lay ra weapon hand tranform
     public WeaponHand GetWeaponHand(WeaponOnHandType weaponHand)
     {
-      
-
         return Cache.GetWeaponHand(WeaponHand[(int)weaponHand]);
     }
 
-    public WeaponOnHandType GetTypeWeaponHand(WeaponOnHandType weaponHand)
-    {
-        return weaponHand;
-     
-    }    
+    // lay ra kieu cua weaponhand
+  
 
 
 }

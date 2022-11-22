@@ -13,14 +13,15 @@ public class Weapons : GameUnit
 
    // public float speed;
     public Transform WeaponRender;
-    private CharacterController character;
+    [HideInInspector]
+    public CharacterController character;
   //  public Transform weaponSize;
 
     public float timeDespawn;
-    public void Update()
-    {
-        OnInit();
-    }
+
+
+  
+  
     public override void OnDespawn()
     {
         SimplePool.Despawn(this);
@@ -37,6 +38,7 @@ public class Weapons : GameUnit
 
     }
 
+    // scaleup vu khi dua tren level hien tai
     void WeaponSizeUp()
     {
         TF.localScale = Vector3.one;

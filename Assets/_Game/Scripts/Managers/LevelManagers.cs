@@ -8,6 +8,8 @@ public class LevelManagers : Singleton<LevelManagers>
     [SerializeField]
     List<Level> levels = new List<Level>();
 
+    Camera cam;
+
     [SerializeField]
     int totalBotAmount;
     PlayerController player;
@@ -18,7 +20,7 @@ public class LevelManagers : Singleton<LevelManagers>
 
     private void Awake()
     {
-
+        
         player = FindObjectOfType<PlayerController>();
 
     }
@@ -35,7 +37,8 @@ public class LevelManagers : Singleton<LevelManagers>
     }
     private void Update()
     {
-        print(GameManager.Instance.getCurentState());
+
+      
 
     }
     Vector3 randomPos;
@@ -53,7 +56,7 @@ public class LevelManagers : Singleton<LevelManagers>
             randomPos = RandomNavmeshLocation();
             //  if (randomPos.x )
 
-            if (Vector3.Distance(randomPos, player.TF.position) >= 20f)
+            if ( Mathf.Abs(randomPos.x - player.TF.position.x ) >=10f  && Mathf.Abs(randomPos.z - player.TF.position.z) >= 10f)
             {
 
                 SimplePool.Spawn<BotController>(PoolType.Bot, randomPos, transform.rotation).OnInit();

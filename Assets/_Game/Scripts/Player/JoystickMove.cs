@@ -6,16 +6,24 @@ public class JoystickMove : MonoBehaviour
 {
     public float speed;
 
-   public  DynamicJoystick dynamicJoystick;
+    public DynamicJoystick dynamicJoystick;
 
 
     [SerializeField]
     CharacterController playerController;
 
 
+
     private void Update()
     {
-        MoveByJoystick();
+        if (GameManager.Instance.IsState(GameState.GamePlay))
+        {
+           
+            MoveByJoystick();
+
+        }
+     
+
     }
 
     public void MoveByJoystick()

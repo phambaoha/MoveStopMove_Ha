@@ -12,6 +12,7 @@ public enum UIID
     UIC_GamePlay,
     UIC_MainMenu,
     UIC_ChangeSkin,
+    UIC_ChangeWeapon,
     UICSetting,
     UIC_Victory,
     UIC_Fail,
