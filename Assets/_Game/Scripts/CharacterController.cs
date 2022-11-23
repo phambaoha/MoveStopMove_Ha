@@ -158,6 +158,8 @@ public class CharacterController : GameUnit, IHit
     }
 
 
+   
+
     protected virtual void ChangeAnim(string animName)
     {
         if (curentAnim != animName)
@@ -275,12 +277,14 @@ public class CharacterController : GameUnit, IHit
     {
         if (!isDead)
         {
+            SoundManager.Instance.ThrowWeapon();
+
             ChangeAnim(Constants.TAG_ANIM_ATTACK);
 
             if (Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
-                //  StartCoroutine(IDelaySetTrue());
+               
                 StartCoroutine(IDelayThrowWeapon());
             }
         }
@@ -309,6 +313,7 @@ public class CharacterController : GameUnit, IHit
     // check dead
     public virtual void OnHit()
     {
+        SoundManager.Instance.Died();
         isDead = true;
         ChangeAnim(Constants.TAG_ANIM_DEAD);
         UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).setNumBot(LevelManagers.Instance.TotalBotAmount);

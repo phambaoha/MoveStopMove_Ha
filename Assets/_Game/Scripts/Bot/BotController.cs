@@ -207,10 +207,17 @@ public class BotController : CharacterController
         // cap nhat so bot khi bot bi giet
         LevelManagers.Instance.TotalBotAmount--;
 
+
+        // check win
         if (!player.isDead && LevelManagers.Instance.TotalBotAmount < 0)
         {
+            SimplePool.CollectAll();
+
             GameManager.Instance.ChangeState(GameState.Menu);
             UIManager.Instance.OpenUI(UIID.UIC_Victory);
+
+            
+           
         }
     }
 

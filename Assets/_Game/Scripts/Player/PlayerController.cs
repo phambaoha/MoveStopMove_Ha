@@ -22,6 +22,8 @@ public class PlayerController : CharacterController, IHit
     void Update()
     {
         Move();
+
+      
     }
 
     public bool IsMove()

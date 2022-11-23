@@ -2,22 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : FindPlayer
 {
-    PlayerController player;
+    
 
     [SerializeField]
     Transform TF;
 
     [SerializeField] Renderer meshRen;
-
-
-
-    private void Awake()
-    {
-
-        player = FindObjectOfType<PlayerController>();
-    }
 
     private void Start()
     {
@@ -37,9 +29,9 @@ public class Obstacle : MonoBehaviour
         }
     }
 
-  
 
-    private void SetAlphaMaterial(float alpha)
+
+    public void SetAlphaMaterial(float alpha)
     {
 
         var matTemp = meshRen.material;

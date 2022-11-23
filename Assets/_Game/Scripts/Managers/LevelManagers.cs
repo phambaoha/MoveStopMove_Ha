@@ -64,9 +64,9 @@ public class LevelManagers : Singleton<LevelManagers>
 
         if(GameManager.Instance.IsState(GameState.GamePlay))
         {
-            // int xCam = camera.ViewportToWorldPoint().x;
+
             randomPos = RandomNavmeshLocation();
-            //  if (randomPos.x )
+     
 
             if ( Mathf.Abs(randomPos.x - player.TF.position.x ) >=10f  && Mathf.Abs(randomPos.z - player.TF.position.z) >= 10f)
             {
