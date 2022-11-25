@@ -1,34 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIC_ChangeSkin : UICanvas
 {
-    PlayerController player;
+
     [SerializeField]
-    List<Button> ListBtnChangeSkin;
+     public TextMeshProUGUI textCash;
+
+
+
     private void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
-        ChangeHatType();
+
+        textCash.text = UserData.Instance.Cash.ToString();
     }
+
+
     public void BackToMainMenu()
     {
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
     }
 
-    public void ChangeHatType()
-    {
-        foreach (Button btn in ListBtnChangeSkin)
-        {
-            btn.onClick.AddListener( () => Change(btn.GetComponent<BtnEnumHat>().hatType));
-        }
-    }
-    public void Change(HatType hatType)
-    {
-        player.ChangeHat(hatType);
-    }
-  
+
+
+
+
+
 }

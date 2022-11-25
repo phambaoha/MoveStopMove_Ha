@@ -684,7 +684,7 @@ MonoBehaviour:
   soundAudioSource: {fileID: 314007387}
   bgMusics:
   - {fileID: 8300000, guid: 3eaa266785f7c6a4cb3b387b7a3daa80, type: 3}
-  buttonClick: {fileID: 0}
+  buttonClick: {fileID: 8300000, guid: 5d4dd3bece804aa4299aa76d529c9394, type: 3}
   dies:
   - {fileID: 8300000, guid: 7e5049f6d9e8d9649bde51a52ccd84cd, type: 3}
   - {fileID: 8300000, guid: 5dcbebae72b22b346beef35af985a7a4, type: 3}
@@ -1028,6 +1028,12 @@ MonoBehaviour:
     amount: 3
     collect: 1
     clamp: 0
+  - root: {fileID: 2064562674}
+    prefab: {fileID: 2998041017797768944, guid: fa870fd3d49dc154db3eae84eb0f91f8, type: 3}
+    amount: 3
+    collect: 1
+    clamp: 0
+  ParticalPool: []
 --- !u!4 &498813213
 Transform:
   m_ObjectHideFlags: 0
@@ -1092,11 +1098,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - {fileID: 6259315083382699574, guid: 099165a41bd625a4fbfbd50f837b17a6, type: 3}
+  - {fileID: 524511788247628313, guid: 064e9262f84826847b334e7c8f640f51, type: 3}
   - {fileID: 1359463042108523391, guid: b1a067da6a5e48e44be79333c62b90b8, type: 3}
-  totalBotAmount: 10
+  totalBotAmount: 5
   navMeshData:
   - {fileID: 23800000, guid: ecbaa071d03b70b48982836a8b7571eb, type: 2}
+  - {fileID: 23800000, guid: a02b9ea804a04dd4fbbf1269cd7b60a6, type: 2}
   - {fileID: 23800000, guid: f62819da738f20043aa0814e477a8b22, type: 2}
+  indexLevel: 0
 --- !u!1 &516834388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,6 +2873,61 @@ Transform:
   m_Father: {fileID: 1780969979}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 61.61799, y: 12.788985, z: 1.3336432}
+--- !u!1 &1719674331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1719674332}
+  - component: {fileID: 1719674333}
+  m_Layer: 0
+  m_Name: DataManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1719674332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719674331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1735319089}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1719674333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719674331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c707d36e343e2fe48b570adb34647496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsTestCheckData: 0
+  Level: 0
+  Cash: 0
+  removeAds: 0
+  musicIsOn: 1
+  vibrationIsOn: 1
+  fxIsOn: 1
+  BunnyUnlocked: 0
+  HatUnlocked: 0
+  HornUnlocked: 0
+  tutorialed: 0
+  lastTimePlay: 
 --- !u!1 &1728508815
 GameObject:
   m_ObjectHideFlags: 0
@@ -2926,6 +2990,7 @@ Transform:
   - {fileID: 2028627457}
   - {fileID: 281912951}
   - {fileID: 314007384}
+  - {fileID: 1719674332}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3404,6 +3469,9 @@ MonoBehaviour:
   pantType: 0
   weaponHandType: 0
   hatType: 3
+  listParticle:
+  - {fileID: 3563754663666865807, guid: 8a56fdb477280c94e90324ace05fae90, type: 3}
+  - {fileID: 198565997176422880, guid: 8cb087f3a3c92f54186e0f20e349dfe1, type: 3}
   joystick: {fileID: 1835385844}
   cam: {fileID: 963194228}
 --- !u!114 &1835385844

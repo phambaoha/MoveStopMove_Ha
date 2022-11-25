@@ -117,7 +117,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         PlaySounds(dies);
     }
-    public void ButtonClick()
+    public void ClickButton()
     {
         PlaySound(buttonClick);
     }

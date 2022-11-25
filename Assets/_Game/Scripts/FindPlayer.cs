@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FindPlayer : MonoBehaviour
 {
-   public PlayerController player;
+    [HideInInspector]
+    public PlayerController player;
     private void Awake()
     {
 

@@ -7,12 +7,22 @@ public class UIC_GamePlay : UICanvas
 {
     [SerializeField]
     TextMeshProUGUI textTotalBot;
+
+    [SerializeField]
+    TextMeshProUGUI textCash;
+
     private void Start()
     {
-        setNumBot(LevelManagers.Instance.TotalBotAmount);
+        SetNumBot(LevelManagers.Instance.TotalBotAmount);
+
+
+        UserData.Instance.OnInitData();
+
+        SetCash(UserData.Instance.Cash);
+
     }
 
-    public void setNumBot(int num)
+    public void SetNumBot(int num)
     {
         textTotalBot.text = num.ToString();
     }
@@ -21,4 +31,10 @@ public class UIC_GamePlay : UICanvas
     {
         base.Close();
     }
+
+    public void SetCash(int num)
+    {
+        textCash.text = num.ToString();
+    }
+
 }

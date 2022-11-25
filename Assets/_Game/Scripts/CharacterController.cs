@@ -158,7 +158,7 @@ public class CharacterController : GameUnit, IHit
     }
 
 
-   
+
 
     protected virtual void ChangeAnim(string animName)
     {
@@ -201,7 +201,7 @@ public class CharacterController : GameUnit, IHit
     //    weaponHand.transform.localRotation = Quaternion.identity;
     //}
 
-   public void ChangeWeaponHand(WeaponOnHandType weaponHandType)
+    public void ChangeWeaponHand(WeaponOnHandType weaponHandType)
     {
 
         if (weaponHand != null)
@@ -220,11 +220,11 @@ public class CharacterController : GameUnit, IHit
 
 
 
-   // Hat curentHat;
+    // Hat curentHat;
     public virtual void ChangeHat(HatType hatType)
     {
-      
-        if(hat!= null)
+
+        if (hat != null)
         {
             Destroy(hat.gameObject);
         }
@@ -235,13 +235,13 @@ public class CharacterController : GameUnit, IHit
         if (this.hatType == HatType.None)
             return;
 
-            hat = Instantiate<Hat>(SObj_Skins.GetHat(hatType), PosSpawnHat.position, PosSpawnHat.rotation);
+        hat = Instantiate<Hat>(SObj_Skins.GetHat(hatType), PosSpawnHat.position, PosSpawnHat.rotation);
 
-            hat.transform.SetParent(PosSpawnHat);
+        hat.transform.SetParent(PosSpawnHat);
 
-            hat.transform.localRotation = Quaternion.identity;
-        
-       
+        hat.transform.localRotation = Quaternion.identity;
+
+
     }
 
 
@@ -284,7 +284,7 @@ public class CharacterController : GameUnit, IHit
             if (Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
-               
+
                 StartCoroutine(IDelayThrowWeapon());
             }
         }
@@ -310,14 +310,27 @@ public class CharacterController : GameUnit, IHit
         StartCoroutine(IDelaySetWeaponTrue());
     }
 
+
+    [SerializeField]
+    public List<ParticleSystem> listParticle;
+
     // check dead
     public virtual void OnHit()
     {
         SoundManager.Instance.Died();
         isDead = true;
         ChangeAnim(Constants.TAG_ANIM_DEAD);
-        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).setNumBot(LevelManagers.Instance.TotalBotAmount);
+        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetNumBot(LevelManagers.Instance.TotalBotAmount);
 
+
+        ParticlePool.Play(listParticle[0], TF.position, TF.rotation);
+
+    }
+
+    IEnumerator DespawnParticleSystem()
+    {
+        yield return new WaitForSeconds(1);
+        ParticlePool.Release(listParticle[0]);
     }
 
     public void SetTextLevel(int num)
@@ -337,6 +350,6 @@ public class CharacterController : GameUnit, IHit
 
     public override void OnDespawn()
     {
-       
+
     }
 }

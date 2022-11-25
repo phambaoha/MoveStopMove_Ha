@@ -25,7 +25,6 @@ public class Weapons : GameUnit
     public override void OnDespawn()
     {
         SimplePool.Despawn(this);
-
         CancelInvoke();
     }
 
@@ -62,10 +61,22 @@ public class Weapons : GameUnit
             character.TargetKilledQty++;
             character.SetTextLevel(character.TargetKilledQty);
 
-            if(character as PlayerController)
+           
+
+
+            if (character as PlayerController)
             {
                 PlayerController player = (PlayerController)character;
+
                 player.PosUpCamera();
+
+                player.SetCash(10);
+
+                UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetCash(player.GetCash());
+
+               UserData.Instance.SetIntData(UserData.Key_Cash, player.GetCash());
+
+                ParticlePool.Play(player.listParticle[1],player.TF.position,player.TF.rotation);
             }
           
             ihit.OnHit();

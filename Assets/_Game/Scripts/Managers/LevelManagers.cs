@@ -15,10 +15,10 @@ public class LevelManagers : Singleton<LevelManagers>
     PlayerController player;
     Level curentLevel;
     public int TotalBotAmount { get => totalBotAmount; set => totalBotAmount = value; }
+    public NavMeshData[] navMeshData;
 
 
-      public NavMeshData[] navMeshData;
-
+    public int indexLevel;
 
 
     //   public NavMeshSurface[] surfaces;
@@ -38,18 +38,21 @@ public class LevelManagers : Singleton<LevelManagers>
        
         player = FindObjectOfType<PlayerController>();
 
-      
-
     }
     void Start()
     {
-        LoadLevel(1);
+
+        UserData.Instance.OnInitData();
+
+        indexLevel = UserData.Instance.Level;
+
+        LoadLevel(indexLevel);
 
         OnInit();
 
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
 
-        InvokeRepeating(nameof(SpawnBotOnNavMesh), 0, 0.5f);
+        InvokeRepeating(nameof(SpawnBotOnNavMesh), 0, 1f);
 
     }
 
@@ -105,7 +108,6 @@ public class LevelManagers : Singleton<LevelManagers>
             Destroy(curentLevel.gameObject);
 
         }
-
         NavMesh.RemoveAllNavMeshData();
 
         curentLevel = Instantiate(levels[indexLevel - 1]);
@@ -114,30 +116,24 @@ public class LevelManagers : Singleton<LevelManagers>
 
         
 
-       
-
-       
-
     }
 
     
 
-    public void RetryLevel()
+    public void RetryLevel(int level)
     {
-        LoadLevel(1);
+        LoadLevel(level);
         OnDespawn();
         OnInit();
 
     }
-
 
     public void OnInit()
     {
         player.isDead = false;
         player.gameObject.SetActive(true);
         player.TF.position = Vector3.one;
-
-       
+   
     }
 
 

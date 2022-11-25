@@ -5,9 +5,7 @@ using UnityEngine.Events;
 using System.Numerics;
 using System.Globalization;
 
-
-[CreateAssetMenu(fileName = "UserData", menuName = "ScriptableObjects/UserData", order = 1)]
-public class UserData : ScriptableObject
+public class UserData : Singleton<UserData>
 {
 #if UNITY_EDITOR
     [Header(" ----Test Data----")]
@@ -17,21 +15,19 @@ public class UserData : ScriptableObject
 
     [Header("----Data----")]
 
-    public int PlayingLevel = 0;
+    public int Level = 1;
 
-    public string Cash;
+    public int Cash;
     public bool removeAds = false;
 
     public bool musicIsOn = true;
     public bool vibrationIsOn = true;
     public bool fxIsOn = true;
+
+    public bool BunnyUnlocked = false;
+    public bool HatUnlocked = false;
+    public bool HornUnlocked = false;
     public bool tutorialed = false;
-
-    public int maxLevelMeleeUnlock = 0;
-    public int maxLevelRangeUnlock = 0;
-
-    public int meleeHaveOwned = 0;
-    public int rangeHaveOwned = 0;
 
     public string lastTimePlay;
 
@@ -82,12 +78,12 @@ public class UserData : ScriptableObject
     /// </summary>
     /// <param name="key"></param>
     /// <param name="value"></param>
-    public void SetIntData(string key, ref int variable, int value)
+    public void SetIntData(string key, int value)
     {
-        variable = value;
+
         PlayerPrefs.SetInt(key, value);
-    } 
-    
+    }
+
     public void SetBoolData(string key, ref bool variable, bool value)
     {
         variable = value;
@@ -108,7 +104,7 @@ public class UserData : ScriptableObject
 
     #endregion
 
-    #region Class
+    //#region Class
 
     //public void SetClassData<T>(string key, T t) where T : class
     //{
@@ -122,32 +118,34 @@ public class UserData : ScriptableObject
     //    return string.IsNullOrEmpty(s) ? null : JsonConvert.DeserializeObject<T>(s);
     //}
 
-    #endregion
+    //#endregion
 
-    public void OnInitData() 
+    public void OnInitData()
     {
-#if UNITY_EDITOR
-        if (IsTestCheckData)
-        {
-            return;
-        }
-#endif
+        //#if UNITY_EDITOR
+        //        if (IsTestCheckData)
+        //        {
+        //            return;
+        //        }
+        //#endif
 
-        PlayingLevel = PlayerPrefs.GetInt(Key_PlayingLevel, 1);
-        Cash = PlayerPrefs.GetString(Key_Cash, "50");
+        Level = PlayerPrefs.GetInt(Key_Level, 1);
+        Cash = PlayerPrefs.GetInt(Key_Cash);
+
+
+
+
         musicIsOn = PlayerPrefs.GetInt(Key_MusicIsOn, 1) == 1;
         vibrationIsOn = PlayerPrefs.GetInt(Key_VibrationIsOn, 1) == 1;
         fxIsOn = PlayerPrefs.GetInt(Key_FxIsOn, 1) == 1;
         removeAds = PlayerPrefs.GetInt(Key_RemoveAds, 0) == 1;
-        tutorialed =  PlayerPrefs.GetInt(Key_Tutorial, 0) == 1;
+        tutorialed = PlayerPrefs.GetInt(Key_Tutorial, 0) == 1;
         lastTimePlay = PlayerPrefs.GetString(Key_Last_Time_Play, System.DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
-        maxLevelMeleeUnlock = PlayerPrefs.GetInt(Key_Max_Level_Melee_Unlock, 1);
-        maxLevelRangeUnlock = PlayerPrefs.GetInt(Key_Max_Level_Range_Unlock, 1);
 
-        meleeHaveOwned = PlayerPrefs.GetInt(Key_Melee_Have_Owned, 0);
-        rangeHaveOwned = PlayerPrefs.GetInt(Key_Range_Have_Owned, 0);
-
+        BunnyUnlocked = PlayerPrefs.GetInt(Key_BunnyUnlock, 0) == 1;
+        HatUnlocked = PlayerPrefs.GetInt(Key_HatUnlock, 0) == 1;
+        HornUnlocked = PlayerPrefs.GetInt(Key_HornUnlock, 0) == 1;
     }
 
     public void OnResetData()
@@ -156,8 +154,13 @@ public class UserData : ScriptableObject
         OnInitData();
     }
 
-    public const string Key_PlayingLevel = "Level";
+    public const string Key_Level = "Level";
     public const string Key_Cash = "Cash";
+
+    public const string Key_BunnyUnlock = "Bunny";
+    public const string Key_HatUnlock = "Hat";
+    public const string Key_HornUnlock = "Horn";
+
     public const string Key_FxIsOn = "SoundIsOn";
     public const string Key_MusicIsOn = "MusicIsOn";
     public const string Key_VibrationIsOn = "VibrationIsOn";

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Obstacle : FindPlayer
 {
-    
-
     [SerializeField]
     Transform TF;
 

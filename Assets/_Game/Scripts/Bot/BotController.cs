@@ -200,12 +200,16 @@ public class BotController : CharacterController
 
     }
 
+
+   
     public override void OnHit()
     {
         base.OnHit();
 
         // cap nhat so bot khi bot bi giet
         LevelManagers.Instance.TotalBotAmount--;
+
+       
 
 
         // check win
@@ -215,9 +219,6 @@ public class BotController : CharacterController
 
             GameManager.Instance.ChangeState(GameState.Menu);
             UIManager.Instance.OpenUI(UIID.UIC_Victory);
-
-            
-           
         }
     }
 

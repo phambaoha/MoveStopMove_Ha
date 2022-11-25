@@ -513,6 +513,9 @@ MonoBehaviour:
   pantType: 0
   weaponHandType: 0
   hatType: 0
+  listParticle:
+  - {fileID: 3563754663666865807, guid: 8a56fdb477280c94e90324ace05fae90, type: 3}
+  - {fileID: 198565997176422880, guid: 8cb087f3a3c92f54186e0f20e349dfe1, type: 3}
   navMeshAgent: {fileID: 289014376}
   circleTarget: {fileID: 2486718737013364200}
 --- !u!195 &289014376

@@ -11,12 +11,14 @@ public class PlayerController : CharacterController, IHit
     Transform cam;
 
 
+     int Cash = 0;
+
    // bool isTargetInRange;
 
     private void Start()
     {
+        Cash = UserData.Instance.Cash;
         OnInit();
-
         ChangeWeaponHand(WeaponOnHandType.Axe);
     }
     void Update()
@@ -49,7 +51,7 @@ public class PlayerController : CharacterController, IHit
         {
             if (IsTargetInRange(transform.position, radiusRangeAttack, Constants.TAG_BOT))
             {
-            //    TF.LookAt(targetofPlayer);
+           
                 ThrowAttack();
           
             }
@@ -73,25 +75,29 @@ public class PlayerController : CharacterController, IHit
     {
         base.OnHit();
 
-        StartCoroutine(IDelayDestroy());
-
         // bat ui fail
+
+
         UIManager.Instance.OpenUI(UIID.UIC_Fail);
         GameManager.Instance.ChangeState(GameState.Menu);
 
     }
-    IEnumerator IDelayDestroy()
-    {
-
-        yield return Cache.GetWaitForSeconds(1.5f);
-        this.gameObject.SetActive(false);
-
-    }
+ 
 
     public void PosUpCamera()
     {
         cam.GetComponent<CameraController>().offset.y += offSetScaleup.y;
     }
 
+    public void SetCash(int num)
+    {
+        Cash += num;
+    }
+
+    public int GetCash()
+    {
+        return Cash;
+    }
+  
 
 }
