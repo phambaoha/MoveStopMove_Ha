@@ -74,7 +74,7 @@ public class Weapons : GameUnit
 
                 UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetCash(player.GetCash());
 
-               UserData.Instance.SetIntData(UserData.Key_Cash, player.GetCash());
+                UserData.Instance.SetIntData(UserData.Key_Cash,player.GetCash());
 
                 ParticlePool.Play(player.listParticle[1],player.TF.position,player.TF.rotation);
             }

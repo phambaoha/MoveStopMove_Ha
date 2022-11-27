@@ -21,17 +21,6 @@ public class LevelManagers : Singleton<LevelManagers>
     public int indexLevel;
 
 
-    //   public NavMeshSurface[] surfaces;
-
-
-    //// Use this for initialization
-    //void BiuldNavmesh(int index)
-    //{
-
-    //    surfaces[index].BuildNavMesh();
-
-    //}
-
 
     private void Awake()
     {
@@ -114,7 +103,8 @@ public class LevelManagers : Singleton<LevelManagers>
 
         NavMesh.AddNavMeshData(navMeshData[indexLevel-1]);
 
-        
+
+       
 
     }
 

@@ -684,6 +684,7 @@ MonoBehaviour:
   soundAudioSource: {fileID: 314007387}
   bgMusics:
   - {fileID: 8300000, guid: 3eaa266785f7c6a4cb3b387b7a3daa80, type: 3}
+  - {fileID: 8300000, guid: fc7b9363ca451634e93a92ef869c6a4b, type: 3}
   buttonClick: {fileID: 8300000, guid: 5d4dd3bece804aa4299aa76d529c9394, type: 3}
   dies:
   - {fileID: 8300000, guid: 7e5049f6d9e8d9649bde51a52ccd84cd, type: 3}
@@ -2926,6 +2927,9 @@ MonoBehaviour:
   BunnyUnlocked: 0
   HatUnlocked: 0
   HornUnlocked: 0
+  AxeUnlocked: 0
+  KnifeUnlocked: 0
+  BoomerangUnlocked: 0
   tutorialed: 0
   lastTimePlay: 
 --- !u!1 &1728508815

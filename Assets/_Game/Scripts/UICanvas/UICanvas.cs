@@ -9,6 +9,9 @@ public class UICanvas : MonoBehaviour
     //public bool IsAvoidBackKey = false;
     public bool IsDestroyOnClose = false;
 
+    [HideInInspector]
+   public PlayerController player;
+
     //protected RectTransform m_RectTransform;
     //private Animator m_Animator;
     //private bool m_IsInit = false;
@@ -16,6 +19,7 @@ public class UICanvas : MonoBehaviour
 
     private void Start()
     {
+        player = FindObjectOfType<PlayerController>();
         Init();
     }
 

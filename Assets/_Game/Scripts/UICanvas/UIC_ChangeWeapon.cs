@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIC_ChangeWeapon : UICanvas
 {
+
     [SerializeField]
     RawImage imageWeapon;
 
@@ -16,22 +17,56 @@ public class UIC_ChangeWeapon : UICanvas
     [SerializeField]
     RenderTexture renderWeapon;
     public TextMeshProUGUI nameWeapon;
+    public TextMeshProUGUI priceWeapon;
 
     [SerializeField]
     WeaponOnHandType[] weaponHandType;
 
     [SerializeField]
-    Camera cameraRender;
+    Camera cameraRenderWeapon;
+
+    [SerializeField]
+    Image imageLock;
 
 
-    PlayerController player;
+
+    [SerializeField]
+
+    Button btnEquip;
+
+    [SerializeField]
+
+    Button btnBuy;
+
+    [SerializeField]
+     WeaponOnHandType currentWeaponOnHandType;
+
+    Transform CurrentWeapon = null;
+
+
     private void Awake()
     {
-  
+
+        player = FindObjectOfType<PlayerController>();
 
         index = 0;
-        player = FindObjectOfType<PlayerController>();
-        Instantiate(weaponPrefab[index], new Vector3(cameraRender.transform.position.x,cameraRender.transform.position.y,cameraRender.transform.localPosition.y +1 ), cameraRender.transform.localRotation).SetParent(cameraRender.transform);
+
+
+        CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1), cameraRenderWeapon.transform.localRotation);
+
+        CurrentWeapon.SetParent(cameraRenderWeapon.transform);
+
+        currentWeaponOnHandType = Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType;
+
+        if (CurrentWeapon.GetComponent<WeaponRender>().unlocked)
+        {
+
+            EnableButtonEquip();
+        }
+        else
+        {
+            EnableButtonBuy();
+        }
     }
 
     public void BackToMainMenu()
@@ -40,35 +75,80 @@ public class UIC_ChangeWeapon : UICanvas
         index = 0;
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
-        
+
     }
 
+
+ 
     private void Update()
     {
         imageWeapon.texture = renderWeapon;
-        nameWeapon.text = weaponPrefab[index].name;
+       
+
+
     }
 
     public void NextWeapon()
     {
+
+        UserData.Instance.OnInitData();
+
         SoundManager.Instance.ClickButton();
         index++;
-        
+
         if (index >= weaponPrefab.Count)
-                index = 0;    
-        if ( index < weaponPrefab.Count)
+            index = 0;
+        if (index < weaponPrefab.Count)
         {
-            Destroy(cameraRender.transform.GetChild(0).gameObject);
-            Instantiate(weaponPrefab[index], new Vector3(cameraRender.transform.position.x, cameraRender.transform.position.y, cameraRender.transform.localPosition.y + 1), cameraRender.transform.localRotation).SetParent(cameraRender.transform);
+
+            nameWeapon.text = weaponPrefab[index].name;
+            priceWeapon.text = Cache.GetWeaponRender(weaponPrefab[index]).Price.ToString();
+
+
+            Destroy(CurrentWeapon.gameObject);
+
+
+            CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1), cameraRenderWeapon.transform.localRotation);
+
+            CurrentWeapon.SetParent(cameraRenderWeapon.transform);
+
+
+           
+
+
+
+            currentWeaponOnHandType = Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType;
+
+            if (currentWeaponOnHandType == WeaponOnHandType.Knife)
+            {
+                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.KnifeUnlocked;
+            }
+            if (currentWeaponOnHandType == WeaponOnHandType.Boomerang)
+            {
+                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.BoomerangUnlocked;
+            }
         }
 
+        if (Cache.GetWeaponRender(CurrentWeapon).unlocked)
+        {
+            EnableButtonEquip();
 
+        }
+        else
+        {
 
+            EnableButtonBuy();
+        }    
+       
 
     }
 
+
+   
     public void PrewWeapon()
     {
+        UserData.Instance.OnInitData();
+
         SoundManager.Instance.ClickButton();
 
         index--;
@@ -76,17 +156,99 @@ public class UIC_ChangeWeapon : UICanvas
         {
             index = weaponPrefab.Count - 1;
         }
-        if ( index >= 0 )
-        { 
-            Destroy(cameraRender.transform.GetChild(0).gameObject);
-            Instantiate(weaponPrefab[index], new Vector3(cameraRender.transform.position.x, cameraRender.transform.position.y, cameraRender.transform.localPosition.y + 1), cameraRender.transform.localRotation).SetParent(cameraRender.transform);
+        if (index >= 0)
+        {
+            nameWeapon.text = weaponPrefab[index].name;
+
+            priceWeapon.text = Cache.GetWeaponRender(weaponPrefab[index]).Price.ToString();
+
+
+
+            Destroy(CurrentWeapon.gameObject);
+
+            CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1), cameraRenderWeapon.transform.localRotation);
+
+            CurrentWeapon.SetParent(cameraRenderWeapon.transform);
+
+            currentWeaponOnHandType = Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType;
+
+          
+
+            if (currentWeaponOnHandType == WeaponOnHandType.Knife)
+            {
+                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.KnifeUnlocked;
+            }
+            if (currentWeaponOnHandType == WeaponOnHandType.Boomerang)
+            {
+                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.BoomerangUnlocked;
+            }
+
 
         }
+
+        // check da unlock hay chua
+        if (CurrentWeapon.GetComponent<WeaponRender>().unlocked)
+        {
+
+            EnableButtonEquip();
+           
+           
+        }
+        else
+        {
+            EnableButtonBuy();
+           
+         
+        }    
     }
 
     public void Equip()
     {
-        SoundManager.Instance.ClickButton();
-        player.ChangeWeaponHand(weaponHandType[index]);
+        player.ChangeWeaponHand(currentWeaponOnHandType);
+     
     }
+
+    public void Buy()
+    {
+            
+        if(player.GetCash() >= Cache.GetWeaponRender(CurrentWeapon).Price)
+        {
+
+            Cache.GetWeaponRender(CurrentWeapon).unlocked = true;
+       
+            if (Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Knife )
+            {
+                UserData.Instance.SetBoolData(UserData.Key_KnifeUnlock, true);
+            }
+
+            if(Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Boomerang)
+            {
+                UserData.Instance.SetBoolData(UserData.Key_BoomerangUnlock, true);
+            }
+
+
+            EnableButtonEquip();
+
+        }
+
+     
+
+    }
+
+    void EnableButtonBuy()
+    {
+        btnBuy.gameObject.SetActive(true);
+        btnEquip.gameObject.SetActive(false);
+
+        imageLock.enabled = true;
+    }
+
+    void EnableButtonEquip()
+    {
+        btnBuy.gameObject.SetActive(false);
+        btnEquip.gameObject.SetActive(true);
+        imageLock.enabled = false;
+    }
+
+    
 }

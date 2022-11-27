@@ -1777,6 +1777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDestroyOnClose: 0
+  player: {fileID: 0}
   level: {fileID: 0}
   textCash: {fileID: 3936201752118274617}
 --- !u!1 &6181837765578641609

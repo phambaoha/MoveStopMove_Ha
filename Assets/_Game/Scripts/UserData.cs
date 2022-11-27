@@ -20,13 +20,22 @@ public class UserData : Singleton<UserData>
     public int Cash;
     public bool removeAds = false;
 
+
     public bool musicIsOn = true;
     public bool vibrationIsOn = true;
     public bool fxIsOn = true;
 
+    [Header("Hat")]
     public bool BunnyUnlocked = false;
     public bool HatUnlocked = false;
     public bool HornUnlocked = false;
+
+    [Header("Weapon")]
+    public bool AxeUnlocked = false;
+    public bool KnifeUnlocked = false;
+    public bool BoomerangUnlocked = false;
+
+
     public bool tutorialed = false;
 
     public string lastTimePlay;
@@ -78,15 +87,21 @@ public class UserData : Singleton<UserData>
     /// </summary>
     /// <param name="key"></param>
     /// <param name="value"></param>
-    public void SetIntData(string key, int value)
+    public void SetIntData(string key, ref int variable, int value)
     {
-
+        variable = value;
         PlayerPrefs.SetInt(key, value);
     }
 
-    public void SetBoolData(string key, ref bool variable, bool value)
+    public void SetIntData(string key, int value)
     {
-        variable = value;
+       
+        PlayerPrefs.SetInt(key, value);
+    }
+
+    public void SetBoolData(string key, bool value)
+    {
+      
         PlayerPrefs.SetInt(key, value ? 1 : 0);
     }
 
@@ -146,6 +161,12 @@ public class UserData : Singleton<UserData>
         BunnyUnlocked = PlayerPrefs.GetInt(Key_BunnyUnlock, 0) == 1;
         HatUnlocked = PlayerPrefs.GetInt(Key_HatUnlock, 0) == 1;
         HornUnlocked = PlayerPrefs.GetInt(Key_HornUnlock, 0) == 1;
+
+        AxeUnlocked = PlayerPrefs.GetInt(Key_AxeUnlock, 0) == 1;
+        KnifeUnlocked = PlayerPrefs.GetInt( Key_KnifeUnlock, 0) == 1;
+        BoomerangUnlocked = PlayerPrefs.GetInt(Key_BoomerangUnlock, 0) == 1;
+
+
     }
 
     public void OnResetData()
@@ -160,6 +181,10 @@ public class UserData : Singleton<UserData>
     public const string Key_BunnyUnlock = "Bunny";
     public const string Key_HatUnlock = "Hat";
     public const string Key_HornUnlock = "Horn";
+
+    public const string Key_AxeUnlock = "Axe";
+    public const string Key_KnifeUnlock = "Knife";
+    public const string Key_BoomerangUnlock = "Boomerang";
 
     public const string Key_FxIsOn = "SoundIsOn";
     public const string Key_MusicIsOn = "MusicIsOn";

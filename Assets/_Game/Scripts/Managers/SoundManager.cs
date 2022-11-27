@@ -97,6 +97,13 @@ public class SoundManager : Singleton<SoundManager>
     //    }
     //}
     
+    public void PlayMusicLevel(int index)
+    {
+
+        PlayMusic(bgMusics[index], true);
+
+    }    
+
     public void WeaponHit()
     {
         PlaySounds(weaponHits);
