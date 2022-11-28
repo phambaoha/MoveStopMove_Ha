@@ -20,11 +20,4 @@ public class Btn_Hat : FindPlayer
     public int Price;
 
 
-
- 
- 
-
-
-
-
 }

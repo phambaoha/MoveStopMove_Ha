@@ -160,7 +160,7 @@ public class CharacterController : GameUnit, IHit
 
 
 
-    protected virtual void ChangeAnim(string animName)
+    public virtual void ChangeAnim(string animName)
     {
         if (curentAnim != animName)
         {

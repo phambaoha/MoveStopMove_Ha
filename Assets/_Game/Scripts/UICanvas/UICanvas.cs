@@ -17,11 +17,16 @@ public class UICanvas : MonoBehaviour
     //private bool m_IsInit = false;
     //private float m_OffsetY = 0;
 
-    private void Start()
+    private void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
-        Init();
+        
     }
+
+    //private void Start()
+    //{
+        
+    //    Init();
+    //}
 
     protected void Init()
     {
@@ -46,6 +51,7 @@ public class UICanvas : MonoBehaviour
 
     public virtual void Setup()
     {
+        player = FindObjectOfType<PlayerController>();
         UIManager.Instance.AddBackUI(this);
         UIManager.Instance.PushBackAction(this, BackKey);
     }

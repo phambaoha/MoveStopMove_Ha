@@ -7,19 +7,25 @@ public class UIC_MainMenu : UICanvas
 {
     public TextMeshProUGUI level;
 
-    public TextMeshProUGUI textCash;
-
-    private void Start()
-    {
-        
-    }
+   // public TextMeshProUGUI textCash;
     public override void Setup()
     {
         base.Setup();
 
-        textCash.text = UserData.Instance.Cash.ToString();
+        OnInit();
+
+     //   textCash.text = UserData.Instance.Cash.ToString();
  
     }
+
+    void OnInit()
+    {
+        player.TF.position = new Vector3(1, 1, 2);
+
+        player.ChangeAnim(Constants.TAG_ANIM_IDLE);
+
+        player.TF.rotation = Quaternion.Euler(0, 150, 0);
+    }    
 
     public void StartGameButton()
     {

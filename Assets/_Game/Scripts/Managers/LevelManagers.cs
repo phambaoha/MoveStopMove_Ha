@@ -50,7 +50,7 @@ public class LevelManagers : Singleton<LevelManagers>
     // spawn bot
     void SpawnBotOnNavMesh()
     {
-        if (TotalBotAmount <= 0)
+        if (TotalBotAmount < 0)
             return;
 
 

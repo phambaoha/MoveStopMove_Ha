@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UIC_ChangeWeapon : UICanvas
 {
+    [SerializeField]
+    TextMeshProUGUI textCash;
 
     [SerializeField]
     RawImage imageWeapon;
@@ -47,10 +49,7 @@ public class UIC_ChangeWeapon : UICanvas
     private void Awake()
     {
 
-        player = FindObjectOfType<PlayerController>();
-
         index = 0;
-
 
         CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1), cameraRenderWeapon.transform.localRotation);
 
@@ -67,6 +66,8 @@ public class UIC_ChangeWeapon : UICanvas
         {
             EnableButtonBuy();
         }
+
+       
     }
 
     public void BackToMainMenu()
@@ -83,7 +84,8 @@ public class UIC_ChangeWeapon : UICanvas
     private void Update()
     {
         imageWeapon.texture = renderWeapon;
-       
+
+   
 
 
     }
@@ -214,6 +216,17 @@ public class UIC_ChangeWeapon : UICanvas
         if(player.GetCash() >= Cache.GetWeaponRender(CurrentWeapon).Price)
         {
 
+            player.SetCash(-Cache.GetWeaponRender(CurrentWeapon).Price);
+
+
+            player.SetTextCash(player.GetCash());
+
+
+            UserData.Instance.SetIntData(UserData.Key_Cash, player.GetCash());
+
+
+
+
             Cache.GetWeaponRender(CurrentWeapon).unlocked = true;
        
             if (Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Knife )
@@ -225,6 +238,7 @@ public class UIC_ChangeWeapon : UICanvas
             {
                 UserData.Instance.SetBoolData(UserData.Key_BoomerangUnlock, true);
             }
+
 
 
             EnableButtonEquip();
@@ -250,5 +264,5 @@ public class UIC_ChangeWeapon : UICanvas
         imageLock.enabled = false;
     }
 
-    
+   
 }

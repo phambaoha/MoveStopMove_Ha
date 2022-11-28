@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class PlayerController : CharacterController, IHit
 {
@@ -11,7 +13,14 @@ public class PlayerController : CharacterController, IHit
     Transform cam;
 
 
-     int Cash = 0;
+  
+    [Header("canvas c")]
+    [SerializeField]
+   TextMeshProUGUI textCash;
+
+
+
+    int Cash = 0;
 
    // bool isTargetInRange;
 
@@ -98,6 +107,12 @@ public class PlayerController : CharacterController, IHit
     {
         return Cash;
     }
+
+
+    public void SetTextCash(int num)
+    {
+        textCash.text = num.ToString();
+    }    
   
 
 }

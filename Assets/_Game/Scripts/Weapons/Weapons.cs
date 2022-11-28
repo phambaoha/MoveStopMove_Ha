@@ -72,7 +72,12 @@ public class Weapons : GameUnit
 
                 player.SetCash(10);
 
-                UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetCash(player.GetCash());
+
+                // UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetCash(player.GetCash());
+
+
+                player.SetTextCash(player.GetCash());
+
 
                 UserData.Instance.SetIntData(UserData.Key_Cash,player.GetCash());
 

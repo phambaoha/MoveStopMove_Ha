@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class UIC_ChangeSkin : UICanvas
 {
 
-    [SerializeField]
-    public TextMeshProUGUI textCash;
     HatType currentHatType;
 
     [SerializeField]
@@ -26,7 +24,7 @@ public class UIC_ChangeSkin : UICanvas
     private void Awake()
     {
 
-        textCash.text = UserData.Instance.Cash.ToString();
+       
 
         curentBtnHat = listButton[0];
         currentHatType = HatType.BunnyEar;
@@ -58,12 +56,6 @@ public class UIC_ChangeSkin : UICanvas
 
 
     }
-
-    private void Update()
-    {
-        print(UserData.Instance.BunnyUnlocked);
-    }
-
 
     public void BackToMainMenu()
     {
@@ -176,7 +168,16 @@ public class UIC_ChangeSkin : UICanvas
     {
         if (player.GetCash() >= Cache.GetBtn_Hat(curentBtnHat).Price)
         {
-           
+
+            player.SetCash(-Cache.GetBtn_Hat(curentBtnHat).Price);
+
+
+            player.SetTextCash(player.GetCash());
+
+
+            UserData.Instance.SetIntData(UserData.Key_Cash, player.GetCash());
+
+
 
             Cache.GetBtn_Hat(curentBtnHat).unlocked = true;
 
