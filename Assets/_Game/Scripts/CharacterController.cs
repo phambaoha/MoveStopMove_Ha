@@ -79,7 +79,6 @@ public class CharacterController : GameUnit, IHit
     public HatType hatType;
 
 
-
     public override void OnInit()
     {
         targetKilledQty = 0;
@@ -97,8 +96,7 @@ public class CharacterController : GameUnit, IHit
     {
         ChangeBodySkinMat((ColorType)Random.Range(0, SObj_Skins.GetColorBodyAmount));
 
-        ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
-
+      //  ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
         if (weaponHand != null)
             weaponHand.gameObject.SetActive(true);
     }
@@ -243,6 +241,7 @@ public class CharacterController : GameUnit, IHit
 
 
     }
+
 
 
     PoolType SelectWeapon(WeaponOnHandType weaponOnHandType)

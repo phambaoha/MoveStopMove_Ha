@@ -12,7 +12,10 @@ public class LevelManagers : Singleton<LevelManagers>
 
     [SerializeField]
     int totalBotAmount;
+
+    [SerializeField]
     PlayerController player;
+
     Level curentLevel;
     public int TotalBotAmount { get => totalBotAmount; set => totalBotAmount = value; }
     public NavMeshData[] navMeshData;
@@ -21,13 +24,6 @@ public class LevelManagers : Singleton<LevelManagers>
     public int indexLevel;
 
 
-
-    private void Awake()
-    {
-       
-        player = FindObjectOfType<PlayerController>();
-
-    }
     void Start()
     {
 
@@ -121,7 +117,7 @@ public class LevelManagers : Singleton<LevelManagers>
     public void OnInit()
     {
         player.isDead = false;
-        player.gameObject.SetActive(true);
+      //  player.gameObject.SetActive(true);
         player.TF.position = Vector3.one;
    
     }

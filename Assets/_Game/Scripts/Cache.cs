@@ -62,6 +62,15 @@ public static class Cache
         return CacheBtn_Hat[btn];
     }
 
+    static readonly Dictionary<Button, Btn_Pant> CacheBtn_Pant = new Dictionary<Button, Btn_Pant>();
+
+    public static Btn_Pant GetBtn_Pant(Button btn)
+    {
+        if (!CacheBtn_Pant.ContainsKey(btn))
+            CacheBtn_Pant.Add(btn, btn.GetComponent<Btn_Pant>());
+        return CacheBtn_Pant[btn];
+    }
+
     static readonly Dictionary<Transform, WeaponRender> CacheWeaponRender = new Dictionary<Transform, WeaponRender>();
 
     public static WeaponRender GetWeaponRender(Transform trans)

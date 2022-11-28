@@ -10,7 +10,7 @@ public class UICanvas : MonoBehaviour
     public bool IsDestroyOnClose = false;
 
     [HideInInspector]
-   public PlayerController player;
+    public PlayerController player;
 
     //protected RectTransform m_RectTransform;
     //private Animator m_Animator;
@@ -19,17 +19,16 @@ public class UICanvas : MonoBehaviour
 
     private void Awake()
     {
-        
+        player = FindObjectOfType<PlayerController>();
     }
 
-    //private void Start()
-    //{
-        
-    //    Init();
-    //}
+
+
 
     protected void Init()
     {
+
+       
         //m_RectTransform = GetComponent<RectTransform>();
         //m_Animator = GetComponent<Animator>();
 
@@ -51,7 +50,7 @@ public class UICanvas : MonoBehaviour
 
     public virtual void Setup()
     {
-        player = FindObjectOfType<PlayerController>();
+        
         UIManager.Instance.AddBackUI(this);
         UIManager.Instance.PushBackAction(this, BackKey);
     }

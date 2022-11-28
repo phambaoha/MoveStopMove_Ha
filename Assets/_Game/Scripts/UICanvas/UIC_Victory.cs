@@ -19,6 +19,11 @@ public class UIC_Victory : UICanvas
 
         LevelManagers.Instance.indexLevel++;
 
+        if(LevelManagers.Instance.indexLevel > 3)
+        {
+            LevelManagers.Instance.indexLevel = 1;
+        }
+
         LevelManagers.Instance.LoadLevel(LevelManagers.Instance.indexLevel);
 
         UserData.Instance.SetIntData(UserData.Key_Level, LevelManagers.Instance.indexLevel);

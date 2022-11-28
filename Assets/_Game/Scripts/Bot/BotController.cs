@@ -26,7 +26,12 @@ public class BotController : CharacterController
 
         listTarget.Add(player.gameObject);
 
+
+        ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
     }
+
+    
+
 
     private void Update()
     {

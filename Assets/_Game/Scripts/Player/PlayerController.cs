@@ -29,6 +29,9 @@ public class PlayerController : CharacterController, IHit
         Cash = UserData.Instance.Cash;
         OnInit();
         ChangeWeaponHand(WeaponOnHandType.Axe);
+
+
+
     }
     void Update()
     {
@@ -37,6 +40,8 @@ public class PlayerController : CharacterController, IHit
       
     }
 
+
+   
     public bool IsMove()
     {
         return rb.velocity != Vector3.zero;

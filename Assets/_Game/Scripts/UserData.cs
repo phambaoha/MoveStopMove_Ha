@@ -35,6 +35,12 @@ public class UserData : Singleton<UserData>
     public bool KnifeUnlocked = false;
     public bool BoomerangUnlocked = false;
 
+    [Header("Pant")]
+
+    public bool OnionUnlocked = false;
+    public bool PokemonUnlocked = false;
+    public bool RainBowUnlocked = false;
+
 
     public bool tutorialed = false;
 
@@ -166,6 +172,13 @@ public class UserData : Singleton<UserData>
         KnifeUnlocked = PlayerPrefs.GetInt( Key_KnifeUnlock, 0) == 1;
         BoomerangUnlocked = PlayerPrefs.GetInt(Key_BoomerangUnlock, 0) == 1;
 
+        OnionUnlocked = PlayerPrefs.GetInt(Key_OrionUnlock, 0) == 1;
+        PokemonUnlocked = PlayerPrefs.GetInt(Key_PokemonUnlock, 0) == 1;
+        RainBowUnlocked = PlayerPrefs.GetInt(Key_RainbowUnlock, 0) == 1;
+
+
+
+
 
     }
 
@@ -185,6 +198,10 @@ public class UserData : Singleton<UserData>
     public const string Key_AxeUnlock = "Axe";
     public const string Key_KnifeUnlock = "Knife";
     public const string Key_BoomerangUnlock = "Boomerang";
+
+    public const string Key_OrionUnlock = "Orion";
+    public const string Key_PokemonUnlock = "Pokemon";
+    public const string Key_RainbowUnlock = "RainBow";
 
     public const string Key_FxIsOn = "SoundIsOn";
     public const string Key_MusicIsOn = "MusicIsOn";
