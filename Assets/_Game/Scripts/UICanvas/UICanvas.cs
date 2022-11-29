@@ -17,7 +17,7 @@ public class UICanvas : MonoBehaviour
     //private bool m_IsInit = false;
     //private float m_OffsetY = 0;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         player = FindObjectOfType<PlayerController>();
     }
@@ -25,10 +25,11 @@ public class UICanvas : MonoBehaviour
 
 
 
+
     protected void Init()
     {
 
-       
+
         //m_RectTransform = GetComponent<RectTransform>();
         //m_Animator = GetComponent<Animator>();
 
@@ -50,7 +51,6 @@ public class UICanvas : MonoBehaviour
 
     public virtual void Setup()
     {
-        
         UIManager.Instance.AddBackUI(this);
         UIManager.Instance.PushBackAction(this, BackKey);
     }
@@ -75,7 +75,7 @@ public class UICanvas : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
     }
 
 

@@ -8,14 +8,15 @@ public class UIC_GamePlay : UICanvas
     [SerializeField]
     TextMeshProUGUI textTotalBot;
 
-   
-
     private void Start()
     {
-        SetNumBot(LevelManagers.Instance.TotalBotAmount);
-
+        OnInit();
     }
 
+   public void OnInit()
+    {
+        SetNumBot(LevelManagers.Instance.TotalBotAmount);
+    }
     public void SetNumBot(int num)
     {
         textTotalBot.text = num.ToString();

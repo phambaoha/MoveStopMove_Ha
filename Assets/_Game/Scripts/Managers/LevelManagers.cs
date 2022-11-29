@@ -100,7 +100,7 @@ public class LevelManagers : Singleton<LevelManagers>
         NavMesh.AddNavMeshData(navMeshData[indexLevel-1]);
 
 
-       
+        TotalBotAmount = 5;
 
     }
 

@@ -276,7 +276,7 @@ public class CharacterController : GameUnit, IHit
     {
         if (!isDead)
         {
-            SoundManager.Instance.ThrowWeapon();
+           SoundManager.Instance.ThrowWeapon();
 
             ChangeAnim(Constants.TAG_ANIM_ATTACK);
 
@@ -316,21 +316,22 @@ public class CharacterController : GameUnit, IHit
     // check dead
     public virtual void OnHit()
     {
-        SoundManager.Instance.Died();
+       
         isDead = true;
         ChangeAnim(Constants.TAG_ANIM_DEAD);
+
+
         UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetNumBot(LevelManagers.Instance.TotalBotAmount);
 
+         SoundManager.Instance.Died();
 
         ParticlePool.Play(listParticle[0], TF.position, TF.rotation);
 
+      
+
     }
 
-    IEnumerator DespawnParticleSystem()
-    {
-        yield return new WaitForSeconds(1);
-        ParticlePool.Release(listParticle[0]);
-    }
+  
 
     public void SetTextLevel(int num)
     {

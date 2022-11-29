@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class UIC_ChangeWeapon : UICanvas
 {
-    [SerializeField]
-    TextMeshProUGUI textCash;
+
 
     [SerializeField]
     RawImage imageWeapon;
@@ -41,13 +40,15 @@ public class UIC_ChangeWeapon : UICanvas
     Button btnBuy;
 
     [SerializeField]
-     WeaponOnHandType currentWeaponOnHandType;
+    WeaponOnHandType currentWeaponOnHandType;
 
     Transform CurrentWeapon = null;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
 
         index = 0;
 
@@ -67,7 +68,7 @@ public class UIC_ChangeWeapon : UICanvas
             EnableButtonBuy();
         }
 
-       
+
     }
 
     public void BackToMainMenu()
@@ -80,12 +81,11 @@ public class UIC_ChangeWeapon : UICanvas
     }
 
 
- 
+
     private void Update()
     {
         imageWeapon.texture = renderWeapon;
 
-   
 
 
     }
@@ -115,7 +115,7 @@ public class UIC_ChangeWeapon : UICanvas
             CurrentWeapon.SetParent(cameraRenderWeapon.transform);
 
 
-           
+
 
 
 
@@ -140,13 +140,13 @@ public class UIC_ChangeWeapon : UICanvas
         {
 
             EnableButtonBuy();
-        }    
-       
+        }
+
 
     }
 
 
-   
+
     public void PrewWeapon()
     {
         UserData.Instance.OnInitData();
@@ -174,7 +174,7 @@ public class UIC_ChangeWeapon : UICanvas
 
             currentWeaponOnHandType = Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType;
 
-          
+
 
             if (currentWeaponOnHandType == WeaponOnHandType.Knife)
             {
@@ -193,27 +193,27 @@ public class UIC_ChangeWeapon : UICanvas
         {
 
             EnableButtonEquip();
-           
-           
+
+
         }
         else
         {
             EnableButtonBuy();
-           
-         
-        }    
+
+
+        }
     }
 
     public void Equip()
     {
         player.ChangeWeaponHand(currentWeaponOnHandType);
-     
+
     }
 
     public void Buy()
     {
-            
-        if(player.GetCash() >= Cache.GetWeaponRender(CurrentWeapon).Price)
+
+        if (player.GetCash() >= Cache.GetWeaponRender(CurrentWeapon).Price)
         {
 
             player.SetCash(-Cache.GetWeaponRender(CurrentWeapon).Price);
@@ -228,13 +228,13 @@ public class UIC_ChangeWeapon : UICanvas
 
 
             Cache.GetWeaponRender(CurrentWeapon).unlocked = true;
-       
-            if (Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Knife )
+
+            if (Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Knife)
             {
                 UserData.Instance.SetBoolData(UserData.Key_KnifeUnlock, true);
             }
 
-            if(Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Boomerang)
+            if (Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Boomerang)
             {
                 UserData.Instance.SetBoolData(UserData.Key_BoomerangUnlock, true);
             }
@@ -245,7 +245,7 @@ public class UIC_ChangeWeapon : UICanvas
 
         }
 
-     
+
 
     }
 
@@ -264,5 +264,5 @@ public class UIC_ChangeWeapon : UICanvas
         imageLock.enabled = false;
     }
 
-   
+
 }

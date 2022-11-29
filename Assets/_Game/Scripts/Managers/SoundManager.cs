@@ -51,14 +51,15 @@ public class SoundManager : Singleton<SoundManager>
     
     public void PlaySound(AudioClip sound)
     {
-        if (soundAudioSource != null )
+        if (soundAudioSource != null)
         {
-            soundAudioSource.PlayOneShot(sound);
+            soundAudioSource.PlayOneShot(sound,1);
         }
     }
    
     public void PlaySounds(AudioClip[] sounds)
     {
+
         PlaySound(sounds[Random.Range(0, sounds.Length)]);
     }
 

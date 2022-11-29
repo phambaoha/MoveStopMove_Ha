@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedAxe: 8
   speedKnife: 8
+  speedBoomerang: 8
   WeaponHand:
   - {fileID: 4773050074150274849, guid: 3a006139869eb144c8d3128e19a07b5a, type: 3}
   - {fileID: 4872383064890402868, guid: 122f0cca5aeb47e4d91ec8e140bd0d64, type: 3}

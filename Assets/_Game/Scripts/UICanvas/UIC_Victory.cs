@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class UIC_Victory : UICanvas
 {
+   
+
     public void RetryButton()
     {
-        LevelManagers.Instance.TotalBotAmount = 5;
+        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).OnInit();
+        
+       
         LevelManagers.Instance.RetryLevel(LevelManagers.Instance.indexLevel);  
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
@@ -28,7 +32,8 @@ public class UIC_Victory : UICanvas
 
         UserData.Instance.SetIntData(UserData.Key_Level, LevelManagers.Instance.indexLevel);
 
-        LevelManagers.Instance.TotalBotAmount = 5;
+        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).OnInit();
+
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
     }

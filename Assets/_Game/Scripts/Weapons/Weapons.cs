@@ -7,21 +7,20 @@ public class Weapons : GameUnit
 {
     //  bat buoc ke thua game unit
 
+
+
     [SerializeField]
+    protected WeaponSObj SObj_weaponSpecs;
 
-   protected WeaponSObj SObj_weaponSpecs;
-
-   // public float speed;
+    // public float speed;
     public Transform WeaponRender;
     [HideInInspector]
     public CharacterController character;
-  //  public Transform weaponSize;
+    //  public Transform weaponSize;
 
     public float timeDespawn;
 
 
-  
-  
     public override void OnDespawn()
     {
         SimplePool.Despawn(this);
@@ -33,6 +32,7 @@ public class Weapons : GameUnit
     {
 
         Invoke(nameof(OnDespawn), timeDespawn);
+
         WeaponSizeUp();
 
     }
@@ -44,24 +44,24 @@ public class Weapons : GameUnit
 
         if (character != null && character.TargetKilledQty >= 0)
         {
-            
+
             TF.localScale = Vector3.one + new Vector3(0.05f, 0.05f, 0.05f) * character.TargetKilledQty;
         }
-            
+
     }
-   
+
 
     private void OnTriggerEnter(Collider other)
     {
         IHit ihit = Cache.GetHit(other);
 
-        if (ihit != null && other.transform != character.transform )
+        if (ihit != null && other.transform != character.transform)
         {
             character.SizeUp();
             character.TargetKilledQty++;
             character.SetTextLevel(character.TargetKilledQty);
 
-           
+
 
 
             if (character as PlayerController)
@@ -79,11 +79,11 @@ public class Weapons : GameUnit
                 player.SetTextCash(player.GetCash());
 
 
-                UserData.Instance.SetIntData(UserData.Key_Cash,player.GetCash());
+                UserData.Instance.SetIntData(UserData.Key_Cash, player.GetCash());
 
-                ParticlePool.Play(player.listParticle[1],player.TF.position,player.TF.rotation);
+                ParticlePool.Play(player.listParticle[1], player.TF.position, player.TF.rotation);
             }
-          
+
             ihit.OnHit();
 
 

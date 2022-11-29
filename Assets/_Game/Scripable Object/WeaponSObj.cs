@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponSObj", menuName = "ScriptableObjects/WeaponSObj", order = 1)]
 public class WeaponSObj : ScriptableObject
 {
-    public int speedAxe;
-    public int speedKnife;
+    public float speedAxe;
+    public float speedKnife;
+    public float speedBoomerang;
 
     [SerializeField]
     public Transform[] WeaponHand;

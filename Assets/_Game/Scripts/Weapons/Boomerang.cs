@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class Boomerang : Weapons
 {
+    Vector3 dir;
 
 
     public override void OnInit()
     {
         base.OnInit();
-     
 
-        TF.Translate(SObj_weaponSpecs.speedAxe * Time.deltaTime * Vector3.forward);
-        
-        
+        dir = Vector3.forward;
+
+       
+
+        StartCoroutine(IBoomerangBack());
+    }
+
+
+    IEnumerator IBoomerangBack()
+    {
+        yield return new WaitForSeconds(1f);
+        dir = Vector3.back;
+    }
+
+    void Update()
+    {
+        print(dir);
+
+        TF.Translate(SObj_weaponSpecs.speedBoomerang * Time.deltaTime * dir);
+
         WeaponRender.Rotate(-360 * Time.deltaTime * Vector3.up, Space.World);
     }
 
-  
-    void Update()
-    {
-        OnInit();
-    }
 
 }

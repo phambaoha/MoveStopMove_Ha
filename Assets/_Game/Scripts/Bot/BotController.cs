@@ -183,16 +183,15 @@ public class BotController : CharacterController
 
         ChangeHat((HatType)Random.Range(0, SObj_Skins.GetHatAmount));
 
-        ChangeWeaponHand((WeaponOnHandType)(Random.Range(0, SObj_Weapon.WeaponHandAmount)));
+        //    ChangeWeaponHand((WeaponOnHandType)(Random.Range(0, SObj_Weapon.WeaponHandAmount)));
+
+        ChangeWeaponHand((WeaponOnHandType)(2));
 
         ChangeState(new IdleState());
 
 
     }
-    //public override void ChangeHat(HatType hatType)
-    //{
-    //    base.ChangeHat(hatType);
-    //}
+  
 
     public override void OnDespawn()
     {
@@ -224,6 +223,7 @@ public class BotController : CharacterController
 
             GameManager.Instance.ChangeState(GameState.Menu);
             UIManager.Instance.OpenUI(UIID.UIC_Victory);
+            SoundManager.Instance.Victory();
         }
     }
 

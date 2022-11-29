@@ -91,7 +91,6 @@ public class PlayerController : CharacterController, IHit
 
         // bat ui fail
 
-
         UIManager.Instance.OpenUI(UIID.UIC_Fail);
         GameManager.Instance.ChangeState(GameState.Menu);
 
