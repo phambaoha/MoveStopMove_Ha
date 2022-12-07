@@ -53,16 +53,15 @@ public class Weapons : GameUnit
 
     private void OnTriggerEnter(Collider other)
     {
-        IHit ihit = Cache.GetHit(other);
+       IHit ihit = Cache.GetHit(other);
+
+      //  IHit ihit = other.gameObject.GetComponent<IHit>();
 
         if (ihit != null && other.transform != character.transform)
         {
             character.SizeUp();
             character.TargetKilledQty++;
             character.SetTextLevel(character.TargetKilledQty);
-
-
-
 
             if (character as PlayerController)
             {
@@ -74,7 +73,6 @@ public class Weapons : GameUnit
 
 
                 // UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetCash(player.GetCash());
-
 
                 player.SetTextCash(player.GetCash());
 
