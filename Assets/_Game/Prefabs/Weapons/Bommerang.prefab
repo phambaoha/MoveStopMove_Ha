@@ -130,7 +130,7 @@ MonoBehaviour:
   SObj_weaponSpecs: {fileID: 11400000, guid: 8e36b21bd1e3aba43b421c14c75dd673, type: 2}
   WeaponRender: {fileID: 121330879572356729}
   character: {fileID: 0}
-  timeDespawn: 2
+  timeDespawn: 1.5
 --- !u!65 &759002251792134539
 BoxCollider:
   m_ObjectHideFlags: 0

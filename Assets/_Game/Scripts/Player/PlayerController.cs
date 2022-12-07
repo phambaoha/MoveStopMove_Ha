@@ -13,23 +13,29 @@ public class PlayerController : CharacterController, IHit
     Transform cam;
 
 
-  
+
     [Header("canvas c")]
     [SerializeField]
-   TextMeshProUGUI textCash;
+    TextMeshProUGUI textCash;
 
 
 
     int Cash = 0;
 
-   // bool isTargetInRange;
+    // bool isTargetInRange;
 
     private void Start()
     {
         Cash = UserData.Instance.Cash;
         OnInit();
-        ChangeWeaponHand(WeaponOnHandType.Axe);
 
+
+
+        ChangeWeaponHand((WeaponOnHandType)UserData.Instance.CurentWeapon);
+
+        ChangeHat((HatType)UserData.Instance.CurrentHat);
+
+        //  ChangePantsMat();
 
 
     }
@@ -37,11 +43,11 @@ public class PlayerController : CharacterController, IHit
     {
         Move();
 
-      
+
     }
 
 
-   
+
     public bool IsMove()
     {
         return rb.velocity != Vector3.zero;
@@ -51,7 +57,7 @@ public class PlayerController : CharacterController, IHit
     {
 
         if (isDead)
-        {   
+        {
             return;
         }
 
@@ -65,9 +71,9 @@ public class PlayerController : CharacterController, IHit
         {
             if (IsTargetInRange(transform.position, radiusRangeAttack, Constants.TAG_BOT))
             {
-           
+
                 ThrowAttack();
-          
+
             }
             else
             {
@@ -80,10 +86,10 @@ public class PlayerController : CharacterController, IHit
 
         }
     }
-  
 
-   
- 
+
+
+
 
     public override void OnHit()
     {
@@ -95,7 +101,7 @@ public class PlayerController : CharacterController, IHit
         GameManager.Instance.ChangeState(GameState.Menu);
 
     }
- 
+
 
     public void PosUpCamera()
     {
@@ -116,7 +122,7 @@ public class PlayerController : CharacterController, IHit
     public void SetTextCash(int num)
     {
         textCash.text = num.ToString();
-    }    
-  
+    }
+
 
 }

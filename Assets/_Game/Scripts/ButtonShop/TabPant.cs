@@ -11,10 +11,7 @@ public class TabPant : UIC_ChangeSkin
     List<Button> ListButtonPant;
     Button curentBtnPant;
 
-    //[SerializeField]
-    //Button btnBuy;
-    //[SerializeField]
-    //Button btnEquip;
+
 
     private void Start()
     {
@@ -41,20 +38,21 @@ public class TabPant : UIC_ChangeSkin
         }
     }
 
-
-
-
     public void SelectedButton(Button btn)
     {
 
 
         curentBtnPant = btn;
 
+        print(curentBtnPant);
+
+
+        player.ChangePantsMat(Cache.GetBtn_Pant(curentBtnPant).pantType);
+
         UserData.Instance.OnInitData();
 
 
         Cache.GetBtn_Pant(curentBtnPant).GetDataPant();
-
 
 
         // bat tat button
@@ -69,6 +67,9 @@ public class TabPant : UIC_ChangeSkin
         Cache.GetBtn_Pant(curentBtnPant).imageSelected.gameObject.SetActive(true);
 
 
+
+
+
         if (Cache.GetBtn_Pant(curentBtnPant).pantUnlocked)
         {
             EnableButtonEquip();
@@ -79,14 +80,13 @@ public class TabPant : UIC_ChangeSkin
             EnableButtonBuy();
 
         }
-
-
     }
-
 
     public void Equip()
     {
         player.ChangePantsMat(Cache.GetBtn_Pant(curentBtnPant).pantType);
+
+        UserData.Instance.SetIntData(UserData.Key_CurentPant, (int)Cache.GetBtn_Pant(curentBtnPant).pantType);
     }
 
     public void Buy()
@@ -128,7 +128,11 @@ public class TabPant : UIC_ChangeSkin
 
 
 
+    public void PreviewPant()
+    {
 
+      
+    }
 
 
 

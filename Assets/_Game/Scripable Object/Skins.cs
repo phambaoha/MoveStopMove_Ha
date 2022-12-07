@@ -31,7 +31,9 @@ public class Skins : ScriptableObject
 
     public Hat GetHat(HatType hatType)
     {
-    
+        if ((int)hatType < 0)
+            return Cache.GetHat(Hat[ (int) HatType.None]);
+
         return Cache.GetHat(Hat[(int)hatType]);
     }
 

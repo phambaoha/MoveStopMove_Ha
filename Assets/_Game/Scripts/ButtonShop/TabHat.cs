@@ -12,15 +12,6 @@ public class TabHat : UIC_ChangeSkin
     List<Button> listButtonHat;
     Button curentBtnHat;
 
-   // [Header("Hat")]
-    //[SerializeField]
-    //Button btnBuy;
-    //[SerializeField]
-    //Button btnEquip;
-
-
-   
-
 
     private void Start()
     {
@@ -51,6 +42,7 @@ public class TabHat : UIC_ChangeSkin
     {
         curentBtnHat = btn;
 
+        player.ChangeHat(Cache.GetBtn_Hat(curentBtnHat).hatType);
 
         UserData.Instance.OnInitData();
 
@@ -113,6 +105,7 @@ public class TabHat : UIC_ChangeSkin
     public void Equip()
     {
         player.ChangeHat(Cache.GetBtn_Hat(curentBtnHat).hatType);
+        UserData.Instance.SetIntData(UserData.Key_CurrentHat, (int)Cache.GetBtn_Hat(curentBtnHat).hatType);
     }
 
 

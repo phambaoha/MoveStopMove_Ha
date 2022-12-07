@@ -13,21 +13,18 @@ public class Boomerang : Weapons
 
         dir = Vector3.forward;
 
-       
-
         StartCoroutine(IBoomerangBack());
     }
 
 
     IEnumerator IBoomerangBack()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         dir = Vector3.back;
     }
 
     void Update()
     {
-        print(dir);
 
         TF.Translate(SObj_weaponSpecs.speedBoomerang * Time.deltaTime * dir);
 

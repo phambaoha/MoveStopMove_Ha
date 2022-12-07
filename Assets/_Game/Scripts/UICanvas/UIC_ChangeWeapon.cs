@@ -42,7 +42,7 @@ public class UIC_ChangeWeapon : UICanvas
     [SerializeField]
     WeaponOnHandType currentWeaponOnHandType;
 
-    Transform CurrentWeapon = null;
+  public  Transform CurrentWeapon = null;
 
 
     protected override void Awake()
@@ -52,7 +52,7 @@ public class UIC_ChangeWeapon : UICanvas
 
         index = 0;
 
-        CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1), cameraRenderWeapon.transform.localRotation);
+        CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1),Quaternion.identity);
 
         CurrentWeapon.SetParent(cameraRenderWeapon.transform);
 
@@ -207,6 +207,8 @@ public class UIC_ChangeWeapon : UICanvas
     public void Equip()
     {
         player.ChangeWeaponHand(currentWeaponOnHandType);
+
+        UserData.Instance.SetIntData(UserData.Key_CurentWeapon,(int) currentWeaponOnHandType);
 
     }
 

@@ -30,7 +30,7 @@ public class BotController : CharacterController
         ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
     }
 
-    
+
 
 
     private void Update()
@@ -142,7 +142,7 @@ public class BotController : CharacterController
         // float closestDistanceSqr = Mathf.Infinity;
         //  Vector3 currentPosition = TF.position;
 
-        if(Vector3.Distance(TF.position,bestTarget.transform.position) <= radiusRangeAttack)
+        if (Vector3.Distance(TF.position, bestTarget.transform.position) <= radiusRangeAttack)
         {
             circleTarget.gameObject.SetActive(true);
         }
@@ -183,15 +183,15 @@ public class BotController : CharacterController
 
         ChangeHat((HatType)Random.Range(0, SObj_Skins.GetHatAmount));
 
-        //    ChangeWeaponHand((WeaponOnHandType)(Random.Range(0, SObj_Weapon.WeaponHandAmount)));
+        ChangeWeaponHand((WeaponOnHandType)(Random.Range(0, SObj_Weapon.WeaponHandAmount)));
 
-        ChangeWeaponHand((WeaponOnHandType)(2));
+        //  ChangeWeaponHand((WeaponOnHandType)(2));
 
         ChangeState(new IdleState());
 
 
     }
-  
+
 
     public override void OnDespawn()
     {
@@ -205,7 +205,7 @@ public class BotController : CharacterController
     }
 
 
-   
+
     public override void OnHit()
     {
         base.OnHit();
@@ -213,7 +213,7 @@ public class BotController : CharacterController
         // cap nhat so bot khi bot bi giet
         LevelManagers.Instance.TotalBotAmount--;
 
-       
+
 
 
         // check win
@@ -227,6 +227,6 @@ public class BotController : CharacterController
         }
     }
 
-  
+
 
 }

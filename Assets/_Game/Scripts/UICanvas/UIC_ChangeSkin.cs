@@ -18,6 +18,10 @@ public class UIC_ChangeSkin : UICanvas
     {
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
+
+        player.ChangePantsMat((PantType)UserData.Instance.CurentPant);
+
+        player.ChangeHat((HatType) UserData.Instance.CurrentHat);
     }
 
     public virtual void EnableButtonBuy()

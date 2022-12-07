@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Numerics;
 using System.Globalization;
+using System.Linq;
 
 public class UserData : Singleton<UserData>
 {
@@ -40,6 +41,14 @@ public class UserData : Singleton<UserData>
     public bool OnionUnlocked = false;
     public bool PokemonUnlocked = false;
     public bool RainBowUnlocked = false;
+
+
+
+    [Header("Curent")]
+
+    public int CurentWeapon = 0;
+    public int CurrentHat = 2;
+    public int CurentPant = 10;
 
 
     public bool tutorialed = false;
@@ -154,8 +163,6 @@ public class UserData : Singleton<UserData>
         Cash = PlayerPrefs.GetInt(Key_Cash);
 
 
-
-
         musicIsOn = PlayerPrefs.GetInt(Key_MusicIsOn, 1) == 1;
         vibrationIsOn = PlayerPrefs.GetInt(Key_VibrationIsOn, 1) == 1;
         fxIsOn = PlayerPrefs.GetInt(Key_FxIsOn, 1) == 1;
@@ -177,8 +184,9 @@ public class UserData : Singleton<UserData>
         RainBowUnlocked = PlayerPrefs.GetInt(Key_RainbowUnlock, 0) == 1;
 
 
-
-
+        CurentWeapon = PlayerPrefs.GetInt(Key_CurentWeapon,0);
+        CurrentHat = PlayerPrefs.GetInt(Key_CurrentHat, (int)PantType.GetValues(typeof(PantType)).Cast<PantType>().Last() );
+        CurentPant = PlayerPrefs.GetInt(Key_CurentPant, (int)PantType.GetValues(typeof(PantType)).Cast<PantType>().Last() );
 
     }
 
@@ -190,6 +198,10 @@ public class UserData : Singleton<UserData>
 
     public const string Key_Level = "Level";
     public const string Key_Cash = "Cash";
+
+    public const string Key_CurentWeapon = "CurentWeapon";
+    public const string Key_CurrentHat = "CurentHat";
+    public const string Key_CurentPant = "CurentPant";
 
     public const string Key_BunnyUnlock = "Bunny";
     public const string Key_HatUnlock = "Hat";

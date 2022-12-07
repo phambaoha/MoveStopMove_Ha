@@ -683,8 +683,8 @@ MonoBehaviour:
   musicAudioSource: {fileID: 314007385}
   soundAudioSource: {fileID: 314007387}
   bgMusics:
-  - {fileID: 8300000, guid: 3eaa266785f7c6a4cb3b387b7a3daa80, type: 3}
   - {fileID: 8300000, guid: fc7b9363ca451634e93a92ef869c6a4b, type: 3}
+  - {fileID: 8300000, guid: 3eaa266785f7c6a4cb3b387b7a3daa80, type: 3}
   buttonClick: {fileID: 8300000, guid: 5d4dd3bece804aa4299aa76d529c9394, type: 3}
   dies:
   - {fileID: 8300000, guid: 7e5049f6d9e8d9649bde51a52ccd84cd, type: 3}
@@ -719,7 +719,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 50
+  MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1356,7 +1356,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b6318425f32c1b4ba3f41126ec85c52, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2231,8 +2231,8 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -3336,6 +3336,9 @@ MonoBehaviour:
   OnionUnlocked: 0
   PokemonUnlocked: 0
   RainBowUnlocked: 0
+  CurentWeapon: 0
+  CurrentHat: 0
+  CurentPant: 0
   tutorialed: 0
   lastTimePlay: 
 --- !u!1 &1728508815
@@ -3876,7 +3879,7 @@ MonoBehaviour:
   radiusRangeAttack: 6
   throwPoint: {fileID: 413039003}
   colorType: 0
-  pantType: 0
+  pantType: 3
   weaponHandType: 0
   hatType: 3
   listParticle:
@@ -4104,7 +4107,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
+  m_RepeatDelay: 1
   m_ForceModuleActive: 0
 --- !u!114 &1906155144
 MonoBehaviour:
