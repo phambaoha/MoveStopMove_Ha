@@ -47,13 +47,19 @@ public class UserData : Singleton<UserData>
     [Header("Curent")]
 
     public int CurentWeapon = 0;
-    public int CurrentHat = 2;
-    public int CurentPant = 10;
+    public int CurrentHat = 0;
+    public int CurentPant = 0;
 
 
     public bool tutorialed = false;
 
     public string lastTimePlay;
+
+
+
+
+
+
 
     #region List
 
@@ -110,13 +116,13 @@ public class UserData : Singleton<UserData>
 
     public void SetIntData(string key, int value)
     {
-       
+
         PlayerPrefs.SetInt(key, value);
     }
 
     public void SetBoolData(string key, bool value)
     {
-      
+
         PlayerPrefs.SetInt(key, value ? 1 : 0);
     }
 
@@ -171,22 +177,22 @@ public class UserData : Singleton<UserData>
         lastTimePlay = PlayerPrefs.GetString(Key_Last_Time_Play, System.DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
 
-        BunnyUnlocked = PlayerPrefs.GetInt(Key_BunnyUnlock, 0) == 1;
-        HatUnlocked = PlayerPrefs.GetInt(Key_HatUnlock, 0) == 1;
-        HornUnlocked = PlayerPrefs.GetInt(Key_HornUnlock, 0) == 1;
+        BunnyUnlocked = UserData.Instance.GetDataState(Key_Hat, 0) == 1;
+        HatUnlocked = UserData.Instance.GetDataState(Key_Hat, 1) == 1;
+        HornUnlocked = UserData.Instance.GetDataState(Key_Hat, 2) == 1;
 
-        AxeUnlocked = PlayerPrefs.GetInt(Key_AxeUnlock, 0) == 1;
-        KnifeUnlocked = PlayerPrefs.GetInt( Key_KnifeUnlock, 0) == 1;
-        BoomerangUnlocked = PlayerPrefs.GetInt(Key_BoomerangUnlock, 0) == 1;
+        AxeUnlocked = UserData.Instance.GetDataState(Key_Weapon, 0) == 1;
+        KnifeUnlocked = UserData.Instance.GetDataState(Key_Weapon, 1) == 1;
+        BoomerangUnlocked = UserData.Instance.GetDataState(Key_Weapon, 2) == 1;
 
-        OnionUnlocked = PlayerPrefs.GetInt(Key_OrionUnlock, 0) == 1;
-        PokemonUnlocked = PlayerPrefs.GetInt(Key_PokemonUnlock, 0) == 1;
-        RainBowUnlocked = PlayerPrefs.GetInt(Key_RainbowUnlock, 0) == 1;
+        OnionUnlocked = UserData.Instance.GetDataState(Key_Pant, 0) == 1;
+        PokemonUnlocked = UserData.Instance.GetDataState(Key_Pant, 1) == 1;
+        RainBowUnlocked = UserData.Instance.GetDataState(Key_Pant, 2) == 1;
 
 
-        CurentWeapon = PlayerPrefs.GetInt(Key_CurentWeapon,0);
-        CurrentHat = PlayerPrefs.GetInt(Key_CurrentHat, (int)PantType.GetValues(typeof(PantType)).Cast<PantType>().Last() );
-        CurentPant = PlayerPrefs.GetInt(Key_CurentPant, (int)PantType.GetValues(typeof(PantType)).Cast<PantType>().Last() );
+        CurentWeapon = PlayerPrefs.GetInt(Key_CurentWeapon, 0);
+        CurrentHat = PlayerPrefs.GetInt(Key_CurrentHat, (int)PantType.GetValues(typeof(PantType)).Cast<PantType>().Last());
+        CurentPant = PlayerPrefs.GetInt(Key_CurentPant, (int)PantType.GetValues(typeof(PantType)).Cast<PantType>().Last());
 
     }
 
@@ -199,21 +205,18 @@ public class UserData : Singleton<UserData>
     public const string Key_Level = "Level";
     public const string Key_Cash = "Cash";
 
+
     public const string Key_CurentWeapon = "CurentWeapon";
     public const string Key_CurrentHat = "CurentHat";
     public const string Key_CurentPant = "CurentPant";
 
-    public const string Key_BunnyUnlock = "Bunny";
-    public const string Key_HatUnlock = "Hat";
-    public const string Key_HornUnlock = "Horn";
 
-    public const string Key_AxeUnlock = "Axe";
-    public const string Key_KnifeUnlock = "Knife";
-    public const string Key_BoomerangUnlock = "Boomerang";
 
-    public const string Key_OrionUnlock = "Orion";
-    public const string Key_PokemonUnlock = "Pokemon";
-    public const string Key_RainbowUnlock = "RainBow";
+
+    public const string Key_Hat = "Hat";
+    public const string Key_Pant = "Pant";
+    public const string Key_Weapon = "Weapon";
+
 
     public const string Key_FxIsOn = "SoundIsOn";
     public const string Key_MusicIsOn = "MusicIsOn";

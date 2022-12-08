@@ -27,7 +27,7 @@ public class BotController : CharacterController
         listTarget.Add(player.gameObject);
 
 
-        ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
+        ChangePantsMat((PantType)Random.Range(0, skinSO.GetPantAmount));
     }
 
 
@@ -181,9 +181,9 @@ public class BotController : CharacterController
 
         AddAllTarget();
 
-        ChangeHat((HatType)Random.Range(0, SObj_Skins.GetHatAmount));
+        ChangeHat((HatType)Random.Range(0, skinSO.GetHatAmount));
 
-        ChangeWeaponHand((WeaponOnHandType)(Random.Range(0, SObj_Weapon.WeaponHandAmount)));
+        ChangeWeaponHand((WeaponOnHandType)(Random.Range(0, weaponSO.WeaponHandAmount)));
 
         //  ChangeWeaponHand((WeaponOnHandType)(2));
 

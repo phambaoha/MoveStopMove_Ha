@@ -32,9 +32,9 @@ public class CharacterController : GameUnit, IHit
 
     [Header("Scripable Object")]
     [SerializeField]
-    protected Skins SObj_Skins;
+    protected SkinSO skinSO;
     [SerializeField]
-    protected WeaponSObj SObj_Weapon;
+    protected WeaponSO weaponSO;
 
 
 
@@ -94,7 +94,7 @@ public class CharacterController : GameUnit, IHit
 
     void ChangeAllSkin()
     {
-        ChangeBodySkinMat((ColorType)Random.Range(0, SObj_Skins.GetColorBodyAmount));
+        ChangeBodySkinMat((ColorType)Random.Range(0, skinSO.GetColorBodyAmount));
 
       //  ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
         if (weaponHand != null)
@@ -173,7 +173,7 @@ public class CharacterController : GameUnit, IHit
     public void ChangeBodySkinMat(ColorType colorType)
     {
         this.colorType = colorType;
-        skinMeshRen.material = SObj_Skins.GetSkinColor(colorType);
+        skinMeshRen.material = skinSO.GetSkinColor(colorType);
 
     }
 
@@ -181,7 +181,7 @@ public class CharacterController : GameUnit, IHit
     {
         this.pantType = pantType;
 
-        PantMeshRen.material = SObj_Skins.GetSkinPants(pantType);
+        PantMeshRen.material = skinSO.GetSkinPants(pantType);
 
     }
 
@@ -209,7 +209,7 @@ public class CharacterController : GameUnit, IHit
 
         this.weaponHandType = weaponHandType;
 
-        weaponHand = Instantiate<WeaponHand>(SObj_Weapon.GetWeaponHand(weaponHandType), posSpawnWeaponHand.position, posSpawnWeaponHand.rotation);
+        weaponHand = Instantiate<WeaponHand>(weaponSO.GetWeaponHand(weaponHandType), posSpawnWeaponHand.position, posSpawnWeaponHand.rotation);
 
         weaponHand.transform.SetParent(posSpawnWeaponHand);
 
@@ -233,7 +233,7 @@ public class CharacterController : GameUnit, IHit
         if (this.hatType == HatType.None)
             return;
 
-        hat = Instantiate<Hat>(SObj_Skins.GetHat(hatType), PosSpawnHat.position, PosSpawnHat.rotation);
+        hat = Instantiate<Hat>(skinSO.GetHat(hatType), PosSpawnHat.position, PosSpawnHat.rotation);
 
         hat.transform.SetParent(PosSpawnHat);
 

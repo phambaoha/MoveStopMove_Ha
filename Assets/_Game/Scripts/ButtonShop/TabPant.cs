@@ -44,10 +44,8 @@ public class TabPant : UIC_ChangeSkin
 
         curentBtnPant = btn;
 
-        print(curentBtnPant);
-
-
         player.ChangePantsMat(Cache.GetBtn_Pant(curentBtnPant).pantType);
+
 
         UserData.Instance.OnInitData();
 

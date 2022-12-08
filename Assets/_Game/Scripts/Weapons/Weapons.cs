@@ -10,7 +10,7 @@ public class Weapons : GameUnit
 
 
     [SerializeField]
-    protected WeaponSObj SObj_weaponSpecs;
+    protected WeaponSO SObj_weaponSpecs;
 
     // public float speed;
     public Transform WeaponRender;

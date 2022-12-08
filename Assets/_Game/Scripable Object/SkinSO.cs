@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Skins", menuName = "ScriptableObjects/Skins", order = 1)]
-public class Skins : ScriptableObject
+public class SkinSO : ScriptableObject
 {
     [SerializeField] Material[] colorBodyColor;
     [SerializeField] Material[] pantsMat;

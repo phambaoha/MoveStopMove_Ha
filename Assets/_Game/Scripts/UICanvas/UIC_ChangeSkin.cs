@@ -16,6 +16,7 @@ public class UIC_ChangeSkin : UICanvas
 
     public void BackToMainMenu()
     {
+        UserData.Instance.OnInitData();
         Close();
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
 

@@ -39,10 +39,9 @@ public class UIC_ChangeWeapon : UICanvas
 
     Button btnBuy;
 
-    [SerializeField]
-    WeaponOnHandType currentWeaponOnHandType;
 
-  public  Transform CurrentWeapon = null;
+
+    public Transform CurrentWeapon = null;
 
 
     protected override void Awake()
@@ -52,11 +51,10 @@ public class UIC_ChangeWeapon : UICanvas
 
         index = 0;
 
-        CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1),Quaternion.identity);
+        CurrentWeapon = Instantiate(weaponPrefab[index], new Vector3(cameraRenderWeapon.transform.position.x, cameraRenderWeapon.transform.position.y, cameraRenderWeapon.transform.localPosition.y + 1), Quaternion.identity);
 
         CurrentWeapon.SetParent(cameraRenderWeapon.transform);
 
-        currentWeaponOnHandType = Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType;
 
         if (CurrentWeapon.GetComponent<WeaponRender>().unlocked)
         {
@@ -115,20 +113,10 @@ public class UIC_ChangeWeapon : UICanvas
             CurrentWeapon.SetParent(cameraRenderWeapon.transform);
 
 
+            if (UserData.Instance.GetDataState(UserData.Key_Weapon, (int)Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType) == 1)
+                Cache.GetWeaponRender(CurrentWeapon).unlocked = true;
 
 
-
-
-            currentWeaponOnHandType = Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType;
-
-            if (currentWeaponOnHandType == WeaponOnHandType.Knife)
-            {
-                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.KnifeUnlocked;
-            }
-            if (currentWeaponOnHandType == WeaponOnHandType.Boomerang)
-            {
-                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.BoomerangUnlocked;
-            }
         }
 
         if (Cache.GetWeaponRender(CurrentWeapon).unlocked)
@@ -172,18 +160,12 @@ public class UIC_ChangeWeapon : UICanvas
 
             CurrentWeapon.SetParent(cameraRenderWeapon.transform);
 
-            currentWeaponOnHandType = Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType;
+
+            if (UserData.Instance.GetDataState(UserData.Key_Weapon, (int)Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType) == 1)
+                Cache.GetWeaponRender(CurrentWeapon).unlocked = true;
 
 
-
-            if (currentWeaponOnHandType == WeaponOnHandType.Knife)
-            {
-                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.KnifeUnlocked;
-            }
-            if (currentWeaponOnHandType == WeaponOnHandType.Boomerang)
-            {
-                Cache.GetWeaponRender(CurrentWeapon).unlocked = UserData.Instance.BoomerangUnlocked;
-            }
+     
 
 
         }
@@ -206,9 +188,9 @@ public class UIC_ChangeWeapon : UICanvas
 
     public void Equip()
     {
-        player.ChangeWeaponHand(currentWeaponOnHandType);
+        player.ChangeWeaponHand(Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType);
 
-        UserData.Instance.SetIntData(UserData.Key_CurentWeapon,(int) currentWeaponOnHandType);
+        UserData.Instance.SetIntData(UserData.Key_CurentWeapon, (int)Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType);
 
     }
 
@@ -227,19 +209,13 @@ public class UIC_ChangeWeapon : UICanvas
             UserData.Instance.SetIntData(UserData.Key_Cash, player.GetCash());
 
 
-
-
             Cache.GetWeaponRender(CurrentWeapon).unlocked = true;
 
-            if (Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Knife)
-            {
-                UserData.Instance.SetBoolData(UserData.Key_KnifeUnlock, true);
-            }
 
-            if (Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType == WeaponOnHandType.Boomerang)
-            {
-                UserData.Instance.SetBoolData(UserData.Key_BoomerangUnlock, true);
-            }
+            UserData.Instance.SetDataState(UserData.Key_Weapon, (int)Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType, 1);
+
+
+        
 
 
 

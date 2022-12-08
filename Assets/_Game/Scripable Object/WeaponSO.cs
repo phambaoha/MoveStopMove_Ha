@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponSObj", menuName = "ScriptableObjects/WeaponSObj", order = 1)]
-public class WeaponSObj : ScriptableObject
+public class WeaponSO : ScriptableObject
 {
     public float speedAxe;
     public float speedKnife;

@@ -3867,8 +3867,8 @@ MonoBehaviour:
   skinMeshRen: {fileID: 1750672968}
   PantMeshRen: {fileID: 636032685}
   targetKilledQty: 0
-  SObj_Skins: {fileID: 11400000, guid: 9385417b735990a4e9518dd82fe3de0a, type: 2}
-  SObj_Weapon: {fileID: 11400000, guid: 8e36b21bd1e3aba43b421c14c75dd673, type: 2}
+  skinSO: {fileID: 11400000, guid: 9385417b735990a4e9518dd82fe3de0a, type: 2}
+  weaponSO: {fileID: 11400000, guid: 8e36b21bd1e3aba43b421c14c75dd673, type: 2}
   textLevel: {fileID: 1517372103}
   nextFire: 0
   offSetScaleup: {x: 0.02, y: 0.02, z: 0.02}

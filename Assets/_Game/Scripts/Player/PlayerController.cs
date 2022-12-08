@@ -29,14 +29,13 @@ public class PlayerController : CharacterController, IHit
         Cash = UserData.Instance.Cash;
         OnInit();
 
-
-
         ChangeWeaponHand((WeaponOnHandType)UserData.Instance.CurentWeapon);
 
         ChangeHat((HatType)UserData.Instance.CurrentHat);
 
-        //  ChangePantsMat();
+        ChangePantsMat((PantType) UserData.Instance.CurentPant);
 
+     
 
     }
     void Update()
