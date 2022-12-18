@@ -10,6 +10,7 @@ public class SoundManager : Singleton<SoundManager>
     //[Range(0, 1)] [SerializeField] private float sfxVolume;
 
     public AudioSource musicAudioSource;
+
     public AudioSource soundAudioSource;
 
 
@@ -25,15 +26,12 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private AudioClip win;
     [SerializeField] private AudioClip lose;
 
-
-   
-
     //private const string VOLUME_ON = "VolumeOn";
     
     // Start is called before the first frame update
     void Start()
     {
-        PlayMusics(bgMusics, true);
+        OnInit();
     }
 
     //public void SwitchVolumeOn()
@@ -49,11 +47,16 @@ public class SoundManager : Singleton<SoundManager>
 
     //public bool isVolumeOn => PlayerPrefs.GetInt(VOLUME_ON, 1) == 1;
     
+    public void OnInit()
+    {
+        PlayMusics(bgMusics, true);
+    }
+
     public void PlaySound(AudioClip sound)
     {
         if (soundAudioSource != null)
         {
-            soundAudioSource.PlayOneShot(sound,1);
+            soundAudioSource.PlayOneShot(sound,0.5f);
         }
     }
    
@@ -115,10 +118,12 @@ public class SoundManager : Singleton<SoundManager>
     }
     public void GameOver()
     {
+        StopMusic();
         PlaySound(lose);
     }
     public void Victory()
     {
+        StopMusic();
         PlaySound(win);
     }
     public void Died()
@@ -130,4 +135,12 @@ public class SoundManager : Singleton<SoundManager>
         PlaySound(buttonClick);
     }
     
+    public void StopMusic()
+    {
+        musicAudioSource.Stop();
+    }
+    public void Mute()
+    {
+        musicAudioSource.mute = !musicAudioSource.mute;
+    }
 }

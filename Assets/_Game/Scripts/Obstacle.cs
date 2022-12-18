@@ -9,14 +9,17 @@ public class Obstacle : FindPlayer
 
     [SerializeField] Renderer meshRen;
 
+    public float distanceToPlayer;
+
+
     private void Start()
     {
-        InvokeRepeating(nameof(HideObtackles), 0, 0.5f);
+        InvokeRepeating(nameof(HideObtackles), 0, 0.1f);
     }
 
     void HideObtackles()
     {
-        if (Vector3.Distance(TF.position, player.transform.position) <= 7)
+        if (Vector3.Distance(TF.position, player.transform.position) <= distanceToPlayer)
         {
 
             SetAlphaMaterial(0.5f);
@@ -26,8 +29,6 @@ public class Obstacle : FindPlayer
             SetAlphaMaterial(1f);
         }
     }
-
-
 
     public void SetAlphaMaterial(float alpha)
     {

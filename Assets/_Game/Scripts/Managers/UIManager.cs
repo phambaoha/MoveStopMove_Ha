@@ -13,7 +13,7 @@ public enum UIID
     UIC_MainMenu,
     UIC_ChangeSkin,
     UIC_ChangeWeapon,
-    UICSetting,
+    UIC_Setting,
     UIC_Victory,
     UIC_Fail,
 

@@ -5,20 +5,24 @@ using UnityEngine;
 public class UIC_Victory : UICanvas
 {
    
-
     public void RetryButton()
     {
+        LevelManagers.Instance.OnInit();
+
         UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).OnInit();
-        
-       
+
         LevelManagers.Instance.RetryLevel(LevelManagers.Instance.indexLevel);  
+
         Close();
+
         UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
         GameManager.Instance.ChangeState(GameState.GamePlay);
     }
 
     public void Nextlevel()
     {
+        LevelManagers.Instance.OnInit();
+
         GameManager.Instance.ChangeState(GameState.GamePlay);
 
         LevelManagers.Instance.indexLevel++;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7208650695802247211}
   - component: {fileID: 7844546933864294584}
   - component: {fileID: 9136953256735673953}
+  - component: {fileID: 3151497892025490069}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Untagged
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4298ee5fa6476f44ab895f4aa7ab0f0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,6 +97,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3151497892025490069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026821086637009923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c1b17149039c34da5d9e2d7b22112a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  TF: {fileID: 4316369919006160321}
+  meshRen: {fileID: 7844546933864294584}
+  distanceToPlayer: 15
 --- !u!1 &5960906512422409973
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +201,7 @@ GameObject:
   - component: {fileID: 3539685295217927065}
   - component: {fileID: 3532370326769880384}
   - component: {fileID: 324952788934652533}
+  - component: {fileID: 549037746188471456}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -232,7 +250,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1d90558f9bc081c409f854bd4f44cad2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -268,6 +286,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &549037746188471456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7518465498779892644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c1b17149039c34da5d9e2d7b22112a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  TF: {fileID: 3116659426966257398}
+  meshRen: {fileID: 3532370326769880384}
+  distanceToPlayer: 15
 --- !u!1 &8930489828097138775
 GameObject:
   m_ObjectHideFlags: 0

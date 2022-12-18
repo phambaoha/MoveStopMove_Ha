@@ -20,6 +20,9 @@ public class Constants : MonoBehaviour
 
     public const string TAG_OBSTACLES = "Obstacles";
 
+    public const string TAG_ANIM_VICTORY = "Win";
+
+    public const string TAG_ANIM_ATTTOIDLE = "AttToIdle";
 }
 
 public enum ColorType { Red,Blue,Green, None }

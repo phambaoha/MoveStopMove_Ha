@@ -15,7 +15,7 @@ public class PatrolState : IState<BotController>
 
     public void OnExecute(BotController t)
     {
-        if(GameManager.Instance.IsState(GameState.GamePlay))
+        if (GameManager.Instance.IsState(GameState.GamePlay))
         {
             if (t != null && !t.isDead)
             {
@@ -39,14 +39,19 @@ public class PatrolState : IState<BotController>
 
                 }
             }
+            else
+                if(t.isDead)
+            {
+                t.StopMoving();
+            }
         }
         else
         {
             t.StopMoving();
         }
-       
-       
-      
+
+
+
 
     }
     public void OnExit(BotController t)

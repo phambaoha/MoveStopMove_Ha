@@ -81,6 +81,8 @@ public class CharacterController : GameUnit, IHit
 
     public override void OnInit()
     {
+
+
         targetKilledQty = 0;
 
         SetTextLevel(targetKilledQty);
@@ -96,28 +98,28 @@ public class CharacterController : GameUnit, IHit
     {
         ChangeBodySkinMat((ColorType)Random.Range(0, skinSO.GetColorBodyAmount));
 
-      //  ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
+        //  ChangePantsMat((PantType)Random.Range(0, SObj_Skins.GetPantAmount));
         if (weaponHand != null)
             weaponHand.gameObject.SetActive(true);
     }
 
+    private void Update()
+    {
 
-    // [HideInInspector]
-    // public Transform targetofPlayer;
-    // tim target trong tam tan cong
+    }
+
     public virtual bool IsTargetInRange(Vector3 center, float radius, string tag)
     {
-        //   targetofPlayer = null;
-        Collider coll = null;
+
+        Collider coll;
         bool temp = false;
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
 
         for (int i = 0; i < hitColliders.Length; i++)
         {
             coll = hitColliders[i];
-            if (coll.transform != this.TF && coll.CompareTag(tag) && !Cache.GetCharacterController(coll.transform).isDead)
+            if (coll.transform != TF && coll.CompareTag(tag) && !Cache.GetCharacterController(coll.transform).isDead)
             {
-                //  targetofPlayer = coll.transform;
                 this.TF.LookAt(coll.transform);
                 temp = true;
                 break;
@@ -274,18 +276,28 @@ public class CharacterController : GameUnit, IHit
 
     public virtual void ThrowAttack()
     {
+        if (isDead)
+            return;
+
         if (!isDead)
         {
-           SoundManager.Instance.ThrowWeapon();
-
-            ChangeAnim(Constants.TAG_ANIM_ATTACK);
 
             if (Time.time > nextFire)
             {
-                nextFire = Time.time + fireRate;
 
                 StartCoroutine(IDelayThrowWeapon());
+                nextFire = Time.time + fireRate;
+
             }
+
+
+            ChangeAnim(Constants.TAG_ANIM_ATTACK);
+
+
+            SoundManager.Instance.ThrowWeapon();
+
+
+
         }
 
     }
@@ -294,16 +306,23 @@ public class CharacterController : GameUnit, IHit
     {
         yield return new WaitForSeconds(0.3f);
         weaponHand.gameObject.SetActive(true);
+      
     }
 
     IEnumerator IDelayThrowWeapon()
     {
+
+
+
         yield return Cache.GetWaitForSeconds(0.4f);
+
         weaponHand.gameObject.SetActive(false);
+
 
         Weapons weapons = SimplePool.Spawn<Weapons>(SelectWeapon(weaponHandType), throwPoint.position, throwPoint.rotation);
         weapons.OnInit();
         weapons.SetCharacter(this);
+
 
         // hien lai vu khi sau khi nem
         StartCoroutine(IDelaySetWeaponTrue());
@@ -311,27 +330,30 @@ public class CharacterController : GameUnit, IHit
 
 
     [SerializeField]
-    public List<ParticleSystem> listParticle;
+    public List<ParticleSystem> listParticleHealing;
+
+    [SerializeField]
+    public List<ParticleSystem> ListParticleBlood;
 
     // check dead
     public virtual void OnHit()
     {
-       
-        isDead = true;
-        ChangeAnim(Constants.TAG_ANIM_DEAD);
 
+
+        isDead = true;
+
+        ChangeAnim(Constants.TAG_ANIM_DEAD);
 
         UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetNumBot(LevelManagers.Instance.TotalBotAmount);
 
-         SoundManager.Instance.Died();
 
-        ParticlePool.Play(listParticle[0], TF.position, TF.rotation);
+        ParticlePool.Play(ListParticleBlood[0], TF.position, TF.rotation);
 
-      
 
+        SoundManager.Instance.Died();
     }
 
-  
+
 
     public void SetTextLevel(int num)
     {

@@ -48,6 +48,7 @@ MonoBehaviour:
   poolType: 2
   SObj_weaponSpecs: {fileID: 11400000, guid: 8e36b21bd1e3aba43b421c14c75dd673, type: 2}
   WeaponRender: {fileID: 2650509212723559394}
+  character: {fileID: 0}
   timeDespawn: 1.5
 --- !u!65 &2439559752429546764
 BoxCollider:

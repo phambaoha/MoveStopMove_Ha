@@ -7,18 +7,28 @@ public class UIC_Fail : UICanvas
     
     public void RetryButton()
     {
-        LevelManagers.Instance.RetryLevel(LevelManagers.Instance.indexLevel);
-        GameManager.Instance.ChangeState(GameState.GamePlay);
-        Close();
-        UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
-    }
+        LevelManagers.Instance.OnInit();
 
+        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).OnInit();
+
+        LevelManagers.Instance.RetryLevel(LevelManagers.Instance.indexLevel);
+
+        Close();
+
+        UIManager.Instance.OpenUI(UIID.UIC_GamePlay);
+
+        GameManager.Instance.ChangeState(GameState.GamePlay);
+    }
 
     public void Menu()
     {
+        LevelManagers.Instance.OnInit();
+        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).OnInit();
         Close();
-        player.TF.position = new Vector3(1, 1, 1);
+        UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).Close();
+
+        player.TF.position = Vector3.one;
 
         UIManager.Instance.OpenUI(UIID.UIC_MainMenu);
-    }    
+    }
 }

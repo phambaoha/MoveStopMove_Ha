@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Weapons : GameUnit
 {
@@ -24,7 +25,7 @@ public class Weapons : GameUnit
     public override void OnDespawn()
     {
         SimplePool.Despawn(this);
-        CancelInvoke();
+      //  CancelInvoke();
     }
 
 
@@ -55,10 +56,11 @@ public class Weapons : GameUnit
     {
        IHit ihit = Cache.GetHit(other);
 
-      //  IHit ihit = other.gameObject.GetComponent<IHit>();
-
         if (ihit != null && other.transform != character.transform)
         {
+           
+            ihit.OnHit();
+
             character.SizeUp();
             character.TargetKilledQty++;
             character.SetTextLevel(character.TargetKilledQty);
@@ -71,22 +73,31 @@ public class Weapons : GameUnit
 
                 player.SetCash(10);
 
-
-                // UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).SetCash(player.GetCash());
-
                 player.SetTextCash(player.GetCash());
 
 
                 UserData.Instance.SetIntData(UserData.Key_Cash, player.GetCash());
 
-                ParticlePool.Play(player.listParticle[1], player.TF.position, player.TF.rotation);
+                ParticlePool.Play(  player.listParticleHealing[Random.Range(0, player.listParticleHealing.Count)], player.TF.position, Quaternion.Euler(-90, 0, 0),player.TF);
+
+
             }
+            
+            if(character as BotController)
+            {
+                BotController bot = (BotController)character;
 
-            ihit.OnHit();
+                ParticlePool.Play(bot.listParticleHealing[Random.Range(0, bot.listParticleHealing.Count)], bot.TF.position, Quaternion.Euler(-90, 0, 0), bot.TF);
 
+               
+            }
 
             OnDespawn();
         }
+
+       
+
+      
     }
 
     internal void SetCharacter(CharacterController characterController)
@@ -94,6 +105,7 @@ public class Weapons : GameUnit
         character = characterController;
     }
 
+  
 
 
 

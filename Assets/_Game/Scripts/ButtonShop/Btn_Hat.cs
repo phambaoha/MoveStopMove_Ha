@@ -49,26 +49,7 @@ public class Btn_Hat : FindPlayer
 
         if (UserData.Instance.GetDataState(UserData.Key_Hat, (int)(hatType)) == 1)
             unlocked = true;
-        //switch (hatType)
-        //{
-        //    case HatType.BunnyEar:
-        //        {
-        //            unlocked = UserData.Instance.BunnyUnlocked;
-        //        }
-        //        break;
-        //    case HatType.Hat:
-        //        {
-        //            unlocked = UserData.Instance.HatUnlocked;
-        //        }
-        //        break;
-        //    case HatType.Horn:
-        //        {
-        //            unlocked = UserData.Instance.HornUnlocked;
-        //        }
-        //        break;
-
-
-        //}
+   
     }
 }
 

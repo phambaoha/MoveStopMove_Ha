@@ -304,6 +304,7 @@ RectTransform:
   - {fileID: 5127269714172756603}
   - {fileID: 995363193480060476}
   - {fileID: 9005010033297717802}
+  - {fileID: 1748235845211668515}
   m_Father: {fileID: 8619970978234659969}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -455,18 +456,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3584050858444850040}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2737027984500465412}
   - {fileID: 6744278476142489985}
-  m_Father: {fileID: 8619970978234659969}
+  m_Father: {fileID: 2448299215846550377}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -39, y: -605}
+  m_AnchoredPosition: {x: -39, y: -528}
   m_SizeDelta: {x: 350, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4669141491691509200
@@ -551,9 +552,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Scripts.PopupUI.MainMenuUI, Assembly-CSharp
-        m_MethodName: SwitchSoundSetting
+      - m_Target: {fileID: 4377677831345656660}
+        m_TargetAssemblyTypeName: UIC_MainMenu, Assembly-CSharp
+        m_MethodName: ChangeMute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -806,7 +807,7 @@ RectTransform:
   - {fileID: 2531057283521000092}
   - {fileID: 2492665198225596221}
   m_Father: {fileID: 8619970978234659969}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1600,7 +1601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2737027984500465412
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1635,7 +1636,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6032784053214306832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1693,7 +1694,6 @@ RectTransform:
   - {fileID: 8142564214225967684}
   - {fileID: 3794903680139985579}
   - {fileID: 7509588201264538968}
-  - {fileID: 1748235845211668515}
   - {fileID: 3461284048790317497}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1779,7 +1779,8 @@ MonoBehaviour:
   IsDestroyOnClose: 0
   player: {fileID: 0}
   level: {fileID: 0}
-  textCash: {fileID: 3936201752118274617}
+  Mute: {fileID: 5678445064107673937}
+  unMute: {fileID: 7736552937987874875}
 --- !u!1 &6181837765578641609
 GameObject:
   m_ObjectHideFlags: 0

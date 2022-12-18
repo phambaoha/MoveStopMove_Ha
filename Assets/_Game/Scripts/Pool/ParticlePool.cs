@@ -105,6 +105,7 @@ public static class ParticlePool
                 obj.Stop();
                 inactive.Insert(index, obj);
             }
+          
 
             obj.transform.SetPositionAndRotation( pos, rot);
             obj.Play();
@@ -140,7 +141,7 @@ public static class ParticlePool
         Init(prefab, qty, parent);
     }
 
-    static public void Play(ParticleSystem prefab, Vector3 pos, Quaternion rot)
+    static public void Play(ParticleSystem prefab, Vector3 pos, Quaternion rot, Transform followParent)
     {
         if (prefab == null)
         {
@@ -151,13 +152,36 @@ public static class ParticlePool
         if ( !pools.ContainsKey(prefab.GetInstanceID()))
         {
             Transform newRoot = new GameObject("VFX_" + prefab.name).transform;
+            newRoot.SetParent(followParent);
+          //  newRoot.SetParent(Root);
+            pools[prefab.GetInstanceID()] = new Pool(prefab, 1, newRoot);
+        }
+
+        pools[prefab.GetInstanceID()].Play(pos, rot);
+
+       
+    }
+
+    static public void Play(ParticleSystem prefab, Vector3 pos, Quaternion rot)
+    {
+        if (prefab == null)
+        {
+            Debug.Log(prefab.name + " is null");
+            return;
+        }
+
+        if (!pools.ContainsKey(prefab.GetInstanceID()))
+        {
+            Transform newRoot = new GameObject("VFX_" + prefab.name).transform;
+          
             newRoot.SetParent(Root);
             pools[prefab.GetInstanceID()] = new Pool(prefab, 10, newRoot);
         }
 
         pools[prefab.GetInstanceID()].Play(pos, rot);
-    }
 
+
+    }
     static public void Release(ParticleSystem prefab)
     {
         if (pools.ContainsKey(prefab.GetInstanceID()))

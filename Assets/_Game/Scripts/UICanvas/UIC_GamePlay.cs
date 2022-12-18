@@ -13,8 +13,9 @@ public class UIC_GamePlay : UICanvas
         OnInit();
     }
 
-   public void OnInit()
+    public void OnInit()
     {
+        SoundManager.Instance.OnInit();
         SetNumBot(LevelManagers.Instance.TotalBotAmount);
     }
     public void SetNumBot(int num)
@@ -25,6 +26,15 @@ public class UIC_GamePlay : UICanvas
     public override void Close()
     {
         base.Close();
+    }
+
+    public void Setting()
+    {
+        SoundManager.Instance.ClickButton();
+        Close();
+
+        GameManager.Instance.ChangeState(GameState.Menu);
+        UIManager.Instance.OpenUI<UIC_Setting>(UIID.UIC_Setting);
     }
 
    

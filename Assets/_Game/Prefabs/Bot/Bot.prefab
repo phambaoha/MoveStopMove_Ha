@@ -506,16 +506,18 @@ MonoBehaviour:
   isDead: 0
   rb: {fileID: 8346754021811397546}
   playerAnim: {fileID: 3673813306199242756}
-  fireRate: 2
+  fireRate: 2.5
   radiusRangeAttack: 6
   throwPoint: {fileID: 7247090554622965155}
   colorType: 0
   pantType: 0
   weaponHandType: 0
   hatType: 0
-  listParticle:
-  - {fileID: 3563754663666865807, guid: 8a56fdb477280c94e90324ace05fae90, type: 3}
+  listParticleHealing:
+  - {fileID: 198805881319366116, guid: 9f0211f2d48d701498ac6baf8a231997, type: 3}
   - {fileID: 198565997176422880, guid: 8cb087f3a3c92f54186e0f20e349dfe1, type: 3}
+  ListParticleBlood:
+  - {fileID: 3563754663666865807, guid: 8a56fdb477280c94e90324ace05fae90, type: 3}
   navMeshAgent: {fileID: 289014376}
   circleTarget: {fileID: 2486718737013364200}
 --- !u!195 &289014376

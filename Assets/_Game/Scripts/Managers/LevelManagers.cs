@@ -116,9 +116,8 @@ public class LevelManagers : Singleton<LevelManagers>
 
     public void OnInit()
     {
-        player.isDead = false;
-      //  player.gameObject.SetActive(true);
-        player.TF.position = Vector3.one;
+        totalBotAmount = 5;
+        player.OnInit();
    
     }
 

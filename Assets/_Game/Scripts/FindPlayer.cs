@@ -8,7 +8,6 @@ public class FindPlayer : MonoBehaviour
     public PlayerController player;
     private void Awake()
     {
-
         player = FindObjectOfType<PlayerController>();
     }
 }

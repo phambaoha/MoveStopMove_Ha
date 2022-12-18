@@ -39,7 +39,6 @@ public class BotController : CharacterController
         {
             ChangeAnim(Constants.TAG_ANIM_DEAD);
             StartCoroutine(IDelayDestroy());
-
             return;
         }
 
@@ -61,14 +60,17 @@ public class BotController : CharacterController
     public void StopMoving()
     {
         ChangeAnim(Constants.TAG_ANIM_IDLE);
-        navMeshAgent.SetDestination(TF.position);
+        navMeshAgent.SetDestination(this.TF.position);
 
     }
 
     public void Moving()
     {
         if (isDead)
+        { 
             return;
+        }
+
 
         ChangeAnim(Constants.TAG_ANIM_RUN);
 
@@ -177,7 +179,8 @@ public class BotController : CharacterController
     {
         base.OnInit();
 
-        this.radiusRangeAttack = Random.Range(4.5f, 7);
+
+        this.radiusRangeAttack = Random.Range(4.5f, 6.5f);
 
         AddAllTarget();
 
@@ -219,10 +222,19 @@ public class BotController : CharacterController
         // check win
         if (!player.isDead && LevelManagers.Instance.TotalBotAmount < 0)
         {
+
+            player.victory = true;
+
+            SoundManager.Instance.Victory();
+
             SimplePool.CollectAll();
 
             GameManager.Instance.ChangeState(GameState.Menu);
+
             UIManager.Instance.OpenUI(UIID.UIC_Victory);
+
+            UIManager.Instance.GetUI<UIC_GamePlay>(UIID.UIC_GamePlay).Close();
+
             SoundManager.Instance.Victory();
         }
     }
