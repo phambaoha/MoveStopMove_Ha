@@ -18,6 +18,8 @@ public class Btn_Pant : MonoBehaviour
 
     public int Price;
 
+    public float upgradeRange;
+
 
 
     public void SetDataPant()

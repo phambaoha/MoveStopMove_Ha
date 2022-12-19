@@ -11,6 +11,10 @@ public class WeaponRender : MonoBehaviour
 
     public int Price;
 
+   // public float upgradeRangeAttack;
+
+    //public string textRangeAttack;
+
   
 
 

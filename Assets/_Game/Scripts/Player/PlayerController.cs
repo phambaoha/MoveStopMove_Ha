@@ -12,7 +12,8 @@ public class PlayerController : CharacterController, IHit
     [SerializeField]
     Transform cam;
 
-
+    [Header(" PlayerDataSO") ]
+    public CharacterData playerDataSO;
 
     [Header("canvas c")]
     [SerializeField]
@@ -47,6 +48,10 @@ public class PlayerController : CharacterController, IHit
 
         ChangePantsMat((PantType)UserData.Instance.CurentPant);
 
+        playerDataSO.speed = UserData.Instance.playerSpeed;
+        
+        playerDataSO.RangeAttack =  UserData.Instance.attackRange;
+
         victory = false;
 
 
@@ -70,7 +75,7 @@ public class PlayerController : CharacterController, IHit
     void Move()
     {
 
-        targetInRange = IsTargetInRange(this.TF.position, radiusRangeAttack, Constants.TAG_BOT);
+        targetInRange = IsTargetInRange(this.TF.position, playerDataSO.RangeAttack, Constants.TAG_BOT);
 
         if (isDead)
         {

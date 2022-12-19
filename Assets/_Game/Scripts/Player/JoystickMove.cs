@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class JoystickMove : MonoBehaviour
 {
-    public float speed;
+
+   // public CharacterData playerDataSO;
+
+  //  public float speed;
 
     public DynamicJoystick dynamicJoystick;
 
 
     [SerializeField]
-    CharacterController playerController;
-
-
+    PlayerController playerController;
 
     private void Update()
     {
@@ -32,7 +33,7 @@ public class JoystickMove : MonoBehaviour
         if (playerController.isDead)
             return;
 
-        playerController.rb.velocity = new Vector3(dynamicJoystick.Horizontal * speed, playerController.rb.velocity.y, dynamicJoystick.Vertical * speed);
+        playerController.rb.velocity = new Vector3(dynamicJoystick.Horizontal * playerController.playerDataSO.speed, playerController.rb.velocity.y, dynamicJoystick.Vertical * playerController.playerDataSO.speed);
 
         // tinh goc xoanh cua nhan vat
         float angleA = Mathf.Atan2(dynamicJoystick.Horizontal, dynamicJoystick.Vertical) * Mathf.Rad2Deg;

@@ -85,6 +85,14 @@ public class TabPant : UIC_ChangeSkin
         player.ChangePantsMat(Cache.GetBtn_Pant(curentBtnPant).pantType);
 
         UserData.Instance.SetIntData(UserData.Key_CurentPant, (int)Cache.GetBtn_Pant(curentBtnPant).pantType);
+
+        player.playerDataSO.RangeAttack = player.playerDataSO.defaultRangeAttack + Cache.GetBtn_Pant(curentBtnPant).upgradeRange;
+
+        UserData.Instance.SetFloatData(UserData.Key_AttackRange, player.playerDataSO.RangeAttack);
+
+        UserData.Instance.OnInitData();
+
+ 
     }
 
     public void Buy()

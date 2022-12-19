@@ -192,6 +192,13 @@ public class UIC_ChangeWeapon : UICanvas
 
         UserData.Instance.SetIntData(UserData.Key_CurentWeapon, (int)Cache.GetWeaponRender(CurrentWeapon).weaponOnHandType);
 
+
+       
+
+       // player.playerDataSO.RangeAttack = player.playerDataSO.defaultRangeAttack + Cache.GetWeaponRender(CurrentWeapon).upgradeRangeAttack;
+
+       // player.PosUpCamera();
+
     }
 
     public void Buy()

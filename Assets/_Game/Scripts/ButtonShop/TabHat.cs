@@ -21,7 +21,7 @@ public class TabHat : UIC_ChangeSkin
 
         for (int i = 0; i < listButtonHat.Count; i++)
         {
-        
+
             Cache.GetBtn_Hat(listButtonHat[i]).GetDataHat();
 
             if (Cache.GetBtn_Hat(listButtonHat[i]).unlocked)
@@ -31,13 +31,13 @@ public class TabHat : UIC_ChangeSkin
             }
             else
             {
-                SetImageLock(listButtonHat[i], true) ;
-              
+                SetImageLock(listButtonHat[i], true);
+
             }
         }
     }
 
- 
+
     public void SelectButton(Button btn)
     {
         curentBtnHat = btn;
@@ -48,7 +48,7 @@ public class TabHat : UIC_ChangeSkin
 
 
         Cache.GetBtn_Hat(curentBtnHat).GetDataHat();
-   
+
 
 
 
@@ -100,12 +100,30 @@ public class TabHat : UIC_ChangeSkin
 
     }
 
-  
+
+
+
 
     public void Equip()
     {
         player.ChangeHat(Cache.GetBtn_Hat(curentBtnHat).hatType);
+
+
         UserData.Instance.SetIntData(UserData.Key_CurrentHat, (int)Cache.GetBtn_Hat(curentBtnHat).hatType);
+
+
+        player.playerDataSO.speed = player.playerDataSO.defaultSpeed + Cache.GetBtn_Hat(curentBtnHat).upgradeSpeed;
+
+
+        UserData.Instance.SetFloatData(UserData.Key_PlayerSpeed, player.playerDataSO.speed);
+
+        UserData.Instance.OnInitData();
+
+       
+
+
+
+
     }
 
 
@@ -120,7 +138,7 @@ public class TabHat : UIC_ChangeSkin
         base.EnableButtonEquip();
 
         SetImageLock(curentBtnHat, false);
-        
+
     }
 
 
@@ -130,5 +148,5 @@ public class TabHat : UIC_ChangeSkin
         Cache.GetBtn_Hat(btn).imageLock.enabled = _bool;
     }
 
-    
+
 }

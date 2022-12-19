@@ -14,8 +14,13 @@ public class UserData : Singleton<UserData>
     public bool IsTestCheckData = false;
 #endif
 
-    [Header("----Data----")]
+    
 
+    [Header("PlayerData")]
+    public float playerSpeed;
+    public float attackRange;
+
+    [Header("----GameData----")]
     public int Level = 1;
 
     public int Cash;
@@ -119,6 +124,7 @@ public class UserData : Singleton<UserData>
 
         PlayerPrefs.SetInt(key, value);
     }
+ 
 
     public void SetBoolData(string key, bool value)
     {
@@ -126,10 +132,10 @@ public class UserData : Singleton<UserData>
         PlayerPrefs.SetInt(key, value ? 1 : 0);
     }
 
-    public void SetFloatData(string key, ref float variable, float value)
+    public void SetFloatData(string key, float value)
     {
-        variable = value;
-        PlayerPrefs.GetFloat(key, value);
+       
+        PlayerPrefs.SetFloat(key, value);
     }
 
     public void SetStringData(string key, ref string variable, string value)
@@ -164,6 +170,9 @@ public class UserData : Singleton<UserData>
         //            return;
         //        }
         //#endif
+
+        playerSpeed = PlayerPrefs.GetFloat(Key_PlayerSpeed,5f);
+        attackRange = PlayerPrefs.GetFloat(Key_AttackRange, 6f);
 
         Level = PlayerPrefs.GetInt(Key_Level, 1);
         Cash = PlayerPrefs.GetInt(Key_Cash);
@@ -201,6 +210,8 @@ public class UserData : Singleton<UserData>
         PlayerPrefs.DeleteAll();
         OnInitData();
     }
+    public const string Key_PlayerSpeed = "speed";
+    public const string Key_AttackRange = "attackrange";
 
     public const string Key_Level = "Level";
     public const string Key_Cash = "Cash";
